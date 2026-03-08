@@ -32,12 +32,12 @@ Construct the main game scene with placeholder visuals: road to horizon, centere
 
 ### Tasks
 
-- [ ] Task 2.1: Create the main `GameScene.tscn` with root node and camera setup appropriate for mobile portrait view
-- [ ] Task 2.2: Build road visual — a simple elongated plane/sprite stretching toward the horizon
-- [ ] Task 2.3: Add grass land areas on both sides of the road
-- [ ] Task 2.4: Add horizon/sky background placeholder
-- [ ] Task 2.5: Add centered car placeholder entity on the road
-- [ ] Task 2.6: Create `GameScene.cs` script as the scene's coordinator
+- [x] Task 2.1: Create the main `GameScene.tscn` with root node and camera setup appropriate for mobile portrait view
+- [x] Task 2.2: Build road visual — a simple elongated plane/sprite stretching toward the horizon
+- [x] Task 2.3: Add grass land areas on both sides of the road
+- [x] Task 2.4: Add horizon/sky background placeholder
+- [x] Task 2.5: Add centered car placeholder entity on the road
+- [x] Task 2.6: Create `GameScene.cs` script as the scene's coordinator
 
 ### Verification
 
