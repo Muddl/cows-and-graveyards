@@ -1,4 +1,6 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://scripts/game/GameScene.cs" id="game_scene_script"]
 
 [sub_resource type="ProceduralSkyMaterial" id="sky_mat"]
 sky_top_color = Color(0.4, 0.6, 0.9, 1)
@@ -38,6 +40,7 @@ size = Vector3(2, 1, 4)
 material = SubResource("car_mat")
 
 [node name="GameScene" type="Node3D"]
+script = ExtResource("game_scene_script")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("env")
