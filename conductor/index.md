@@ -13,7 +13,7 @@ Navigation hub for project context.
 
 ## Active Tracks
 
-<!-- Auto-populated by /conductor:new-track -->
+- [Initial Game Scene](./tracks/game-scene_20260308/index.md) — Pending
 
 ## Getting Started
 
