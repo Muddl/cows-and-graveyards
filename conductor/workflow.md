@@ -10,6 +10,29 @@
 
 No production code without a corresponding test.
 
+## Branching Strategy
+
+**Feature branches per track.** Each Conductor track gets its own branch:
+
+1. **Branch creation** — When starting a track, create a branch from `master`:
+   ```
+   git checkout -b track/{trackId}
+   ```
+2. **Phase commits** — Commit at the end of every completed phase (after verification passes). Use the format:
+   ```
+   {prefix}: {phase summary} ({trackId})
+   ```
+   A phase commit bundles all task-level work (tests, implementation, refactors) for that phase.
+3. **Push after each phase** — Push the branch to origin after each phase commit to preserve progress remotely:
+   ```
+   git push -u origin track/{trackId}
+   ```
+4. **PR on track completion** — After all phases pass final verification, create a pull request via `gh` CLI:
+   ```
+   gh pr create --base master --head track/{trackId} --title "{Track title}" --body "..."
+   ```
+   The PR body should include a summary of changes, acceptance criteria status, and test results.
+
 ## Commit Strategy
 
 **Conventional Commits** format:
@@ -21,9 +44,13 @@ No production code without a corresponding test.
 - `chore:` — build, config, or tooling changes
 - `docs:` — documentation updates
 
+Commit granularity:
+- **Within a phase:** Commit per task (test file, implementation, refactor) for fine-grained history.
+- **Phase boundary:** A phase-level commit is required after verification passes. If task-level commits were already made, the phase boundary is the last task commit of that phase.
+
 ## Code Review
 
-**Required for non-trivial changes.** Trivial changes (typos, formatting, config tweaks) may be self-reviewed.
+**Required for non-trivial changes.** Trivial changes (typos, formatting, config tweaks) may be self-reviewed. Feature track PRs always require review.
 
 ## Verification Checkpoints
 

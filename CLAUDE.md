@@ -37,6 +37,9 @@ The `.runsettings` file configures gdUnit4 test runner with `GODOT_BIN` pointing
 
 - **TDD workflow:** Write tests before implementation (strict)
 - **Commits:** Conventional Commits format (feat/fix/test/refactor/chore)
+- **Branching:** Each Conductor track gets a `track/{trackId}` branch from `master`
+- **Phase commits:** Commit after every completed phase; push to origin
+- **PR on completion:** Use `gh pr create` when a track finishes all phases
 - **Line endings:** LF everywhere (enforced via .gitattributes)
 - **Charset:** UTF-8 (enforced via .editorconfig)
 
