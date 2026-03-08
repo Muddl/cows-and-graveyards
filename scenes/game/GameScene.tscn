@@ -1,7 +1,18 @@
-[gd_scene load_steps=1 format=3]
+[gd_scene load_steps=3 format=3]
+
+[sub_resource type="StandardMaterial3D" id="road_mat"]
+albedo_color = Color(0.25, 0.25, 0.27, 1)
+
+[sub_resource type="PlaneMesh" id="road_mesh"]
+size = Vector2(6, 200)
+material = SubResource("road_mat")
 
 [node name="GameScene" type="Node3D"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.966, -0.259, 0, 0.259, 0.966, 0, 3, 8)
 fov = 60.0
+
+[node name="Road" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -90)
+mesh = SubResource("road_mesh")
