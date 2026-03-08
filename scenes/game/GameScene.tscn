@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
 [sub_resource type="StandardMaterial3D" id="road_mat"]
 albedo_color = Color(0.25, 0.25, 0.27, 1)
@@ -6,6 +6,13 @@ albedo_color = Color(0.25, 0.25, 0.27, 1)
 [sub_resource type="PlaneMesh" id="road_mesh"]
 size = Vector2(6, 200)
 material = SubResource("road_mat")
+
+[sub_resource type="StandardMaterial3D" id="grass_mat"]
+albedo_color = Color(0.2, 0.55, 0.15, 1)
+
+[sub_resource type="PlaneMesh" id="grass_mesh"]
+size = Vector2(40, 200)
+material = SubResource("grass_mat")
 
 [node name="GameScene" type="Node3D"]
 
@@ -16,3 +23,11 @@ fov = 60.0
 [node name="Road" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -90)
 mesh = SubResource("road_mesh")
+
+[node name="GrassLeft" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23, -0.01, -90)
+mesh = SubResource("grass_mesh")
+
+[node name="GrassRight" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23, -0.01, -90)
+mesh = SubResource("grass_mesh")
