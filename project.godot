@@ -14,6 +14,14 @@ config/name="Cows & Graveyards"
 config/features=PackedStringArray("4.6", "C#", "Mobile")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_width=1080
+window/size/viewport_height=1920
+window/stretch/mode="canvas_items"
+window/stretch/aspect="keep_width"
+window/handheld/orientation=1
+
 [dotnet]
 
 project/assembly_name="Cows & Graveyards"
