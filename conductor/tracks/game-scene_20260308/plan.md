@@ -50,12 +50,12 @@ Implement tap detection for left/right sides and cow spawn logic, test-first.
 
 ### Tasks
 
-- [ ] Task 3.1: Write unit tests for `SideDetector` — determines left/right side from screen tap position
-- [ ] Task 3.2: Implement `SideDetector` to pass all tests
-- [ ] Task 3.3: Write unit tests for `CowSpawner` — spawns cow on correct side, triggers drive-past sequence
-- [ ] Task 3.4: Implement `CowSpawner` to pass all tests
-- [ ] Task 3.5: Create placeholder cow scene (`CowEntity.tscn` + `CowEntity.cs`) with drive-past animation (spawn at horizon, move toward and past camera)
-- [ ] Task 3.6: Wire tap input in `GameScene.cs` — detect tap, determine side, spawn cow, increment score
+- [x] Task 3.1: Write unit tests for `SideDetector` — determines left/right side from screen tap position
+- [x] Task 3.2: Implement `SideDetector` to pass all tests
+- [x] Task 3.3: Write unit tests for `CowSpawner` — spawns cow on correct side, triggers drive-past sequence
+- [x] Task 3.4: Implement `CowSpawner` to pass all tests
+- [x] Task 3.5: Create placeholder cow scene (`CowEntity.tscn` + `CowEntity.cs`) with drive-past animation (spawn at horizon, move toward and past camera)
+- [x] Task 3.6: Wire tap input in `GameScene.cs` — detect tap, determine side, spawn cow, increment score
 
 ### Verification
 
