@@ -2,8 +2,8 @@ namespace CowsGraveyards.Game;
 
 public class SideDetector
 {
-    public Side Detect(float tapX, float screenWidth)
+    public TapSide Detect(float tapX, float screenWidth)
     {
-        return tapX < screenWidth / 2f ? Side.Left : Side.Right;
+        return tapX < screenWidth / 2f ? TapSide.Left : TapSide.Right;
     }
 }

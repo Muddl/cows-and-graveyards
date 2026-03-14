@@ -1,6 +1,6 @@
 namespace CowsGraveyards.Game;
 
-public enum Side
+public enum TapSide
 {
     Left,
     Right

@@ -20,7 +20,7 @@ public class SideDetectorTest
     {
         var result = _detector.Detect(100f, 1080f);
 
-        AssertThat(result).IsEqual(Side.Left);
+        AssertThat(result).IsEqual(TapSide.Left);
     }
 
     [TestCase]
@@ -28,7 +28,7 @@ public class SideDetectorTest
     {
         var result = _detector.Detect(800f, 1080f);
 
-        AssertThat(result).IsEqual(Side.Right);
+        AssertThat(result).IsEqual(TapSide.Right);
     }
 
     [TestCase]
@@ -36,7 +36,7 @@ public class SideDetectorTest
     {
         var result = _detector.Detect(540f, 1080f);
 
-        AssertThat(result).IsEqual(Side.Right);
+        AssertThat(result).IsEqual(TapSide.Right);
     }
 
     [TestCase]
@@ -44,7 +44,7 @@ public class SideDetectorTest
     {
         var result = _detector.Detect(539f, 1080f);
 
-        AssertThat(result).IsEqual(Side.Left);
+        AssertThat(result).IsEqual(TapSide.Left);
     }
 
     [TestCase]
@@ -52,7 +52,7 @@ public class SideDetectorTest
     {
         var result = _detector.Detect(0f, 1080f);
 
-        AssertThat(result).IsEqual(Side.Left);
+        AssertThat(result).IsEqual(TapSide.Left);
     }
 
     [TestCase]
@@ -60,7 +60,7 @@ public class SideDetectorTest
     {
         var result = _detector.Detect(1079f, 1080f);
 
-        AssertThat(result).IsEqual(Side.Right);
+        AssertThat(result).IsEqual(TapSide.Right);
     }
 
     [TestCase]
@@ -68,6 +68,6 @@ public class SideDetectorTest
     {
         var result = _detector.Detect(100f, 720f);
 
-        AssertThat(result).IsEqual(Side.Left);
+        AssertThat(result).IsEqual(TapSide.Left);
     }
 }
