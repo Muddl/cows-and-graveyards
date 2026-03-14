@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cow_entity_scene1"]
+
+[ext_resource type="Script" uid="uid://cow_entity_script" path="res://scripts/game/CowEntity.cs" id="cow_entity_script"]
+
+[sub_resource type="StandardMaterial3D" id="cow_mat"]
+albedo_color = Color(0.9, 0.9, 0.85, 1)
+
+[sub_resource type="BoxMesh" id="cow_mesh"]
+material = SubResource("cow_mat")
+size = Vector3(1.2, 1, 2)
+
+[node name="CowEntity" type="Node3D"]
+script = ExtResource("cow_entity_script")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("cow_mesh")
