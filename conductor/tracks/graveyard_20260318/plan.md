@@ -3,7 +3,7 @@
 **Track ID:** graveyard_20260318
 **Spec:** [spec.md](./spec.md)
 **Created:** 2026-03-18
-**Status:** [~] In Progress
+**Status:** [x] Complete
 
 ## Overview
 
@@ -104,11 +104,11 @@ the wiring. Cover coexistence with cow taps to guard against regressions.
 
 ## Final Verification
 
-- [ ] All acceptance criteria met
-- [ ] All tests passing (`dotnet test`)
-- [ ] `dotnet build` succeeds with no warnings
-- [ ] Project file structure follows Godot conventions
-- [ ] Ready for review
+- [x] All acceptance criteria met
+- [x] All tests passing (`dotnet test`)
+- [x] `dotnet build` succeeds with no warnings
+- [x] Project file structure follows Godot conventions
+- [x] Ready for review
 
 ---
 
