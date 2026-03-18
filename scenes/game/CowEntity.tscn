@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://cow_entity_scene1"]
+[gd_scene format=3]
 
-[ext_resource type="Script" uid="uid://cow_entity_script" path="res://scripts/game/CowEntity.cs" id="cow_entity_script"]
+[ext_resource type="Script" path="res://scripts/game/CowEntity.cs" id="cow_entity_script"]
 
 [sub_resource type="StandardMaterial3D" id="cow_mat"]
 albedo_color = Color(0.9, 0.9, 0.85, 1)

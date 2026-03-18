@@ -14,6 +14,8 @@ public partial class GameScene : Node3D
     private SideDetector _sideDetector = null!;
     private CowSpawner _cowSpawner = null!;
     private ScoreHud _scoreHud = null!;
+    private GraveyardButton _graveyardButtonLeft = null!;
+    private GraveyardButton _graveyardButtonRight = null!;
 
     public override void _Ready()
     {
@@ -22,10 +24,10 @@ public partial class GameScene : Node3D
         _cowSpawner = new CowSpawner();
         _scoreHud = GetNode<ScoreHud>("CanvasLayer/ScoreHud");
 
-        var buttonLeft = GetNode<GraveyardButton>("CanvasLayer/GraveyardButtonLeft");
-        var buttonRight = GetNode<GraveyardButton>("CanvasLayer/GraveyardButtonRight");
-        buttonLeft.Activated += OnGraveyardActivated;
-        buttonRight.Activated += OnGraveyardActivated;
+        _graveyardButtonLeft = GetNode<GraveyardButton>("CanvasLayer/GraveyardButtonLeft");
+        _graveyardButtonRight = GetNode<GraveyardButton>("CanvasLayer/GraveyardButtonRight");
+        _graveyardButtonLeft.Activated += OnGraveyardActivated;
+        _graveyardButtonRight.Activated += OnGraveyardActivated;
     }
 
     public override void _Input(InputEvent @event)
@@ -38,6 +40,10 @@ public partial class GameScene : Node3D
 
     private void HandleTap(Vector2 tapPosition)
     {
+        if (_graveyardButtonLeft.GetButtonRect().HasPoint(tapPosition) ||
+            _graveyardButtonRight.GetButtonRect().HasPoint(tapPosition))
+            return;
+
         float screenWidth = GetViewport().GetVisibleRect().Size.X;
         var side = _sideDetector.Detect(tapPosition.X, screenWidth);
 

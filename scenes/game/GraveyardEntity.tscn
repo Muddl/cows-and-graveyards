@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://graveyard_entity_scene1"]
+[gd_scene format=3]
 
-[ext_resource type="Script" uid="uid://graveyard_entity_script" path="res://scripts/game/GraveyardEntity.cs" id="graveyard_entity_script"]
+[ext_resource type="Script" path="res://scripts/game/GraveyardEntity.cs" id="graveyard_entity_script"]
 
 [sub_resource type="StandardMaterial3D" id="headstone_mat"]
 albedo_color = Color(0.4, 0.4, 0.45, 1)

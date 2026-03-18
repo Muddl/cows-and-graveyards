@@ -10,12 +10,16 @@ public partial class GraveyardButton : Control
     [Export]
     public TapSide Side { get; set; }
 
+    private Button _button = null!;
+
     public override void _Ready()
     {
-        var button = GetNode<Button>("Button");
-        button.Pressed += OnButtonPressed;
+        _button = GetNode<Button>("Button");
+        _button.Pressed += OnButtonPressed;
         MouseFilter = MouseFilterEnum.Ignore;
     }
+
+    public Rect2 GetButtonRect() => _button.GetGlobalRect();
 
     public void OnButtonPressed()
     {
