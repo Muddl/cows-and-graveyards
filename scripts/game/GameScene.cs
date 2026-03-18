@@ -10,12 +10,14 @@ public partial class GameScene : Node3D
     private GameState _gameState = null!;
     private SideDetector _sideDetector = null!;
     private CowSpawner _cowSpawner = null!;
+    private ScoreHud _scoreHud = null!;
 
     public override void _Ready()
     {
         _gameState = new GameState();
         _sideDetector = new SideDetector();
         _cowSpawner = new CowSpawner();
+        _scoreHud = GetNode<ScoreHud>("CanvasLayer/ScoreHud");
     }
 
     public override void _UnhandledInput(InputEvent @event)
@@ -57,5 +59,7 @@ public partial class GameScene : Node3D
         {
             _gameState.Scores.IncrementRight();
         }
+
+        _scoreHud.UpdateScores(_gameState.Scores.LeftScore, _gameState.Scores.RightScore);
     }
 }
