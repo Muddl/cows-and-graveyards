@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://nulbshweexew" path="res://scripts/game/GameScene.cs" id="game_scene_script"]
 [ext_resource type="PackedScene" path="res://scenes/game/GraveyardButton.tscn" id="graveyard_button_scene"]
 [ext_resource type="PackedScene" path="res://scenes/game/ScoreHud.tscn" id="score_hud_scene"]
+[ext_resource type="PackedScene" path="res://scenes/menus/PauseMenu.tscn" id="pause_menu_scene"]
 
 [sub_resource type="ProceduralSkyMaterial" id="sky_mat"]
 sky_top_color = Color(0.4, 0.6, 0.9, 1)
@@ -87,3 +88,20 @@ anchor_right = 0.5
 layout_mode = 3
 anchor_left = 0.5
 Side = 1
+
+[node name="PauseButton" type="Button" parent="CanvasLayer"]
+layout_mode = 3
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -160.0
+offset_top = 30.0
+offset_right = -30.0
+offset_bottom = 110.0
+mouse_filter = 0
+text = "II"
+theme_override_font_sizes/font_size = 40
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("pause_menu_scene")]
+layout_mode = 3
+anchor_right = 1.0
+anchor_bottom = 1.0

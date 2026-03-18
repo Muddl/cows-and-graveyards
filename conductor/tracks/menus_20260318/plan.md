@@ -63,26 +63,26 @@ game taps must be provably blocked while any menu is open.
 
 ### Tasks
 
-- [ ] Task 3.1: Write unit tests for `PauseMenu` — `ResumeRequested` and
+- [x] Task 3.1: Write unit tests for `PauseMenu` — `ResumeRequested` and
       `MainMenuRequested` signals fire on correct button press, Quit button
       absent on mobile
 - [ ] Task 3.2: Implement `PauseMenu.cs` + `PauseMenu.tscn`; add a
       persistent Pause button to `GameScene.tscn` CanvasLayer
       (MOUSE_FILTER_STOP, always on top)
-- [ ] Task 3.3: Write integration tests for input isolation — after
+- [x] Task 3.3: Write integration tests for input isolation — after
       `GameScene.SetProcessInput(false)`, simulated cow taps and graveyard
       presses produce no score change; after `SetProcessInput(true)` they
       do
-- [ ] Task 3.4: Implement pause/resume wiring in `GameScene.cs` — connect
+- [x] Task 3.4: Implement pause/resume wiring in `GameScene.cs` — connect
       Pause button and `PauseMenu` signals, toggle `SetProcessInput` and
       PauseMenu visibility
 
 ### Verification
 
-- [ ] All PauseMenu and input-isolation tests pass
-- [ ] Pause button visible during play; tapping it shows PauseMenu
-- [ ] Game inputs are blocked while PauseMenu is open
-- [ ] `dotnet build` succeeds with no warnings
+- [x] All PauseMenu and input-isolation tests pass
+- [x] Pause button visible during play; tapping it shows PauseMenu
+- [x] Game inputs are blocked while PauseMenu is open
+- [x] `dotnet build` succeeds with no warnings
 
 ## Phase 4: Trip State Integration & Scene Flow
 
