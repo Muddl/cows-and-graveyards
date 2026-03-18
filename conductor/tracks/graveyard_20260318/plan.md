@@ -40,17 +40,17 @@ evolution.
 
 ### Tasks
 
-- [ ] Task 2.1: Write unit tests for `GraveyardEntity` — starts at spawn
+- [x] Task 2.1: Write unit tests for `GraveyardEntity` — starts at spawn
       position, lerps to end position, queues free on completion (mirrors
       CowEntity test contract)
-- [ ] Task 2.2: Implement `GraveyardEntity.cs` + `GraveyardEntity.tscn`
+- [x] Task 2.2: Implement `GraveyardEntity.cs` + `GraveyardEntity.tscn`
       with headstone placeholder mesh (tall box or cross) and drive-past
       animation
 
 ### Verification
 
-- [ ] All GraveyardEntity tests pass
-- [ ] `dotnet build` succeeds with no warnings
+- [x] All GraveyardEntity tests pass
+- [x] `dotnet build` succeeds with no warnings
 
 ## Phase 3: GraveyardButton UI
 
