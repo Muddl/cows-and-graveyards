@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://dc3dnsxxbg41g"]
 
 [ext_resource type="Script" uid="uid://nulbshweexew" path="res://scripts/game/GameScene.cs" id="game_scene_script"]
-[ext_resource type="PackedScene" uid="uid://score_hud_scene1" path="res://scenes/game/ScoreHud.tscn" id="score_hud_scene"]
-[ext_resource type="PackedScene" uid="uid://graveyard_button_scene1" path="res://scenes/game/GraveyardButton.tscn" id="graveyard_button_scene"]
+[ext_resource type="PackedScene" path="res://scenes/game/GraveyardButton.tscn" id="graveyard_button_scene"]
+[ext_resource type="PackedScene" path="res://scenes/game/ScoreHud.tscn" id="score_hud_scene"]
 
 [sub_resource type="ProceduralSkyMaterial" id="sky_mat"]
 sky_top_color = Color(0.4, 0.6, 0.9, 1)
@@ -75,13 +75,15 @@ mesh = SubResource("car_mesh")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=483920157]
 
-[node name="ScoreHud" parent="CanvasLayer" instance=ExtResource("score_hud_scene")]
+[node name="ScoreHud" parent="CanvasLayer" unique_id=424549114 instance=ExtResource("score_hud_scene")]
+layout_mode = 3
+anchors_preset = 10
 
-[node name="GraveyardButtonLeft" parent="CanvasLayer" instance=ExtResource("graveyard_button_scene")]
+[node name="GraveyardButtonLeft" parent="CanvasLayer" unique_id=792196645 instance=ExtResource("graveyard_button_scene")]
+layout_mode = 3
 anchor_right = 0.5
-Side = 0
 
-[node name="GraveyardButtonRight" parent="CanvasLayer" instance=ExtResource("graveyard_button_scene")]
+[node name="GraveyardButtonRight" parent="CanvasLayer" unique_id=326454044 instance=ExtResource("graveyard_button_scene")]
+layout_mode = 3
 anchor_left = 0.5
-anchor_right = 1.0
 Side = 1
