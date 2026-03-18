@@ -3,7 +3,7 @@
 **Track ID:** game-scene_20260308
 **Spec:** [spec.md](./spec.md)
 **Created:** 2026-03-08
-**Status:** [ ] Not Started
+**Status:** [x] Complete
 
 ## Overview
 
@@ -77,17 +77,17 @@ Add the score display GUI and run full integration tests.
 
 ### Verification
 
-- [ ] All unit and integration tests pass
-- [ ] Full game loop works: tap → cow spawns → score increments → HUD updates
-- [ ] Scene renders correctly at mobile resolution
+- [x] All unit and integration tests pass
+- [x] Full game loop works: tap → cow spawns → score increments → HUD updates
+- [x] Scene renders correctly at mobile resolution
 
 ## Final Verification
 
-- [ ] All acceptance criteria met
-- [ ] All tests passing (`dotnet test`)
-- [ ] `dotnet build` succeeds with no warnings
-- [ ] Project file structure follows Godot conventions
-- [ ] Ready for review
+- [x] All acceptance criteria met
+- [x] All tests passing (`dotnet test`) — 41/41
+- [x] `dotnet build` succeeds with no warnings
+- [x] Project file structure follows Godot conventions
+- [x] Ready for review
 
 ---
 
