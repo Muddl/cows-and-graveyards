@@ -20,7 +20,7 @@ public partial class GameScene : Node3D
         _scoreHud = GetNode<ScoreHud>("CanvasLayer/ScoreHud");
     }
 
-    public override void _UnhandledInput(InputEvent @event)
+    public override void _Input(InputEvent @event)
     {
         if (@event is InputEventScreenTouch { Pressed: true } touch)
         {
