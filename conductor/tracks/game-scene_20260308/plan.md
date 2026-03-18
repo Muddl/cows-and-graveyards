@@ -69,11 +69,11 @@ Add the score display GUI and run full integration tests.
 
 ### Tasks
 
-- [ ] Task 4.1: Create `ScoreHud.tscn` + `ScoreHud.cs` — displays left and right scores, updates reactively
-- [ ] Task 4.2: Integrate `ScoreHud` into `GameScene.tscn`, wire to `ScoreTracker`
-- [ ] Task 4.3: Write integration tests — full tap-to-score loop (tap → side detection → cow spawn → score increment → HUD update)
-- [ ] Task 4.4: Write integration test — scores persist correctly across multiple taps on both sides
-- [ ] Task 4.5: Verify scene runs end-to-end on mobile viewport settings
+- [x] Task 4.1: Create `ScoreHud.tscn` + `ScoreHud.cs` — displays left and right scores, updates reactively
+- [x] Task 4.2: Integrate `ScoreHud` into `GameScene.tscn`, wire to `ScoreTracker`
+- [x] Task 4.3: Write integration tests — full tap-to-score loop (tap → side detection → cow spawn → score increment → HUD update)
+- [x] Task 4.4: Write integration test — scores persist correctly across multiple taps on both sides
+- [x] Task 4.5: Verify scene runs end-to-end on mobile viewport settings
 
 ### Verification
 
