@@ -4,22 +4,24 @@
 
 [node name="ScoreHud" type="Control"]
 anchor_right = 1.0
-offset_bottom = 80.0
+offset_bottom = 160.0
 script = ExtResource("score_hud_script")
 
 [node name="LeftLabel" type="Label" parent="."]
-offset_left = 20.0
+offset_left = 30.0
 offset_top = 20.0
-offset_right = 200.0
-offset_bottom = 60.0
+offset_right = 400.0
+offset_bottom = 140.0
 text = "L: 0"
+theme_override_font_sizes/font_size = 72
 
 [node name="RightLabel" type="Label" parent="."]
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -200.0
+offset_left = -400.0
 offset_top = 20.0
-offset_right = -20.0
-offset_bottom = 60.0
+offset_right = -30.0
+offset_bottom = 140.0
 text = "R: 0"
 horizontal_alignment = 2
+theme_override_font_sizes/font_size = 72
