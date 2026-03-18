@@ -1,0 +1,31 @@
+{
+  "id": "graveyard_20260318",
+  "title": "Graveyard Mechanic",
+  "type": "feature",
+  "status": "archived",
+  "archived": true,
+  "archived_at": "2026-03-18T00:00:00Z",
+  "archive_reason": "Completed - Work finished successfully",
+  "created": "2026-03-18T00:00:00Z",
+  "updated": "2026-03-18T00:00:00Z",
+  "current_phase": 4,
+  "current_task": "4.5",
+  "phases": {
+    "total": 4,
+    "completed": 4
+  },
+  "tasks": {
+    "total": 13,
+    "completed": 13
+  },
+  "commits": [
+    "480f7a4: feat: add ZeroLeft and ZeroRight to ScoreTracker (graveyard_20260318)",
+    "4ab0dde: chore: mark Phase 1 complete (graveyard_20260318)",
+    "4f9e3e2: feat: add GraveyardEntity with drive-past animation and unit tests (graveyard_20260318)",
+    "934e6f5: chore: mark Phase 2 complete (graveyard_20260318)",
+    "5bfacee: feat: add GraveyardButton with Activated signal and scene wiring (graveyard_20260318)",
+    "1732beb: chore: mark Phase 3 complete (graveyard_20260318)",
+    "8a743f5: feat: wire GraveyardButton signals into GameScene, add integration tests (graveyard_20260318)",
+    "06b0ad7: chore: mark Phase 4 complete (graveyard_20260318)"
+  ]
+}
