@@ -15,4 +15,8 @@ public class ScoreTracker
         LeftScore = 0;
         RightScore = 0;
     }
+
+    public void ZeroLeft() => LeftScore = 0;
+
+    public void ZeroRight() => RightScore = 0;
 }

@@ -13,8 +13,8 @@ Navigation hub for project context.
 
 ## Active Tracks
 
-- [Initial Game Scene](./tracks/game-scene_20260308/index.md) — Pending
+- [Graveyard Mechanic](./tracks/graveyard_20260318/index.md) — Pending
 
-## Getting Started
+## Completed Tracks
 
-Run `/conductor:new-track` to create your first feature track.
+- [Initial Game Scene](./tracks/game-scene_20260308/index.md) — Complete

@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://score_hud_scene1"]
+[gd_scene format=3]
 
-[ext_resource type="Script" uid="uid://score_hud_script1" path="res://scripts/game/ScoreHud.cs" id="score_hud_script"]
+[ext_resource type="Script" path="res://scripts/game/ScoreHud.cs" id="score_hud_script"]
 
 [node name="ScoreHud" type="Control"]
 anchor_right = 1.0

@@ -1,0 +1,20 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/game/GraveyardButton.cs" id="graveyard_button_script"]
+
+[node name="GraveyardButton" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource("graveyard_button_script")
+
+[node name="Button" type="Button" parent="."]
+anchor_top = 0.88
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_right = -40.0
+offset_bottom = -30.0
+mouse_filter = 0
+text = "Graveyard"
+theme_override_font_sizes/font_size = 40
