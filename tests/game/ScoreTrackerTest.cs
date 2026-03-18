@@ -78,4 +78,74 @@ public class ScoreTrackerTest
         AssertThat(_tracker.LeftScore).IsEqual(0);
         AssertThat(_tracker.RightScore).IsEqual(0);
     }
+
+    // Task 1.1 — ZeroLeft
+
+    [TestCase]
+    public void ZeroLeftSetsLeftScoreToZero()
+    {
+        _tracker.IncrementLeft();
+        _tracker.IncrementLeft();
+        _tracker.IncrementLeft();
+
+        _tracker.ZeroLeft();
+
+        AssertThat(_tracker.LeftScore).IsEqual(0);
+    }
+
+    [TestCase]
+    public void ZeroLeftPreservesRightScore()
+    {
+        _tracker.IncrementRight();
+        _tracker.IncrementRight();
+        _tracker.IncrementLeft();
+
+        _tracker.ZeroLeft();
+
+        AssertThat(_tracker.RightScore).IsEqual(2);
+    }
+
+    [TestCase]
+    public void ZeroLeftWhenAlreadyZeroIsIdempotent()
+    {
+        _tracker.ZeroLeft();
+
+        AssertThat(_tracker.LeftScore).IsEqual(0);
+        AssertThat(_tracker.RightScore).IsEqual(0);
+    }
+
+    // Task 1.2 — ZeroRight
+
+    [TestCase]
+    public void ZeroRightSetsRightScoreToZero()
+    {
+        _tracker.IncrementRight();
+        _tracker.IncrementRight();
+        _tracker.IncrementRight();
+
+        _tracker.ZeroRight();
+
+        AssertThat(_tracker.RightScore).IsEqual(0);
+    }
+
+    [TestCase]
+    public void ZeroRightPreservesLeftScore()
+    {
+        _tracker.IncrementLeft();
+        _tracker.IncrementLeft();
+        _tracker.IncrementRight();
+
+        _tracker.ZeroRight();
+
+        AssertThat(_tracker.LeftScore).IsEqual(2);
+    }
+
+    [TestCase]
+    public void ZeroRightWhenAlreadyZeroIsIdempotent()
+    {
+        _tracker.ZeroRight();
+
+        AssertThat(_tracker.LeftScore).IsEqual(0);
+        AssertThat(_tracker.RightScore).IsEqual(0);
+    }
 }
