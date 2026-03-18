@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://dc3dnsxxbg41g"]
+
+[ext_resource type="Script" uid="uid://nulbshweexew" path="res://scripts/game/GameScene.cs" id="game_scene_script"]
+[ext_resource type="PackedScene" uid="uid://score_hud_scene1" path="res://scenes/game/ScoreHud.tscn" id="score_hud_scene"]
+
+[sub_resource type="ProceduralSkyMaterial" id="sky_mat"]
+sky_top_color = Color(0.4, 0.6, 0.9, 1)
+sky_horizon_color = Color(0.7, 0.8, 0.95, 1)
+ground_bottom_color = Color(0.2, 0.55, 0.15, 1)
+ground_horizon_color = Color(0.5, 0.65, 0.45, 1)
+
+[sub_resource type="Sky" id="sky"]
+sky_material = SubResource("sky_mat")
+
+[sub_resource type="Environment" id="env"]
+background_mode = 2
+sky = SubResource("sky")
+ambient_light_source = 2
+ambient_light_color = Color(0.8, 0.8, 0.85, 1)
+ambient_light_energy = 0.5
+
+[sub_resource type="StandardMaterial3D" id="road_mat"]
+albedo_color = Color(0.25, 0.25, 0.27, 1)
+
+[sub_resource type="PlaneMesh" id="road_mesh"]
+material = SubResource("road_mat")
+size = Vector2(6, 200)
+
+[sub_resource type="StandardMaterial3D" id="grass_mat"]
+albedo_color = Color(0.2, 0.55, 0.15, 1)
+
+[sub_resource type="PlaneMesh" id="grass_mesh"]
+material = SubResource("grass_mat")
+size = Vector2(40, 200)
+
+[sub_resource type="StandardMaterial3D" id="car_mat"]
+albedo_color = Color(0.8, 0.15, 0.1, 1)
+
+[sub_resource type="BoxMesh" id="car_mesh"]
+material = SubResource("car_mat")
+size = Vector3(2, 1, 4)
+
+[node name="GameScene" type="Node3D" unique_id=1298731447]
+script = ExtResource("game_scene_script")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=662207476]
+environment = SubResource("env")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1314950166]
+transform = Transform3D(1, 0, 0, 0, 0.866, 0.5, 0, -0.5, 0.866, 0, 10, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1997738888]
+transform = Transform3D(1, 0, 0, 0, 0.966, -0.259, 0, 0.259, 0.966, 0, 3, 8)
+fov = 60.0
+
+[node name="Road" type="MeshInstance3D" parent="." unique_id=1739271956]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -90)
+mesh = SubResource("road_mesh")
+
+[node name="GrassLeft" type="MeshInstance3D" parent="." unique_id=1776850811]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23, -0.01, -90)
+mesh = SubResource("grass_mesh")
+
+[node name="GrassRight" type="MeshInstance3D" parent="." unique_id=1069892528]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23, -0.01, -90)
+mesh = SubResource("grass_mesh")
+
+[node name="Car" type="Node3D" parent="." unique_id=1508113914]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 2)
+
+[node name="Body" type="MeshInstance3D" parent="Car" unique_id=1009829390]
+mesh = SubResource("car_mesh")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=483920157]
+
+[node name="ScoreHud" parent="CanvasLayer" instance=ExtResource("score_hud_scene")]
