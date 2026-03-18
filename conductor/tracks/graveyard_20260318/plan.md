@@ -3,7 +3,7 @@
 **Track ID:** graveyard_20260318
 **Spec:** [spec.md](./spec.md)
 **Created:** 2026-03-18
-**Status:** [ ] Not Started
+**Status:** [~] In Progress
 
 ## Overview
 
@@ -21,16 +21,16 @@ until they are test-verified.
 
 ### Tasks
 
-- [ ] Task 1.1: Write failing unit tests for `ScoreTracker.ZeroLeft()` —
+- [x] Task 1.1: Write failing unit tests for `ScoreTracker.ZeroLeft()` —
       zeroes left score, preserves right score at any value
-- [ ] Task 1.2: Write failing unit tests for `ScoreTracker.ZeroRight()` —
+- [x] Task 1.2: Write failing unit tests for `ScoreTracker.ZeroRight()` —
       zeroes right score, preserves left score at any value
-- [ ] Task 1.3: Implement `ZeroLeft()` and `ZeroRight()` to pass all tests
+- [x] Task 1.3: Implement `ZeroLeft()` and `ZeroRight()` to pass all tests
 
 ### Verification
 
-- [ ] All new and existing ScoreTracker tests pass
-- [ ] `dotnet build` succeeds with no warnings
+- [x] All new and existing ScoreTracker tests pass
+- [x] `dotnet build` succeeds with no warnings
 
 ## Phase 2: GraveyardEntity Placeholder
 
