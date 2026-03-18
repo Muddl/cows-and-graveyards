@@ -92,26 +92,26 @@ contract.
 
 ### Tasks
 
-- [ ] Task 4.1: Write integration tests — `GameScene` initialised with a
+- [x] Task 4.1: Write integration tests — `GameScene` initialised with a
       `TripSave` slot correctly seeds `ScoreTracker` left/right scores and
       stores the active slot index
-- [ ] Task 4.2: Write integration tests — calling `GameScene.SaveAndExit()`
+- [x] Task 4.2: Write integration tests — calling `GameScene.SaveAndExit()`
       writes current scores back to the correct slot via `SaveManager`,
       then signals scene change
-- [ ] Task 4.3: Implement `GameScene` trip slot initialisation — accept
+- [x] Task 4.3: Implement `GameScene` trip slot initialisation — accept
       slot index + optional `TripSave` on entry, seed `ScoreTracker`
       accordingly
-- [ ] Task 4.4: Implement `GameScene.SaveAndExit()` — saves current scores
+- [x] Task 4.4: Implement `GameScene.SaveAndExit()` — saves current scores
       to active slot and changes scene to `MainMenuScene`; connect to
       `PauseMenu.MainMenuRequested`
 
 ### Verification
 
-- [ ] All trip integration tests pass
-- [ ] New trip starts with zero scores; loaded trip restores correct scores
-- [ ] Returning to main menu saves current state; re-loading the slot
+- [x] All trip integration tests pass
+- [x] New trip starts with zero scores; loaded trip restores correct scores
+- [x] Returning to main menu saves current state; re-loading the slot
       shows the saved scores
-- [ ] `dotnet build` succeeds with no warnings
+- [x] `dotnet build` succeeds with no warnings
 
 ## Phase 5: Shared Theme
 

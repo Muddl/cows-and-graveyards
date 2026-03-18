@@ -80,18 +80,18 @@ public partial class GameScene : Node3D
 
     public void SaveAndExit()
     {
-        _saveManager?.SaveSlot(new TripSave(_activeSlot, Scores.LeftScore, Scores.RightScore));
-        GetTree().ChangeSceneToFile("res://scenes/menus/MainMenuScene.tscn");
+        _saveManager?.SaveSlot(new TripSave(ActiveSlot, Scores.LeftScore, Scores.RightScore));
+        GetTree()?.ChangeSceneToFile("res://scenes/menus/MainMenuScene.tscn");
     }
 
     // ── Trip slot initialisation (Task 4.3) ───────────────────────────────────
 
-    private int _activeSlot;
+    public int ActiveSlot { get; private set; }
     private SaveManager? _saveManager;
 
     public void InitTripSlot(int slotIndex, TripSave? existingSave, SaveManager? saveManager = null)
     {
-        _activeSlot = slotIndex;
+        ActiveSlot = slotIndex;
         _saveManager = saveManager ?? new SaveManager();
 
         if (existingSave is not null)
