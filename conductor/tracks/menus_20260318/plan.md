@@ -20,19 +20,19 @@ before any menu scene touches it.
 
 ### Tasks
 
-- [ ] Task 1.1: Write failing unit tests for `TripSave` — stores slot
+- [x] Task 1.1: Write failing unit tests for `TripSave` — stores slot
       index (0–2), left score, right score; serialises to/from a JSON
       dictionary correctly
-- [ ] Task 1.2: Write failing unit tests for `SaveManager` — save a slot,
+- [x] Task 1.2: Write failing unit tests for `SaveManager` — save a slot,
       load a slot, load all slots, graceful empty return on missing file,
       graceful empty return on corrupt/invalid JSON
-- [ ] Task 1.3: Implement `TripSave.cs` and `SaveManager.cs` to pass all
+- [x] Task 1.3: Implement `TripSave.cs` and `SaveManager.cs` to pass all
       tests; persist to `user://trips.json` via `FileAccess`
 
 ### Verification
 
-- [ ] All TripSave and SaveManager tests pass
-- [ ] `dotnet build` succeeds with no warnings
+- [x] All TripSave and SaveManager tests pass
+- [x] `dotnet build` succeeds with no warnings
 
 ## Phase 2: Main Menu
 
