@@ -80,27 +80,27 @@ the wiring. Cover coexistence with cow taps to guard against regressions.
 
 ### Tasks
 
-- [ ] Task 4.1: Write integration tests — left graveyard activation spawns
+- [x] Task 4.1: Write integration tests — left graveyard activation spawns
       GraveyardEntity on left side and zeroes right score, HUD reflects
       change immediately
-- [ ] Task 4.2: Write integration tests — right graveyard activation spawns
+- [x] Task 4.2: Write integration tests — right graveyard activation spawns
       GraveyardEntity on right side and zeroes left score, HUD reflects
       change immediately
-- [ ] Task 4.3: Write integration tests — graveyard activation does not
+- [x] Task 4.3: Write integration tests — graveyard activation does not
       affect the same side's score
-- [ ] Task 4.4: Write integration tests — interleaved cow taps and graveyard
+- [x] Task 4.4: Write integration tests — interleaved cow taps and graveyard
       activations produce correct cumulative scores on both sides
-- [ ] Task 4.5: Implement `GameScene.cs` graveyard handler — connect
+- [x] Task 4.5: Implement `GameScene.cs` graveyard handler — connect
       GraveyardButton Activated signals, spawn GraveyardEntity on matching
       side, call ZeroLeft/ZeroRight on opposing side, update ScoreHud
 
 ### Verification
 
-- [ ] All unit and integration tests pass
-- [ ] Full graveyard loop works: button tap → entity animates past → opposing
+- [x] All unit and integration tests pass
+- [x] Full graveyard loop works: button tap → entity animates past → opposing
       score zeroed → HUD updates
-- [ ] Cow tap mechanic unaffected
-- [ ] `dotnet build` succeeds with no warnings
+- [x] Cow tap mechanic unaffected
+- [x] `dotnet build` succeeds with no warnings
 
 ## Final Verification
 
