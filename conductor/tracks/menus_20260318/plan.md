@@ -41,20 +41,20 @@ display and sets the startup scene.
 
 ### Tasks
 
-- [ ] Task 2.1: Write unit tests for `MainMenuScene` — three slot buttons
+- [x] Task 2.1: Write unit tests for `MainMenuScene` — three slot buttons
       show correct labels (empty vs saved scores), Quit button absent when
       `OS.GetName()` is "Android" or "iOS", `NewTripRequested` signal
       carries slot index, `LoadTripRequested` signal carries a `TripSave`
-- [ ] Task 2.2: Implement `MainMenuScene.cs` + `MainMenuScene.tscn` with
+- [x] Task 2.2: Implement `MainMenuScene.cs` + `MainMenuScene.tscn` with
       New Trip slots, Load Trip slots, and conditional Quit button
-- [ ] Task 2.3: Set `MainMenuScene.tscn` as the project startup scene
+- [x] Task 2.3: Set `MainMenuScene.tscn` as the project startup scene
       in `project.godot`
 
 ### Verification
 
-- [ ] All MainMenuScene tests pass
-- [ ] Launching the project opens the main menu, not the game directly
-- [ ] `dotnet build` succeeds with no warnings
+- [x] All MainMenuScene tests pass
+- [x] Launching the project opens the main menu, not the game directly
+- [x] `dotnet build` succeeds with no warnings
 
 ## Phase 3: Pause Menu & Input Isolation
 

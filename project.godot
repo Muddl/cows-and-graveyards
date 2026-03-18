@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Cows & Graveyards"
-run/main_scene="uid://dc3dnsxxbg41g"
+run/main_scene="res://scenes/menus/MainMenuScene.tscn"
 config/features=PackedStringArray("4.6", "C#", "Mobile")
 config/icon="res://icon.svg"
 

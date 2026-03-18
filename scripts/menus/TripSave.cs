@@ -4,9 +4,10 @@ using Godot;
 
 /// <summary>
 /// Immutable data record for a single saved trip slot.
+/// Extends RefCounted so it can be carried as a Godot signal parameter.
 /// SlotIndex must be 0–2.
 /// </summary>
-public class TripSave
+public partial class TripSave : RefCounted
 {
     public int SlotIndex { get; }
     public int LeftScore { get; }
