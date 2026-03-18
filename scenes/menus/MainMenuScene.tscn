@@ -1,10 +1,12 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://scripts/menus/MainMenuScene.cs" id="main_menu_script"]
+[ext_resource type="Theme" path="res://assets/ui/game_theme.tres" id="game_theme"]
 
 [node name="MainMenuScene" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource("game_theme")
 script = ExtResource("main_menu_script")
 
 [node name="VBox" type="VBoxContainer" parent="."]

@@ -1,11 +1,13 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://scripts/menus/PauseMenu.cs" id="pause_menu_script"]
+[ext_resource type="Theme" path="res://assets/ui/game_theme.tres" id="game_theme"]
 
 [node name="PauseMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 visible = false
+theme = ExtResource("game_theme")
 script = ExtResource("pause_menu_script")
 
 [node name="Panel" type="Panel" parent="."]

@@ -3,7 +3,7 @@
 **Track ID:** menus_20260318
 **Spec:** [spec.md](./spec.md)
 **Created:** 2026-03-18
-**Status:** [ ] Not Started
+**Status:** [x] Complete
 
 ## Overview
 
@@ -120,24 +120,24 @@ are acceptable — consistency is the goal.
 
 ### Tasks
 
-- [ ] Task 5.1: Create `res://assets/ui/game_theme.tres` — define shared
+- [x] Task 5.1: Create `res://assets/ui/game_theme.tres` — define shared
       styles for Button (normal/hover/pressed), Label, and Panel nodes
-- [ ] Task 5.2: Apply `game_theme.tres` to `MainMenuScene.tscn`,
+- [x] Task 5.2: Apply `game_theme.tres` to `MainMenuScene.tscn`,
       `PauseMenu.tscn`, and `ScoreHud.tscn`
 
 ### Verification
 
-- [ ] All menus and the HUD share a visually consistent style
-- [ ] `dotnet build` succeeds with no warnings
+- [x] All menus and the HUD share a visually consistent style
+- [x] `dotnet build` succeeds with no warnings
 
 ## Final Verification
 
-- [ ] All acceptance criteria met
-- [ ] All tests passing (`dotnet test`)
-- [ ] `dotnet build` succeeds with no warnings
-- [ ] Quit button absent on Android/iOS, present on desktop
-- [ ] Project file structure follows Godot conventions
-- [ ] Ready for review
+- [x] All acceptance criteria met
+- [x] All tests passing (`dotnet test`)
+- [x] `dotnet build` succeeds with no warnings
+- [x] Quit button absent on Android/iOS, present on desktop
+- [x] Project file structure follows Godot conventions
+- [x] Ready for review
 
 ---
 
