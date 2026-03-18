@@ -59,19 +59,19 @@ must not bleed input into the cow tap zone.
 
 ### Tasks
 
-- [ ] Task 3.1: Write unit tests for `GraveyardButton` — correct TapSide
+- [x] Task 3.1: Write unit tests for `GraveyardButton` — correct TapSide
       assignment on construction, Activated signal carries correct side
-- [ ] Task 3.2: Implement `GraveyardButton.cs` + `GraveyardButton.tscn` —
+- [x] Task 3.2: Implement `GraveyardButton.cs` + `GraveyardButton.tscn` —
       Control node with MOUSE_FILTER_STOP on button rect, anchored
       responsively to its side of the screen
-- [ ] Task 3.3: Add Left and Right `GraveyardButton` instances to
+- [x] Task 3.3: Add Left and Right `GraveyardButton` instances to
       `GameScene.tscn` CanvasLayer, verify layout at 1080×1920
 
 ### Verification
 
-- [ ] All GraveyardButton tests pass
-- [ ] Buttons are visible and correctly positioned at mobile viewport size
-- [ ] `dotnet build` succeeds with no warnings
+- [x] All GraveyardButton tests pass
+- [x] Buttons are visible and correctly positioned at mobile viewport size
+- [x] `dotnet build` succeeds with no warnings
 
 ## Phase 4: GameScene Wiring & Integration
 
