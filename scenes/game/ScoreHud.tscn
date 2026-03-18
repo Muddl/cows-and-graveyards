@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://score_hud_scene1"]
+
+[ext_resource type="Script" uid="uid://score_hud_script1" path="res://scripts/game/ScoreHud.cs" id="score_hud_script"]
+
+[node name="ScoreHud" type="Control"]
+anchor_right = 1.0
+offset_bottom = 80.0
+script = ExtResource("score_hud_script")
+
+[node name="LeftLabel" type="Label" parent="."]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 200.0
+offset_bottom = 60.0
+text = "L: 0"
+
+[node name="RightLabel" type="Label" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 60.0
+text = "R: 0"
+horizontal_alignment = 2
