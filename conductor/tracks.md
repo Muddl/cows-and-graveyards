@@ -3,8 +3,6 @@
 | Status | Track ID | Title | Created | Updated |
 | ------ | -------- | ----- | ------- | ------- |
 
-| [x] | menus_20260318 | Main Menu, Pause Menu & Trip Persistence | 2026-03-18 | 2026-03-18 |
-
 <!-- Tracks registered by /conductor:new-track -->
 
 ## Archived Tracks
@@ -20,3 +18,9 @@
 **Reason:** Completed - Work finished successfully
 **Archived:** 2026-03-18
 **Folder:** [./tracks/_archive/graveyard_20260318/](./tracks/_archive/graveyard_20260318/)
+
+### menus_20260318: Main Menu, Pause Menu & Trip Persistence
+
+**Reason:** Completed - Work finished successfully
+**Archived:** 2026-03-19
+**Folder:** [./tracks/_archive/menus_20260318/](./tracks/_archive/menus_20260318/)
