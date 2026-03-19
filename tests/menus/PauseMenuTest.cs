@@ -86,4 +86,30 @@ public class PauseMenuTest
 
         AssertThat(menu.ShouldShowQuitButton()).IsFalse();
     }
+
+    // CompleteTrip signal
+
+    [TestCase]
+    public void CompleteTripRequestedSignalFiresOnCompleteTripPressed()
+    {
+        var menu = AutoFree(new PauseMenu())!;
+
+        bool fired = false;
+        menu.CompleteTripRequested += () => fired = true;
+        menu.OnCompleteTripPressed();
+
+        AssertThat(fired).IsTrue();
+    }
+
+    [TestCase]
+    public void CompleteTripDoesNotFireResumeRequested()
+    {
+        var menu = AutoFree(new PauseMenu())!;
+
+        bool fired = false;
+        menu.ResumeRequested += () => fired = true;
+        menu.OnCompleteTripPressed();
+
+        AssertThat(fired).IsFalse();
+    }
 }

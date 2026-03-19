@@ -50,6 +50,13 @@ public class SaveManager
         return result;
     }
 
+    public void DeleteSlot(int slotIndex)
+    {
+        var slots = LoadRawSlots();
+        slots[slotIndex] = null;
+        WriteSlots(slots);
+    }
+
     public void DeleteAll()
     {
         if (FileAccess.FileExists(_savePath))

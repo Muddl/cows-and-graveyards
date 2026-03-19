@@ -133,6 +133,45 @@ public class SaveManagerTest
         AssertThat(all[2]).IsNull();
     }
 
+    // DeleteSlot tests
+
+    [TestCase]
+    public void DeleteSlotSetsSlotToNull()
+    {
+        _manager.SaveSlot(new TripSave(1, 10, 20));
+        _manager.DeleteSlot(1);
+
+        var loaded = _manager.LoadSlot(1);
+
+        AssertThat(loaded).IsNull();
+    }
+
+    [TestCase]
+    public void DeleteSlotDoesNotAffectOtherSlots()
+    {
+        _manager.SaveSlot(new TripSave(0, 1, 2));
+        _manager.SaveSlot(new TripSave(1, 3, 4));
+        _manager.SaveSlot(new TripSave(2, 5, 6));
+
+        _manager.DeleteSlot(1);
+
+        AssertThat(_manager.LoadSlot(0)).IsNotNull();
+        AssertThat(_manager.LoadSlot(1)).IsNull();
+        AssertThat(_manager.LoadSlot(2)).IsNotNull();
+    }
+
+    [TestCase]
+    public void DeleteSlotFileRemainsValidAfterDelete()
+    {
+        _manager.SaveSlot(new TripSave(0, 7, 8));
+        _manager.DeleteSlot(0);
+
+        var all = _manager.LoadAllSlots();
+
+        AssertThat(all.Count).IsEqual(3);
+        AssertThat(all[0]).IsNull();
+    }
+
     [TestCase]
     public void MultipleSlotsAreIndependent()
     {

@@ -1,5 +1,7 @@
 namespace CowsGraveyards.Menus;
 
+using System.Collections.Generic;
+using System.Linq;
 using Godot;
 
 public partial class MainMenuScene : Control
@@ -17,32 +19,67 @@ public partial class MainMenuScene : Control
     // Settable in tests to override OS.GetName() without mocking.
     public string PlatformName { get; set; } = OS.GetName();
 
-    // Child node references — set in _Ready() when scene tree is available.
-    private Button?[] _newTripButtons = new Button?[SlotCount];
-    private Button?[] _loadTripButtons = new Button?[SlotCount];
+    // Main panel refs
+    private Control? _mainPanel;
+    private Button? _startTripButton;
+    private Button? _loadTripButton;
     private Button? _quitButton;
+
+    // Overlay error label (sits outside VBox so it doesn't shift layout)
+    private Label? _errorLabel;
+
+    // Slot select panel refs
+    private Control? _slotSelectPanel;
+    private readonly Button?[] _slotButtons = new Button?[SlotCount];
+    private Button? _backButton;
+
+    // Whether the slot panel was opened for loading (true) or not used for new-trip selection
+    private bool _slotPanelIsForLoad;
 
     public override void _Ready()
     {
-        _quitButton = GetNodeOrNull<Button>("VBox/QuitButton");
+        _mainPanel       = GetNodeOrNull<Control>("MainPanel");
+        _startTripButton = GetNodeOrNull<Button>("MainPanel/StartTripButton");
+        _loadTripButton  = GetNodeOrNull<Button>("MainPanel/LoadTripButton");
+        _quitButton      = GetNodeOrNull<Button>("MainPanel/QuitButton");
+        _errorLabel      = GetNodeOrNull<Label>("ErrorLabel");
+        _slotSelectPanel = GetNodeOrNull<Control>("SlotSelectPanel");
 
         for (int i = 0; i < SlotCount; i++)
         {
             int slot = i; // capture for closure
-            _newTripButtons[i] = GetNodeOrNull<Button>($"VBox/Slot{i}/NewTripButton");
-            _loadTripButtons[i] = GetNodeOrNull<Button>($"VBox/Slot{i}/LoadTripButton");
-
-            if (_newTripButtons[i] is { } newBtn)
-                newBtn.Pressed += () => OnNewTripSlotPressed(slot);
-
-            if (_loadTripButtons[i] is { } loadBtn)
-                loadBtn.Pressed += () => OnLoadTripSlotPressedByIndex(slot);
+            _slotButtons[i] = GetNodeOrNull<Button>($"SlotSelectPanel/Slot{i}Button");
+            if (_slotButtons[i] is { } btn)
+                btn.Pressed += () => OnSlotButtonPressed(slot);
         }
+
+        _backButton = GetNodeOrNull<Button>("SlotSelectPanel/BackButton");
+
+        if (_startTripButton is not null)
+            _startTripButton.Pressed += OnStartTripPressed;
+
+        if (_loadTripButton is not null)
+            _loadTripButton.Pressed += () => OpenSlotPanel(forLoad: true);
+
+        if (_backButton is not null)
+            _backButton.Pressed += HideSlotSelectPanel;
 
         if (_quitButton is not null)
             _quitButton.Pressed += OnQuitPressed;
 
-        RefreshSlotLabels();
+        NewTripRequested  += (int slot) => NavigateToGame(slot, null);
+        LoadTripRequested += (TripSave save) => NavigateToGame(save.SlotIndex, save);
+
+        var slots = _saveManager.LoadAllSlots();
+        if (_loadTripButton is not null)
+            _loadTripButton.Visible = HasAnySave(slots);
+
+        if (_errorLabel is not null)
+            _errorLabel.Visible = false;
+
+        HideSlotSelectPanel();
+        if (_mainPanel is not null)
+            _mainPanel.Visible = true;
         ApplyQuitButtonVisibility();
     }
 
@@ -60,13 +97,40 @@ public partial class MainMenuScene : Control
     public bool ShouldShowQuitButton() =>
         PlatformName != "Android" && PlatformName != "iOS";
 
-    /// <summary>Called by the New Trip button for a given slot (or directly in tests).</summary>
+    /// <summary>Returns true if at least one slot is available (null).</summary>
+    public bool HasAvailableSlot(IList<TripSave?> slots) =>
+        slots.Any(s => s is null);
+
+    /// <summary>Returns true if at least one slot has a save.</summary>
+    public bool HasAnySave(IList<TripSave?> slots) =>
+        slots.Any(s => s is not null);
+
+    /// <summary>Called by the Start Trip button. Loads saves internally.</summary>
+    public void OnStartTripPressed() =>
+        OnStartTripPressed(_saveManager.LoadAllSlots());
+
+    /// <summary>Finds the first free slot and starts a trip, or shows an error if all full.</summary>
+    public void OnStartTripPressed(IList<TripSave?> slots)
+    {
+        for (int i = 0; i < slots.Count; i++)
+        {
+            if (slots[i] is null)
+            {
+                OnNewTripSlotPressed(i);
+                return;
+            }
+        }
+
+        ShowErrorMessage("All trip slots are full — complete a trip to start a new one.");
+    }
+
+    /// <summary>Called by a New Trip slot button (or directly in tests).</summary>
     public void OnNewTripSlotPressed(int slotIndex)
     {
         EmitSignal(SignalName.NewTripRequested, slotIndex);
     }
 
-    /// <summary>Called by the Load Trip button (or directly in tests).</summary>
+    /// <summary>Called by the Load Trip slot button (or directly in tests).</summary>
     public void OnLoadTripSlotPressed(TripSave save)
     {
         EmitSignal(SignalName.LoadTripRequested, save);
@@ -74,21 +138,76 @@ public partial class MainMenuScene : Control
 
     // ── Private helpers ───────────────────────────────────────────────────────
 
-    private void OnLoadTripSlotPressedByIndex(int slotIndex)
+    private void OnSlotButtonPressed(int slotIndex)
     {
-        var save = _saveManager.LoadSlot(slotIndex);
-        if (save is not null)
-            OnLoadTripSlotPressed(save);
+        HideSlotSelectPanel();
+
+        if (_slotPanelIsForLoad)
+        {
+            var save = _saveManager.LoadSlot(slotIndex);
+            if (save is not null)
+                OnLoadTripSlotPressed(save);
+        }
+        else
+        {
+            OnNewTripSlotPressed(slotIndex);
+        }
     }
 
-    private void RefreshSlotLabels()
+    private void OpenSlotPanel(bool forLoad)
     {
+        _slotPanelIsForLoad = forLoad;
+        var slots = _saveManager.LoadAllSlots();
+
         for (int i = 0; i < SlotCount; i++)
         {
-            var save = _saveManager.LoadSlot(i);
-            if (_loadTripButtons[i] is { } btn)
-                btn.Text = GetSlotLabel(save);
+            if (_slotButtons[i] is not { } btn) continue;
+            var save = slots[i];
+            btn.Text = GetSlotLabel(save);
+            // For load panel, hide empty slots; for new-trip panel all are shown
+            btn.Visible = !forLoad || save is not null;
         }
+
+        if (_mainPanel is not null)
+            _mainPanel.Visible = false;
+
+        if (_slotSelectPanel is not null)
+            _slotSelectPanel.Visible = true;
+    }
+
+    private void HideSlotSelectPanel()
+    {
+        if (_slotSelectPanel is not null)
+            _slotSelectPanel.Visible = false;
+
+        if (_mainPanel is not null)
+            _mainPanel.Visible = true;
+    }
+
+    private void ShowErrorMessage(string msg)
+    {
+        if (_errorLabel is null) return;
+
+        _errorLabel.Text = msg;
+        _errorLabel.Visible = true;
+
+        if (_startTripButton is not null)
+            _startTripButton.Visible = false;
+
+        if (GetTree() is { } tree)
+            tree.CreateTimer(3.0).Timeout += () =>
+            {
+                if (_errorLabel is not null)
+                    _errorLabel.Visible = false;
+                if (_startTripButton is not null)
+                    _startTripButton.Visible = true;
+            };
+    }
+
+    private void NavigateToGame(int slotIndex, TripSave? save)
+    {
+        PendingTrip.Set(slotIndex, save);
+        GetTree().ChangeSceneToFile("res://scenes/game/GameScene.tscn");
     }
 
     private void ApplyQuitButtonVisibility()

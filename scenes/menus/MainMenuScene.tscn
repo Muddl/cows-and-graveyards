@@ -9,80 +9,85 @@ anchor_bottom = 1.0
 theme = ExtResource("game_theme")
 script = ExtResource("main_menu_script")
 
-[node name="VBox" type="VBoxContainer" parent="."]
+[node name="MainPanel" type="VBoxContainer" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = -300.0
-offset_top = -360.0
+offset_top = -220.0
 offset_right = 300.0
-offset_bottom = 360.0
+offset_bottom = 220.0
 theme_override_constants/separation = 24
 
-[node name="TitleLabel" type="Label" parent="VBox"]
+[node name="TitleLabel" type="Label" parent="MainPanel"]
 text = "Cows & Graveyards"
 horizontal_alignment = 1
 theme_override_font_sizes/font_size = 56
 
-[node name="Slot0" type="HBoxContainer" parent="VBox"]
-theme_override_constants/separation = 16
+[node name="StartTripButton" type="Button" parent="MainPanel"]
+custom_minimum_size = Vector2(0, 72)
+text = "Start Trip"
+theme_override_font_sizes/font_size = 40
 
-[node name="SlotLabel" type="Label" parent="VBox/Slot0"]
-custom_minimum_size = Vector2(80, 0)
-text = "Slot 1"
-vertical_alignment = 1
-theme_override_font_sizes/font_size = 36
+[node name="LoadTripButton" type="Button" parent="MainPanel"]
+custom_minimum_size = Vector2(0, 72)
+text = "Load Trip"
+theme_override_font_sizes/font_size = 40
 
-[node name="NewTripButton" type="Button" parent="VBox/Slot0"]
-custom_minimum_size = Vector2(180, 64)
-text = "New Trip"
-theme_override_font_sizes/font_size = 32
-
-[node name="LoadTripButton" type="Button" parent="VBox/Slot0"]
-custom_minimum_size = Vector2(240, 64)
-text = "Empty"
-theme_override_font_sizes/font_size = 32
-
-[node name="Slot1" type="HBoxContainer" parent="VBox"]
-theme_override_constants/separation = 16
-
-[node name="SlotLabel" type="Label" parent="VBox/Slot1"]
-custom_minimum_size = Vector2(80, 0)
-text = "Slot 2"
-vertical_alignment = 1
-theme_override_font_sizes/font_size = 36
-
-[node name="NewTripButton" type="Button" parent="VBox/Slot1"]
-custom_minimum_size = Vector2(180, 64)
-text = "New Trip"
-theme_override_font_sizes/font_size = 32
-
-[node name="LoadTripButton" type="Button" parent="VBox/Slot1"]
-custom_minimum_size = Vector2(240, 64)
-text = "Empty"
-theme_override_font_sizes/font_size = 32
-
-[node name="Slot2" type="HBoxContainer" parent="VBox"]
-theme_override_constants/separation = 16
-
-[node name="SlotLabel" type="Label" parent="VBox/Slot2"]
-custom_minimum_size = Vector2(80, 0)
-text = "Slot 3"
-vertical_alignment = 1
-theme_override_font_sizes/font_size = 36
-
-[node name="NewTripButton" type="Button" parent="VBox/Slot2"]
-custom_minimum_size = Vector2(180, 64)
-text = "New Trip"
-theme_override_font_sizes/font_size = 32
-
-[node name="LoadTripButton" type="Button" parent="VBox/Slot2"]
-custom_minimum_size = Vector2(240, 64)
-text = "Empty"
-theme_override_font_sizes/font_size = 32
-
-[node name="QuitButton" type="Button" parent="VBox"]
-custom_minimum_size = Vector2(0, 64)
+[node name="QuitButton" type="Button" parent="MainPanel"]
+custom_minimum_size = Vector2(0, 72)
 text = "Quit"
+theme_override_font_sizes/font_size = 40
+
+[node name="SlotSelectPanel" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -280.0
+offset_right = 300.0
+offset_bottom = 280.0
+theme_override_constants/separation = 24
+visible = false
+
+[node name="SelectLabel" type="Label" parent="SlotSelectPanel"]
+text = "Select a Trip"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 44
+
+[node name="Slot0Button" type="Button" parent="SlotSelectPanel"]
+custom_minimum_size = Vector2(0, 72)
+text = "Slot 1"
 theme_override_font_sizes/font_size = 36
+
+[node name="Slot1Button" type="Button" parent="SlotSelectPanel"]
+custom_minimum_size = Vector2(0, 72)
+text = "Slot 2"
+theme_override_font_sizes/font_size = 36
+
+[node name="Slot2Button" type="Button" parent="SlotSelectPanel"]
+custom_minimum_size = Vector2(0, 72)
+text = "Slot 3"
+theme_override_font_sizes/font_size = 36
+
+[node name="BackButton" type="Button" parent="SlotSelectPanel"]
+custom_minimum_size = Vector2(0, 72)
+text = "Back"
+theme_override_font_sizes/font_size = 36
+
+[node name="ErrorLabel" type="Label" parent="."]
+anchor_left = 0.0
+anchor_right = 1.0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = -120.0
+offset_right = -30.0
+offset_bottom = -60.0
+visible = false
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 28

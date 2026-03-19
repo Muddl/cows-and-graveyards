@@ -13,6 +13,10 @@ and finish with a shared theme applied across all UI. Every logic class
 gets tests before implementation; the input-isolation boundary and
 save/load round-trip get explicit integration test coverage.
 
+Later extended to add trip completion (Complete Trip flow, history
+persistence), a redesigned main menu (Start/Load Trip pattern with slot
+panel), scene navigation wiring (PendingTrip handoff), and GUI polish.
+
 ## Phase 1: Trip Persistence
 
 Pure data layer — no Godot nodes, fully unit-testable. Must be solid
@@ -41,12 +45,9 @@ display and sets the startup scene.
 
 ### Tasks
 
-- [x] Task 2.1: Write unit tests for `MainMenuScene` — three slot buttons
-      show correct labels (empty vs saved scores), Quit button absent when
-      `OS.GetName()` is "Android" or "iOS", `NewTripRequested` signal
-      carries slot index, `LoadTripRequested` signal carries a `TripSave`
-- [x] Task 2.2: Implement `MainMenuScene.cs` + `MainMenuScene.tscn` with
-      New Trip slots, Load Trip slots, and conditional Quit button
+- [x] Task 2.1: Write unit tests for `MainMenuScene` — slot labels, Quit
+      button visibility, `NewTripRequested` and `LoadTripRequested` signals
+- [x] Task 2.2: Implement `MainMenuScene.cs` + `MainMenuScene.tscn`
 - [x] Task 2.3: Set `MainMenuScene.tscn` as the project startup scene
       in `project.godot`
 
@@ -66,16 +67,10 @@ game taps must be provably blocked while any menu is open.
 - [x] Task 3.1: Write unit tests for `PauseMenu` — `ResumeRequested` and
       `MainMenuRequested` signals fire on correct button press, Quit button
       absent on mobile
-- [ ] Task 3.2: Implement `PauseMenu.cs` + `PauseMenu.tscn`; add a
+- [x] Task 3.2: Implement `PauseMenu.cs` + `PauseMenu.tscn`; add a
       persistent Pause button to `GameScene.tscn` CanvasLayer
-      (MOUSE_FILTER_STOP, always on top)
-- [x] Task 3.3: Write integration tests for input isolation — after
-      `GameScene.SetProcessInput(false)`, simulated cow taps and graveyard
-      presses produce no score change; after `SetProcessInput(true)` they
-      do
-- [x] Task 3.4: Implement pause/resume wiring in `GameScene.cs` — connect
-      Pause button and `PauseMenu` signals, toggle `SetProcessInput` and
-      PauseMenu visibility
+- [x] Task 3.3: Write integration tests for input isolation
+- [x] Task 3.4: Implement pause/resume wiring in `GameScene.cs`
 
 ### Verification
 
@@ -87,53 +82,83 @@ game taps must be provably blocked while any menu is open.
 ## Phase 4: Trip State Integration & Scene Flow
 
 Wire trip slot data through the full new-game and return-to-menu flows.
-Tests written before the wiring code to lock down the save/restore
-contract.
 
 ### Tasks
 
 - [x] Task 4.1: Write integration tests — `GameScene` initialised with a
-      `TripSave` slot correctly seeds `ScoreTracker` left/right scores and
-      stores the active slot index
-- [x] Task 4.2: Write integration tests — calling `GameScene.SaveAndExit()`
-      writes current scores back to the correct slot via `SaveManager`,
-      then signals scene change
-- [x] Task 4.3: Implement `GameScene` trip slot initialisation — accept
-      slot index + optional `TripSave` on entry, seed `ScoreTracker`
-      accordingly
-- [x] Task 4.4: Implement `GameScene.SaveAndExit()` — saves current scores
-      to active slot and changes scene to `MainMenuScene`; connect to
-      `PauseMenu.MainMenuRequested`
+      `TripSave` slot correctly seeds `ScoreTracker` left/right scores
+- [x] Task 4.2: Write integration tests — `GameScene.SaveAndExit()` writes
+      scores back and changes scene
+- [x] Task 4.3: Implement `GameScene` trip slot initialisation
+- [x] Task 4.4: Implement `GameScene.SaveAndExit()` and scene wiring
+- [x] Task 4.5: Add `PendingTrip` static handoff so `MainMenuScene` can
+      pass slot data to `GameScene` across `ChangeSceneToFile`; wire
+      `MainMenuScene` own signals to `NavigateToGame`
 
 ### Verification
 
 - [x] All trip integration tests pass
 - [x] New trip starts with zero scores; loaded trip restores correct scores
-- [x] Returning to main menu saves current state; re-loading the slot
-      shows the saved scores
+- [x] Returning to main menu saves current state
 - [x] `dotnet build` succeeds with no warnings
 
 ## Phase 5: Shared Theme
 
-Apply a consistent design language across all UI. Placeholder aesthetics
-are acceptable — consistency is the goal.
+Apply a consistent design language across all UI.
 
 ### Tasks
 
-- [x] Task 5.1: Create `res://assets/ui/game_theme.tres` — define shared
-      styles for Button (normal/hover/pressed), Label, and Panel nodes
-- [x] Task 5.2: Apply `game_theme.tres` to `MainMenuScene.tscn`,
-      `PauseMenu.tscn`, and `ScoreHud.tscn`
+- [x] Task 5.1: Create `res://assets/ui/game_theme.tres`
+- [x] Task 5.2: Apply `game_theme.tres` to all menu and HUD scenes
 
 ### Verification
 
 - [x] All menus and the HUD share a visually consistent style
 - [x] `dotnet build` succeeds with no warnings
 
+## Phase 6: Menu Redesign & Trip Completion
+
+Redesign main menu for a cleaner UX; add Complete Trip flow with
+persistent history; GUI polish pass.
+
+### Tasks
+
+- [x] Task 6.1: Write tests for `HasAvailableSlot`, `HasAnySave`, and
+      `OnStartTripPressed(slots)` overload on `MainMenuScene`
+- [x] Task 6.2: Redesign `MainMenuScene` — replace per-slot button rows
+      with Start Trip / Load Trip / Quit; Load Trip opens a slot select
+      panel showing only populated slots; Start Trip shows a timed error
+      when all slots are full and hides itself during the error
+- [x] Task 6.3: Write tests for `SaveManager.DeleteSlot`
+- [x] Task 6.4: Implement `SaveManager.DeleteSlot`
+- [x] Task 6.5: Write tests for `CompletedTripRecord` and
+      `TripHistoryManager` (append, load-all, corrupt-file resilience)
+- [x] Task 6.6: Implement `CompletedTripRecord.cs` and
+      `TripHistoryManager.cs` — persist completed trips to
+      `user://trip_history.json`
+- [x] Task 6.7: Write tests for `PauseMenu.CompleteTripRequested` signal
+- [x] Task 6.8: Add Complete Trip button to `PauseMenu`; wire
+      `GameScene.CompleteAndExit()` — appends history record, deletes
+      active slot, returns to main menu
+- [x] Task 6.9: Move pause button to top-center of screen
+- [x] Task 6.10: Fix overlapping panels (hide MainPanel when SlotSelectPanel
+      is open) and move ErrorLabel outside VBox to prevent layout shifts
+
+### Verification
+
+- [x] All 156 tests pass
+- [x] Start Trip finds first free slot; shows timed error and hides button
+      when all 3 slots are full
+- [x] Load Trip panel shows only populated slots
+- [x] Complete Trip archives the trip and removes it from active slots
+- [x] No layout shifts when error label appears
+- [x] No panel overlap between main buttons and slot select panel
+- [x] `dotnet build` succeeds with no warnings
+
 ## Final Verification
 
 - [x] All acceptance criteria met
-- [x] All tests passing (`dotnet test`)
+- [x] All 156 tests passing (`dotnet test`)
 - [x] `dotnet build` succeeds with no warnings
 - [x] Quit button absent on Android/iOS, present on desktop
 - [x] Project file structure follows Godot conventions

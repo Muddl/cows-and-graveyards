@@ -1,5 +1,6 @@
 namespace CowsGraveyards.Tests.Menus;
 
+using System.Collections.Generic;
 using CowsGraveyards.Menus;
 using GdUnit4;
 using static GdUnit4.Assertions;
@@ -181,5 +182,117 @@ public class MainMenuSceneTest
 
         AssertThat(received!.LeftScore).IsEqual(11);
         AssertThat(received.RightScore).IsEqual(22);
+    }
+
+    // ── HasAvailableSlot ──────────────────────────────────────────────────────
+
+    [TestCase]
+    public void HasAvailableSlotReturnsTrueWhenAllSlotsNull()
+    {
+        var menu = AutoFree(new MainMenuScene())!;
+        var slots = new List<TripSave?> { null, null, null };
+
+        AssertThat(menu.HasAvailableSlot(slots)).IsTrue();
+    }
+
+    [TestCase]
+    public void HasAvailableSlotReturnsTrueWhenSomeSlotsNull()
+    {
+        var menu = AutoFree(new MainMenuScene())!;
+        var slots = new List<TripSave?> { new TripSave(0, 1, 2), null, new TripSave(2, 3, 4) };
+
+        AssertThat(menu.HasAvailableSlot(slots)).IsTrue();
+    }
+
+    [TestCase]
+    public void HasAvailableSlotReturnsFalseWhenNoSlotsNull()
+    {
+        var menu = AutoFree(new MainMenuScene())!;
+        var slots = new List<TripSave?> { new TripSave(0, 1, 2), new TripSave(1, 3, 4), new TripSave(2, 5, 6) };
+
+        AssertThat(menu.HasAvailableSlot(slots)).IsFalse();
+    }
+
+    // ── HasAnySave ────────────────────────────────────────────────────────────
+
+    [TestCase]
+    public void HasAnySaveReturnsTrueWhenOneSaveExists()
+    {
+        var menu = AutoFree(new MainMenuScene())!;
+        var slots = new List<TripSave?> { null, new TripSave(1, 5, 3), null };
+
+        AssertThat(menu.HasAnySave(slots)).IsTrue();
+    }
+
+    [TestCase]
+    public void HasAnySaveReturnsFalseWhenAllNull()
+    {
+        var menu = AutoFree(new MainMenuScene())!;
+        var slots = new List<TripSave?> { null, null, null };
+
+        AssertThat(menu.HasAnySave(slots)).IsFalse();
+    }
+
+    [TestCase]
+    public void HasAnySaveReturnsTrueWhenAllSlotsPopulated()
+    {
+        var menu = AutoFree(new MainMenuScene())!;
+        var slots = new List<TripSave?> { new TripSave(0, 1, 2), new TripSave(1, 3, 4), new TripSave(2, 5, 6) };
+
+        AssertThat(menu.HasAnySave(slots)).IsTrue();
+    }
+
+    // ── OnStartTripPressed(slots) ─────────────────────────────────────────────
+
+    [TestCase]
+    public void OnStartTripPressedEmitsNewTripRequestedWithFirstFreeSlot()
+    {
+        var menu = AutoFree(new MainMenuScene())!;
+        var slots = new List<TripSave?> { new TripSave(0, 1, 2), null, null };
+
+        int? received = null;
+        menu.NewTripRequested += (int slot) => received = slot;
+        menu.OnStartTripPressed(slots);
+
+        AssertThat(received).IsEqual(1);
+    }
+
+    [TestCase]
+    public void OnStartTripPressedUsesFirstFreeSlotWhenSlot0IsFree()
+    {
+        var menu = AutoFree(new MainMenuScene())!;
+        var slots = new List<TripSave?> { null, new TripSave(1, 3, 4), null };
+
+        int? received = null;
+        menu.NewTripRequested += (int slot) => received = slot;
+        menu.OnStartTripPressed(slots);
+
+        AssertThat(received).IsEqual(0);
+    }
+
+    [TestCase]
+    public void OnStartTripPressedUsesLastSlotWhenOnlyLastIsFree()
+    {
+        var menu = AutoFree(new MainMenuScene())!;
+        var slots = new List<TripSave?> { new TripSave(0, 1, 2), new TripSave(1, 3, 4), null };
+
+        int? received = null;
+        menu.NewTripRequested += (int slot) => received = slot;
+        menu.OnStartTripPressed(slots);
+
+        AssertThat(received).IsEqual(2);
+    }
+
+    [TestCase]
+    public void OnStartTripPressedDoesNotEmitWhenAllSlotsFull()
+    {
+        var menu = AutoFree(new MainMenuScene())!;
+        var slots = new List<TripSave?> { new TripSave(0, 1, 2), new TripSave(1, 3, 4), new TripSave(2, 5, 6) };
+
+        int? received = null;
+        menu.NewTripRequested += (int slot) => received = slot;
+        menu.OnStartTripPressed(slots);
+
+        AssertThat(received).IsNull();
     }
 }

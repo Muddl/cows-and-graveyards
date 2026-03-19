@@ -10,6 +10,9 @@ public partial class PauseMenu : Control
     [Signal]
     public delegate void MainMenuRequestedEventHandler();
 
+    [Signal]
+    public delegate void CompleteTripRequestedEventHandler();
+
     // Settable in tests to override OS.GetName() without mocking.
     public string PlatformName { get; set; } = OS.GetName();
 
@@ -19,6 +22,7 @@ public partial class PauseMenu : Control
     {
         var resumeButton = GetNodeOrNull<Button>("VBox/ResumeButton");
         var mainMenuButton = GetNodeOrNull<Button>("VBox/MainMenuButton");
+        var completeTripButton = GetNodeOrNull<Button>("VBox/CompleteTripButton");
         _quitButton = GetNodeOrNull<Button>("VBox/QuitButton");
 
         if (resumeButton is not null)
@@ -26,6 +30,9 @@ public partial class PauseMenu : Control
 
         if (mainMenuButton is not null)
             mainMenuButton.Pressed += OnMainMenuPressed;
+
+        if (completeTripButton is not null)
+            completeTripButton.Pressed += OnCompleteTripPressed;
 
         if (_quitButton is not null)
             _quitButton.Pressed += OnQuitPressed;
@@ -46,6 +53,11 @@ public partial class PauseMenu : Control
     public void OnMainMenuPressed()
     {
         EmitSignal(SignalName.MainMenuRequested);
+    }
+
+    public void OnCompleteTripPressed()
+    {
+        EmitSignal(SignalName.CompleteTripRequested);
     }
 
     // ── Private helpers ───────────────────────────────────────────────────────

@@ -1,5 +1,6 @@
 namespace CowsGraveyards.Game;
 
+using System;
 using CowsGraveyards.Menus;
 using Godot;
 
@@ -39,11 +40,15 @@ public partial class GameScene : Node3D
         {
             _pauseMenu.ResumeRequested += Resume;
             _pauseMenu.MainMenuRequested += SaveAndExit;
+            _pauseMenu.CompleteTripRequested += CompleteAndExit;
         }
 
         var pauseButton = GetNodeOrNull<Button>("CanvasLayer/PauseButton");
         if (pauseButton is not null)
             pauseButton.Pressed += Pause;
+
+        InitTripSlot(PendingTrip.SlotIndex, PendingTrip.Save);
+        PendingTrip.Clear();
     }
 
     public override void _Input(InputEvent @event)
@@ -84,15 +89,29 @@ public partial class GameScene : Node3D
         GetTree()?.ChangeSceneToFile("res://scenes/menus/MainMenuScene.tscn");
     }
 
+    public void CompleteAndExit()
+    {
+        var record = new CompletedTripRecord(
+            Scores.LeftScore,
+            Scores.RightScore,
+            DateTimeOffset.UtcNow.ToUnixTimeSeconds()
+        );
+        _tripHistoryManager.Append(record);
+        _saveManager?.DeleteSlot(ActiveSlot);
+        GetTree()?.ChangeSceneToFile("res://scenes/menus/MainMenuScene.tscn");
+    }
+
     // ── Trip slot initialisation (Task 4.3) ───────────────────────────────────
 
     public int ActiveSlot { get; private set; }
     private SaveManager? _saveManager;
+    private TripHistoryManager _tripHistoryManager = new();
 
-    public void InitTripSlot(int slotIndex, TripSave? existingSave, SaveManager? saveManager = null)
+    public void InitTripSlot(int slotIndex, TripSave? existingSave, SaveManager? saveManager = null, TripHistoryManager? historyManager = null)
     {
         ActiveSlot = slotIndex;
         _saveManager = saveManager ?? new SaveManager();
+        _tripHistoryManager = historyManager ?? new TripHistoryManager();
 
         if (existingSave is not null)
         {
