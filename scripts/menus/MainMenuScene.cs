@@ -77,6 +77,9 @@ public partial class MainMenuScene : Control
         if (_errorLabel is not null)
             _errorLabel.Visible = false;
 
+        if (!HasAvailableSlot(slots))
+            ShowErrorMessage("All trip slots are full — complete a trip to start a new one.");
+
         HideSlotSelectPanel();
         if (_mainPanel is not null)
             _mainPanel.Visible = true;
@@ -193,15 +196,6 @@ public partial class MainMenuScene : Control
 
         if (_startTripButton is not null)
             _startTripButton.Visible = false;
-
-        if (GetTree() is { } tree)
-            tree.CreateTimer(3.0).Timeout += () =>
-            {
-                if (_errorLabel is not null)
-                    _errorLabel.Visible = false;
-                if (_startTripButton is not null)
-                    _startTripButton.Visible = true;
-            };
     }
 
     private void NavigateToGame(int slotIndex, TripSave? save)
