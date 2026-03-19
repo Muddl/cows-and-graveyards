@@ -1,5 +1,7 @@
 namespace CowsGraveyards.Game;
 
+using System;
+using CowsGraveyards.Menus;
 using Godot;
 
 public partial class GameScene : Node3D
@@ -10,33 +12,141 @@ public partial class GameScene : Node3D
     private static readonly PackedScene GraveyardScene =
         GD.Load<PackedScene>("res://scenes/game/GraveyardEntity.tscn");
 
-    private GameState _gameState = null!;
-    private SideDetector _sideDetector = null!;
-    private CowSpawner _cowSpawner = null!;
-    private ScoreHud _scoreHud = null!;
+    // Initialized at field level so test-seam methods work without _Ready().
+    private GameState _gameState = new();
+    private SideDetector _sideDetector = new();
+    private CowSpawner _cowSpawner = new();
+    private ScoreHud? _scoreHud;
     private GraveyardButton _graveyardButtonLeft = null!;
     private GraveyardButton _graveyardButtonRight = null!;
+    private PauseMenu? _pauseMenu;
+
+    // Exposed for input-isolation tests and trip-state integration.
+    public ScoreTracker Scores => _gameState.Scores;
+
+    public bool IsInputEnabled { get; private set; } = true;
 
     public override void _Ready()
     {
-        _gameState = new GameState();
-        _sideDetector = new SideDetector();
-        _cowSpawner = new CowSpawner();
         _scoreHud = GetNode<ScoreHud>("CanvasLayer/ScoreHud");
 
         _graveyardButtonLeft = GetNode<GraveyardButton>("CanvasLayer/GraveyardButtonLeft");
         _graveyardButtonRight = GetNode<GraveyardButton>("CanvasLayer/GraveyardButtonRight");
         _graveyardButtonLeft.Activated += OnGraveyardActivated;
         _graveyardButtonRight.Activated += OnGraveyardActivated;
+
+        _pauseMenu = GetNodeOrNull<PauseMenu>("CanvasLayer/PauseMenu");
+        if (_pauseMenu is not null)
+        {
+            _pauseMenu.ResumeRequested += Resume;
+            _pauseMenu.MainMenuRequested += SaveAndExit;
+            _pauseMenu.CompleteTripRequested += CompleteAndExit;
+        }
+
+        var pauseButton = GetNodeOrNull<Button>("CanvasLayer/PauseButton");
+        if (pauseButton is not null)
+            pauseButton.Pressed += Pause;
+
+        InitTripSlot(PendingTrip.SlotIndex, PendingTrip.Save);
+        PendingTrip.Clear();
     }
 
     public override void _Input(InputEvent @event)
     {
+        if (!IsInputEnabled) return;
+
         if (@event is InputEventScreenTouch { Pressed: true } touch)
         {
             HandleTap(touch.Position);
         }
     }
+
+    // ── Pause / Resume ────────────────────────────────────────────────────────
+
+    public void Pause()
+    {
+        IsInputEnabled = false;
+        SetProcessInput(false);
+
+        if (_pauseMenu is not null)
+            _pauseMenu.Visible = true;
+    }
+
+    public void Resume()
+    {
+        IsInputEnabled = true;
+        SetProcessInput(true);
+
+        if (_pauseMenu is not null)
+            _pauseMenu.Visible = false;
+    }
+
+    // ── Scene transition ──────────────────────────────────────────────────────
+
+    public void SaveAndExit()
+    {
+        _saveManager?.SaveSlot(new TripSave(ActiveSlot, Scores.LeftScore, Scores.RightScore));
+        GetTree()?.ChangeSceneToFile("res://scenes/menus/MainMenuScene.tscn");
+    }
+
+    public void CompleteAndExit()
+    {
+        var record = new CompletedTripRecord(
+            Scores.LeftScore,
+            Scores.RightScore,
+            DateTimeOffset.UtcNow.ToUnixTimeSeconds()
+        );
+        _tripHistoryManager.Append(record);
+        _saveManager?.DeleteSlot(ActiveSlot);
+        GetTree()?.ChangeSceneToFile("res://scenes/menus/MainMenuScene.tscn");
+    }
+
+    // ── Trip slot initialisation (Task 4.3) ───────────────────────────────────
+
+    public int ActiveSlot { get; private set; }
+    private SaveManager? _saveManager;
+    private TripHistoryManager _tripHistoryManager = new();
+
+    public void InitTripSlot(int slotIndex, TripSave? existingSave, SaveManager? saveManager = null, TripHistoryManager? historyManager = null)
+    {
+        ActiveSlot = slotIndex;
+        _saveManager = saveManager ?? new SaveManager();
+        _tripHistoryManager = historyManager ?? new TripHistoryManager();
+
+        if (existingSave is not null)
+        {
+            _gameState.Scores.SetLeft(existingSave.LeftScore);
+            _gameState.Scores.SetRight(existingSave.RightScore);
+            _scoreHud?.UpdateScores(Scores.LeftScore, Scores.RightScore);
+        }
+    }
+
+    // ── Test seams (score logic without scene-tree spawning) ──────────────────
+
+    /// <summary>
+    /// Simulates a cow tap at the given screen position, running only score
+    /// logic (no spawn). Respects <see cref="IsInputEnabled"/>.
+    /// </summary>
+    public void SimulateCowTap(float tapX, float screenWidth = 1080f)
+    {
+        if (!IsInputEnabled) return;
+
+        var side = _sideDetector.Detect(tapX, screenWidth);
+        IncrementScore(side);
+    }
+
+    /// <summary>
+    /// Simulates a graveyard button press for the given side, running only
+    /// score logic (no spawn). Respects <see cref="IsInputEnabled"/>.
+    /// </summary>
+    public void SimulateGraveyardPress(TapSide side)
+    {
+        if (!IsInputEnabled) return;
+
+        ZeroOpposingScore(side);
+    }
+
+    // ── Private helpers ───────────────────────────────────────────────────────
 
     private void HandleTap(Vector2 tapPosition)
     {
@@ -53,6 +163,8 @@ public partial class GameScene : Node3D
 
     private void OnGraveyardActivated(int side)
     {
+        if (!IsInputEnabled) return;
+
         var buttonSide = (TapSide)side;
         SpawnGraveyard(buttonSide);
         ZeroOpposingScore(buttonSide);
@@ -87,7 +199,7 @@ public partial class GameScene : Node3D
         else
             _gameState.Scores.IncrementRight();
 
-        _scoreHud.UpdateScores(_gameState.Scores.LeftScore, _gameState.Scores.RightScore);
+        _scoreHud?.UpdateScores(_gameState.Scores.LeftScore, _gameState.Scores.RightScore);
     }
 
     private void ZeroOpposingScore(TapSide buttonSide)
@@ -97,6 +209,6 @@ public partial class GameScene : Node3D
         else
             _gameState.Scores.ZeroLeft();
 
-        _scoreHud.UpdateScores(_gameState.Scores.LeftScore, _gameState.Scores.RightScore);
+        _scoreHud?.UpdateScores(_gameState.Scores.LeftScore, _gameState.Scores.RightScore);
     }
 }

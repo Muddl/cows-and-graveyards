@@ -19,4 +19,8 @@ public class ScoreTracker
     public void ZeroLeft() => LeftScore = 0;
 
     public void ZeroRight() => RightScore = 0;
+
+    public void SetLeft(int value) => LeftScore = value;
+
+    public void SetRight(int value) => RightScore = value;
 }

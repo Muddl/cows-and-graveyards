@@ -13,8 +13,9 @@ Navigation hub for project context.
 
 ## Active Tracks
 
-- [Graveyard Mechanic](./tracks/graveyard_20260318/index.md) — Pending
+- [Main Menu, Pause Menu & Trip Persistence](./tracks/menus_20260318/index.md) — Pending
 
 ## Completed Tracks
 
 - [Initial Game Scene](./tracks/game-scene_20260308/index.md) — Complete
+- [Graveyard Mechanic](./tracks/graveyard_20260318/index.md) — Complete (Archived)

@@ -1,11 +1,13 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://scripts/game/ScoreHud.cs" id="score_hud_script"]
+[ext_resource type="Theme" path="res://assets/ui/game_theme.tres" id="game_theme"]
 
 [node name="ScoreHud" type="Control"]
 anchor_right = 1.0
 offset_bottom = 160.0
 mouse_filter = 2
+theme = ExtResource("game_theme")
 script = ExtResource("score_hud_script")
 
 [node name="LeftLabel" type="Label" parent="."]

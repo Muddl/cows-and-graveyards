@@ -1,0 +1,93 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/menus/MainMenuScene.cs" id="main_menu_script"]
+[ext_resource type="Theme" path="res://assets/ui/game_theme.tres" id="game_theme"]
+
+[node name="MainMenuScene" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("game_theme")
+script = ExtResource("main_menu_script")
+
+[node name="MainPanel" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -220.0
+offset_right = 300.0
+offset_bottom = 220.0
+theme_override_constants/separation = 24
+
+[node name="TitleLabel" type="Label" parent="MainPanel"]
+text = "Cows & Graveyards"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 56
+
+[node name="StartTripButton" type="Button" parent="MainPanel"]
+custom_minimum_size = Vector2(0, 72)
+text = "Start Trip"
+theme_override_font_sizes/font_size = 40
+
+[node name="LoadTripButton" type="Button" parent="MainPanel"]
+custom_minimum_size = Vector2(0, 72)
+text = "Load Trip"
+theme_override_font_sizes/font_size = 40
+
+[node name="QuitButton" type="Button" parent="MainPanel"]
+custom_minimum_size = Vector2(0, 72)
+text = "Quit"
+theme_override_font_sizes/font_size = 40
+
+[node name="SlotSelectPanel" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -280.0
+offset_right = 300.0
+offset_bottom = 280.0
+theme_override_constants/separation = 24
+visible = false
+
+[node name="SelectLabel" type="Label" parent="SlotSelectPanel"]
+text = "Select a Trip"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 44
+
+[node name="Slot0Button" type="Button" parent="SlotSelectPanel"]
+custom_minimum_size = Vector2(0, 72)
+text = "Slot 1"
+theme_override_font_sizes/font_size = 36
+
+[node name="Slot1Button" type="Button" parent="SlotSelectPanel"]
+custom_minimum_size = Vector2(0, 72)
+text = "Slot 2"
+theme_override_font_sizes/font_size = 36
+
+[node name="Slot2Button" type="Button" parent="SlotSelectPanel"]
+custom_minimum_size = Vector2(0, 72)
+text = "Slot 3"
+theme_override_font_sizes/font_size = 36
+
+[node name="BackButton" type="Button" parent="SlotSelectPanel"]
+custom_minimum_size = Vector2(0, 72)
+text = "Back"
+theme_override_font_sizes/font_size = 36
+
+[node name="ErrorLabel" type="Label" parent="."]
+anchor_left = 0.0
+anchor_right = 1.0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = -120.0
+offset_right = -30.0
+offset_bottom = -60.0
+visible = false
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 28
