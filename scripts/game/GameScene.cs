@@ -20,6 +20,7 @@ public partial class GameScene : Node3D
     private GraveyardButton _graveyardButtonLeft = null!;
     private GraveyardButton _graveyardButtonRight = null!;
     private PauseMenu? _pauseMenu;
+    private Button? _pauseButton;
 
     // Exposed for input-isolation tests and trip-state integration.
     public ScoreTracker Scores => _gameState.Scores;
@@ -43,9 +44,9 @@ public partial class GameScene : Node3D
             _pauseMenu.CompleteTripRequested += CompleteAndExit;
         }
 
-        var pauseButton = GetNodeOrNull<Button>("CanvasLayer/PauseButton");
-        if (pauseButton is not null)
-            pauseButton.Pressed += Pause;
+        _pauseButton = GetNodeOrNull<Button>("CanvasLayer/PauseButton");
+        if (_pauseButton is not null)
+            _pauseButton.Pressed += Pause;
 
         InitTripSlot(PendingTrip.SlotIndex, PendingTrip.Save);
         PendingTrip.Clear();
@@ -152,6 +153,9 @@ public partial class GameScene : Node3D
     {
         if (_graveyardButtonLeft.GetButtonRect().HasPoint(tapPosition) ||
             _graveyardButtonRight.GetButtonRect().HasPoint(tapPosition))
+            return;
+
+        if (_pauseButton is not null && _pauseButton.GetGlobalRect().HasPoint(tapPosition))
             return;
 
         float screenWidth = GetViewport().GetVisibleRect().Size.X;
