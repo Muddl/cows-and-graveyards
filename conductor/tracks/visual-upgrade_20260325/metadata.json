@@ -1,0 +1,25 @@
+{
+  "id": "visual-upgrade_20260325",
+  "title": "Medium-Fidelity Visual Upgrade",
+  "type": "feature",
+  "status": "complete",
+  "created": "2026-03-25",
+  "updated": "2026-03-27",
+  "current_phase": 6,
+  "current_task": "6.3",
+  "phases": {
+    "total": 6,
+    "completed": 6
+  },
+  "tasks": {
+    "total": 18,
+    "completed": 18
+  },
+  "commits": [
+    "62f861b: feat: build low-poly cow model with CSG nodes and black patches",
+    "406eb8f: feat: build low-poly headstone with stone shader and cross",
+    "fb1076c: feat: upgrade car model, lane markings, and grass shader",
+    "4fedcb9: feat: enhance environment with sky, lighting, hills, and fences",
+    "69e05f7: feat: add dust particles, speed lines, and cow idle animation"
+  ]
+}

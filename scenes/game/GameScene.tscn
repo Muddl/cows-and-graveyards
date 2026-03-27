@@ -2,14 +2,19 @@
 
 [ext_resource type="Script" uid="uid://nulbshweexew" path="res://scripts/game/GameScene.cs" id="game_scene_script"]
 [ext_resource type="PackedScene" path="res://scenes/game/GraveyardButton.tscn" id="graveyard_button_scene"]
-[ext_resource type="PackedScene" path="res://scenes/game/ScoreHud.tscn" id="score_hud_scene"]
 [ext_resource type="PackedScene" path="res://scenes/menus/PauseMenu.tscn" id="pause_menu_scene"]
+[ext_resource type="PackedScene" path="res://scenes/game/ScoreHud.tscn" id="score_hud_scene"]
+[ext_resource type="Shader" path="res://shaders/grass.gdshader" id="grass_shader"]
 
 [sub_resource type="ProceduralSkyMaterial" id="sky_mat"]
-sky_top_color = Color(0.4, 0.6, 0.9, 1)
-sky_horizon_color = Color(0.7, 0.8, 0.95, 1)
-ground_bottom_color = Color(0.2, 0.55, 0.15, 1)
-ground_horizon_color = Color(0.5, 0.65, 0.45, 1)
+sky_top_color = Color(0.35, 0.55, 0.88, 1)
+sky_horizon_color = Color(0.72, 0.82, 0.95, 1)
+sky_curve = 0.1
+sky_energy_multiplier = 1.1
+ground_bottom_color = Color(0.18, 0.5, 0.12, 1)
+ground_horizon_color = Color(0.55, 0.68, 0.48, 1)
+sun_angle_max = 30.0
+sun_curve = 0.1
 
 [sub_resource type="Sky" id="sky"]
 sky_material = SubResource("sky_mat")
@@ -28,8 +33,13 @@ albedo_color = Color(0.25, 0.25, 0.27, 1)
 material = SubResource("road_mat")
 size = Vector2(6, 200)
 
-[sub_resource type="StandardMaterial3D" id="grass_mat"]
-albedo_color = Color(0.2, 0.55, 0.15, 1)
+[sub_resource type="ShaderMaterial" id="grass_mat"]
+shader = ExtResource("grass_shader")
+shader_parameter/base_color = Color(0.2, 0.55, 0.15, 1)
+shader_parameter/tip_color = Color(0.35, 0.7, 0.25, 1)
+shader_parameter/noise_scale = 8.0
+shader_parameter/color_variation = 0.1
+shader_parameter/roughness = 0.9
 
 [sub_resource type="PlaneMesh" id="grass_mesh"]
 material = SubResource("grass_mat")
@@ -40,7 +50,87 @@ albedo_color = Color(0.8, 0.15, 0.1, 1)
 
 [sub_resource type="BoxMesh" id="car_mesh"]
 material = SubResource("car_mat")
-size = Vector3(2, 1, 4)
+size = Vector3(2, 0.7, 4)
+
+[sub_resource type="StandardMaterial3D" id="car_roof_mat"]
+albedo_color = Color(0.75, 0.12, 0.08, 1)
+
+[sub_resource type="BoxMesh" id="car_roof_mesh"]
+material = SubResource("car_roof_mat")
+size = Vector3(1.8, 0.6, 2.2)
+
+[sub_resource type="StandardMaterial3D" id="windshield_mat"]
+albedo_color = Color(0.6, 0.75, 0.9, 0.7)
+transparency = 1
+
+[sub_resource type="BoxMesh" id="windshield_mesh"]
+material = SubResource("windshield_mat")
+size = Vector3(1.7, 0.5, 0.05)
+
+[sub_resource type="StandardMaterial3D" id="wheel_mat"]
+albedo_color = Color(0.15, 0.15, 0.15, 1)
+
+[sub_resource type="CylinderMesh" id="wheel_mesh"]
+material = SubResource("wheel_mat")
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.2
+radial_segments = 10
+
+[sub_resource type="StandardMaterial3D" id="lane_mat"]
+albedo_color = Color(0.9, 0.9, 0.8, 1)
+
+[sub_resource type="BoxMesh" id="lane_dash_mesh"]
+material = SubResource("lane_mat")
+size = Vector3(0.15, 0.01, 2.0)
+
+[sub_resource type="StandardMaterial3D" id="hill_mat"]
+albedo_color = Color(0.25, 0.5, 0.2, 1)
+
+[sub_resource type="BoxMesh" id="hill_mesh"]
+material = SubResource("hill_mat")
+size = Vector3(60, 4, 20)
+
+[sub_resource type="StandardMaterial3D" id="fence_post_mat"]
+albedo_color = Color(0.45, 0.3, 0.15, 1)
+
+[sub_resource type="BoxMesh" id="fence_post_mesh"]
+material = SubResource("fence_post_mat")
+size = Vector3(0.1, 1.0, 0.1)
+
+[sub_resource type="BoxMesh" id="fence_rail_mesh"]
+material = SubResource("fence_post_mat")
+size = Vector3(0.05, 0.05, 4.0)
+
+[sub_resource type="ParticleProcessMaterial" id="dust_particle_mat"]
+direction = Vector3(0, 0.3, 1)
+spread = 15.0
+initial_velocity_min = 2.0
+initial_velocity_max = 4.0
+gravity = Vector3(0, -0.5, 0)
+scale_min = 0.3
+scale_max = 0.8
+color = Color(0.6, 0.55, 0.45, 0.4)
+
+[sub_resource type="BoxMesh" id="dust_mesh"]
+size = Vector3(0.08, 0.08, 0.08)
+
+[sub_resource type="ParticleProcessMaterial" id="speed_lines_mat"]
+direction = Vector3(0, 0, 1)
+spread = 5.0
+initial_velocity_min = 15.0
+initial_velocity_max = 25.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.02
+scale_max = 0.04
+
+[sub_resource type="StandardMaterial3D" id="speed_line_draw_mat"]
+albedo_color = Color(1, 1, 1, 0.15)
+transparency = 1
+
+[sub_resource type="BoxMesh" id="speed_line_mesh"]
+material = SubResource("speed_line_draw_mat")
+size = Vector3(0.02, 0.02, 1.5)
 
 [node name="GameScene" type="Node3D" unique_id=1298731447]
 script = ExtResource("game_scene_script")
@@ -50,7 +140,17 @@ environment = SubResource("env")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1314950166]
 transform = Transform3D(1, 0, 0, 0, 0.866, 0.5, 0, -0.5, 0.866, 0, 10, 0)
+light_color = Color(1.0, 0.96, 0.88, 1)
+light_energy = 1.2
 shadow_enabled = true
+shadow_bias = 0.03
+directional_shadow_max_distance = 100.0
+
+[node name="FillLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, -0.866, 0, 0.866, 0.5, 0, 8, 0)
+light_color = Color(0.7, 0.8, 0.95, 1)
+light_energy = 0.3
+shadow_enabled = false
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1997738888]
 transform = Transform3D(1, 0, 0, 0, 0.966, -0.259, 0, 0.259, 0.966, 0, 3, 8)
@@ -74,11 +174,136 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 2)
 [node name="Body" type="MeshInstance3D" parent="Car" unique_id=1009829390]
 mesh = SubResource("car_mesh")
 
+[node name="Roof" type="MeshInstance3D" parent="Car"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, -0.3)
+mesh = SubResource("car_roof_mesh")
+
+[node name="Windshield" type="MeshInstance3D" parent="Car"]
+transform = Transform3D(1, 0, 0, 0, 0.966, -0.259, 0, 0.259, 0.966, 0, 0.55, -1.35)
+mesh = SubResource("windshield_mesh")
+
+[node name="WheelFrontLeft" type="MeshInstance3D" parent="Car"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -1.1, -0.2, -1.2)
+mesh = SubResource("wheel_mesh")
+
+[node name="WheelFrontRight" type="MeshInstance3D" parent="Car"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 1.1, -0.2, -1.2)
+mesh = SubResource("wheel_mesh")
+
+[node name="WheelBackLeft" type="MeshInstance3D" parent="Car"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -1.1, -0.2, 1.2)
+mesh = SubResource("wheel_mesh")
+
+[node name="WheelBackRight" type="MeshInstance3D" parent="Car"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 1.1, -0.2, 1.2)
+mesh = SubResource("wheel_mesh")
+
+[node name="LaneMarkings" type="Node3D" parent="."]
+
+[node name="Dash1" type="MeshInstance3D" parent="LaneMarkings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, -5)
+mesh = SubResource("lane_dash_mesh")
+
+[node name="Dash2" type="MeshInstance3D" parent="LaneMarkings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, -10)
+mesh = SubResource("lane_dash_mesh")
+
+[node name="Dash3" type="MeshInstance3D" parent="LaneMarkings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, -15)
+mesh = SubResource("lane_dash_mesh")
+
+[node name="Dash4" type="MeshInstance3D" parent="LaneMarkings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, -20)
+mesh = SubResource("lane_dash_mesh")
+
+[node name="Dash5" type="MeshInstance3D" parent="LaneMarkings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, -25)
+mesh = SubResource("lane_dash_mesh")
+
+[node name="Dash6" type="MeshInstance3D" parent="LaneMarkings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, -30)
+mesh = SubResource("lane_dash_mesh")
+
+[node name="Dash7" type="MeshInstance3D" parent="LaneMarkings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, -35)
+mesh = SubResource("lane_dash_mesh")
+
+[node name="Dash8" type="MeshInstance3D" parent="LaneMarkings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, -40)
+mesh = SubResource("lane_dash_mesh")
+
+[node name="DustParticlesLeft" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0.1, 0)
+emitting = true
+amount = 20
+lifetime = 2.0
+visibility_aabb = AABB(-5, -1, -10, 10, 3, 20)
+process_material = SubResource("dust_particle_mat")
+draw_pass_1 = SubResource("dust_mesh")
+
+[node name="DustParticlesRight" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0.1, 0)
+emitting = true
+amount = 20
+lifetime = 2.0
+visibility_aabb = AABB(-5, -1, -10, 10, 3, 20)
+process_material = SubResource("dust_particle_mat")
+draw_pass_1 = SubResource("dust_mesh")
+
+[node name="SpeedLines" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 5)
+emitting = true
+amount = 15
+lifetime = 0.5
+visibility_aabb = AABB(-3, -2, -2, 6, 4, 5)
+process_material = SubResource("speed_lines_mat")
+draw_pass_1 = SubResource("speed_line_mesh")
+
+[node name="BackgroundScenery" type="Node3D" parent="."]
+
+[node name="HillLeft" type="MeshInstance3D" parent="BackgroundScenery"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45, -1, -60)
+mesh = SubResource("hill_mesh")
+
+[node name="HillRight" type="MeshInstance3D" parent="BackgroundScenery"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, -0.5, -55)
+mesh = SubResource("hill_mesh")
+
+[node name="FencePost1" type="MeshInstance3D" parent="BackgroundScenery"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.5, -10)
+mesh = SubResource("fence_post_mesh")
+
+[node name="FencePost2" type="MeshInstance3D" parent="BackgroundScenery"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.5, -14)
+mesh = SubResource("fence_post_mesh")
+
+[node name="FencePost3" type="MeshInstance3D" parent="BackgroundScenery"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.5, -18)
+mesh = SubResource("fence_post_mesh")
+
+[node name="FenceRail1" type="MeshInstance3D" parent="BackgroundScenery"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.7, -12)
+mesh = SubResource("fence_rail_mesh")
+
+[node name="FenceRail2" type="MeshInstance3D" parent="BackgroundScenery"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.7, -16)
+mesh = SubResource("fence_rail_mesh")
+
+[node name="FenceRail3" type="MeshInstance3D" parent="BackgroundScenery"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.35, -12)
+mesh = SubResource("fence_rail_mesh")
+
+[node name="FenceRail4" type="MeshInstance3D" parent="BackgroundScenery"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.35, -16)
+mesh = SubResource("fence_rail_mesh")
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=483920157]
 
 [node name="ScoreHud" parent="CanvasLayer" unique_id=424549114 instance=ExtResource("score_hud_scene")]
 layout_mode = 3
 anchors_preset = 10
+offset_bottom = 0.0
+grow_horizontal = 2
 
 [node name="GraveyardButtonLeft" parent="CanvasLayer" unique_id=792196645 instance=ExtResource("graveyard_button_scene")]
 layout_mode = 3
@@ -89,19 +314,19 @@ layout_mode = 3
 anchor_left = 0.5
 Side = 1
 
-[node name="PauseButton" type="Button" parent="CanvasLayer"]
-layout_mode = 3
+[node name="PauseButton" type="Button" parent="CanvasLayer" unique_id=1749908393]
+anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -65.0
 offset_top = 30.0
 offset_right = 65.0
 offset_bottom = 110.0
-mouse_filter = 0
-text = "II"
 theme_override_font_sizes/font_size = 40
+text = "II"
 
-[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("pause_menu_scene")]
+[node name="PauseMenu" parent="CanvasLayer" unique_id=329899468 instance=ExtResource("pause_menu_scene")]
 layout_mode = 3
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 15
+grow_horizontal = 2
+grow_vertical = 2
