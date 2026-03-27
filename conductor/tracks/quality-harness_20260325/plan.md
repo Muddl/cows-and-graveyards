@@ -44,13 +44,13 @@ Adapt the devtools.py CLI to work with this project.
 
 ### Tasks
 
-- [ ] Task 3.1: Port devtools.py into tools/, update project name detection for "Cows & Graveyards"
-- [ ] Task 3.2: Verify CLI commands work against running game (ping, screenshot, performance, scene-tree)
-- [ ] Task 3.3: Verify input simulation commands work with project's input actions
+- [x] Task 3.1: Port devtools.py into tools/, update project name detection for "Cows & Graveyards"
+- [x] Task 3.2: Verify CLI commands work against running game (ping, screenshot, performance, scene-tree)
+- [x] Task 3.3: Verify input simulation commands work with project's input actions
 
 ### Verification
 
-- [ ] devtools.py ping/screenshot/scene-tree succeed against running game instance
+- [x] devtools.py ping/screenshot/scene-tree succeed against running game instance
 
 ## Phase 4: Linting Tools
 
