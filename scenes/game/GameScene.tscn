@@ -102,6 +102,36 @@ size = Vector3(0.1, 1.0, 0.1)
 material = SubResource("fence_post_mat")
 size = Vector3(0.05, 0.05, 4.0)
 
+[sub_resource type="ParticleProcessMaterial" id="dust_particle_mat"]
+direction = Vector3(0, 0.3, 1)
+spread = 15.0
+initial_velocity_min = 2.0
+initial_velocity_max = 4.0
+gravity = Vector3(0, -0.5, 0)
+scale_min = 0.3
+scale_max = 0.8
+color = Color(0.6, 0.55, 0.45, 0.4)
+
+[sub_resource type="BoxMesh" id="dust_mesh"]
+size = Vector3(0.08, 0.08, 0.08)
+
+[sub_resource type="ParticleProcessMaterial" id="speed_lines_mat"]
+direction = Vector3(0, 0, 1)
+spread = 5.0
+initial_velocity_min = 15.0
+initial_velocity_max = 25.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.02
+scale_max = 0.04
+
+[sub_resource type="StandardMaterial3D" id="speed_line_draw_mat"]
+albedo_color = Color(1, 1, 1, 0.15)
+transparency = 1
+
+[sub_resource type="BoxMesh" id="speed_line_mesh"]
+material = SubResource("speed_line_draw_mat")
+size = Vector3(0.02, 0.02, 1.5)
+
 [node name="GameScene" type="Node3D" unique_id=1298731447]
 script = ExtResource("game_scene_script")
 
@@ -201,6 +231,33 @@ mesh = SubResource("lane_dash_mesh")
 [node name="Dash8" type="MeshInstance3D" parent="LaneMarkings"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, -40)
 mesh = SubResource("lane_dash_mesh")
+
+[node name="DustParticlesLeft" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0.1, 0)
+emitting = true
+amount = 20
+lifetime = 2.0
+visibility_aabb = AABB(-5, -1, -10, 10, 3, 20)
+process_material = SubResource("dust_particle_mat")
+draw_pass_1 = SubResource("dust_mesh")
+
+[node name="DustParticlesRight" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0.1, 0)
+emitting = true
+amount = 20
+lifetime = 2.0
+visibility_aabb = AABB(-5, -1, -10, 10, 3, 20)
+process_material = SubResource("dust_particle_mat")
+draw_pass_1 = SubResource("dust_mesh")
+
+[node name="SpeedLines" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 5)
+emitting = true
+amount = 15
+lifetime = 0.5
+visibility_aabb = AABB(-3, -2, -2, 6, 4, 5)
+process_material = SubResource("speed_lines_mat")
+draw_pass_1 = SubResource("speed_line_mesh")
 
 [node name="BackgroundScenery" type="Node3D" parent="."]
 

@@ -71,9 +71,9 @@ Add basic particle effects and ambient motion for atmosphere.
 
 ### Tasks
 
-- [ ] Task 5.1: Add road-side dust/grass particle effects using GPUParticles3D
-- [ ] Task 5.2: Add subtle animation to cow entities (idle bob or sway via shader or code)
-- [ ] Task 5.3: Add speed lines or motion blur hint near camera for sense of movement
+- [x] Task 5.1: Add road-side dust/grass particle effects using GPUParticles3D
+- [x] Task 5.2: Add subtle animation to cow entities (idle bob or sway via shader or code)
+- [x] Task 5.3: Add speed lines or motion blur hint near camera for sense of movement
 
 ### Verification
 
