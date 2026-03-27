@@ -3,7 +3,7 @@
 **Track ID:** visual-upgrade_20260325
 **Spec:** [spec.md](./spec.md)
 **Created:** 2026-03-25
-**Status:** [~] In Progress
+**Status:** [x] Complete
 
 ## Overview
 
@@ -21,7 +21,7 @@ Build a stylized low-poly cow model from CSG primitives to replace the current B
 
 ### Verification
 
-- [ ] Cow spawns correctly, drives past camera, visual quality acceptable
+- [x] Cow spawns correctly, drives past camera, visual quality acceptable
 
 ## Phase 2: Graveyard Model Upgrade
 
@@ -35,7 +35,7 @@ Build a stylized headstone/graveyard model to replace the current BoxMesh.
 
 ### Verification
 
-- [ ] Graveyard spawns correctly, drives past camera, visual quality acceptable
+- [x] Graveyard spawns correctly, drives past camera, visual quality acceptable
 
 ## Phase 3: Car & Road Upgrade
 
@@ -49,7 +49,7 @@ Replace the car BoxMesh and flat road/grass planes with more detailed versions.
 
 ### Verification
 
-- [ ] Car and road render correctly, game scene loads without errors
+- [x] Car and road render correctly, game scene loads without errors
 
 ## Phase 4: Environment & Lighting Polish
 
@@ -63,7 +63,7 @@ Improve skybox, lighting, and add background scenery for depth and cohesion.
 
 ### Verification
 
-- [ ] Environment looks cohesive, no visual artifacts, lighting feels natural
+- [x] Environment looks cohesive, no visual artifacts, lighting feels natural
 
 ## Phase 5: Visual Effects
 
@@ -77,7 +77,7 @@ Add basic particle effects and ambient motion for atmosphere.
 
 ### Verification
 
-- [ ] Effects render correctly, no performance issues on mobile renderer
+- [x] Effects render correctly, no performance issues on mobile renderer
 
 ## Phase 6: Performance Validation
 
@@ -85,19 +85,19 @@ Verify everything runs smoothly within Mobile renderer constraints.
 
 ### Tasks
 
-- [ ] Task 6.1: Profile scene with multiple entities spawned (measure draw calls, frame time)
-- [ ] Task 6.2: Optimize materials/meshes if needed (reduce polygon count, merge meshes, LOD)
-- [ ] Task 6.3: Test on mobile export settings, verify stable framerate
+- [x] Task 6.1: Profile scene with multiple entities spawned (measure draw calls, frame time)
+- [x] Task 6.2: Optimize materials/meshes if needed (reduce polygon count, merge meshes, LOD)
+- [x] Task 6.3: Test on mobile export settings, verify stable framerate
 
 ### Verification
 
-- [ ] Stable performance, all acceptance criteria met
+- [x] Stable performance, all acceptance criteria met
 
 ## Final Verification
 
-- [ ] All acceptance criteria met
-- [ ] Tests passing
-- [ ] Ready for review
+- [x] All acceptance criteria met
+- [x] Tests passing
+- [x] Ready for review
 
 ---
 
