@@ -29,14 +29,14 @@ Port the core DevTools command server — the central runtime component.
 
 ### Tasks
 
-- [ ] Task 2.1: Write tests for DevTools command handling (ping, screenshot, scene_tree, get_state, set_state)
-- [ ] Task 2.2: Port DevTools.cs to CowsGraveyards namespace, integrate SceneValidator for validate_scene/validate_all_scenes commands
-- [ ] Task 2.3: Register DevTools as autoload in project.godot
-- [ ] Task 2.4: Verify DevTools initializes without interfering with existing game autoloads
+- [x] Task 2.1: Write tests for DevTools command handling (ping, screenshot, scene_tree, get_state, set_state)
+- [x] Task 2.2: Port DevTools.cs to CowsGraveyards namespace, integrate SceneValidator for validate_scene/validate_all_scenes commands
+- [x] Task 2.3: Register DevTools as autoload in project.godot
+- [x] Task 2.4: Verify DevTools initializes without interfering with existing game autoloads
 
 ### Verification
 
-- [ ] DevTools autoload loads, creates command/result files, responds to ping
+- [x] DevTools autoload loads, creates command/result files, responds to ping
 
 ## Phase 3: Python CLI
 
