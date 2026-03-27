@@ -2,14 +2,14 @@
   "id": "quality-harness_20260325",
   "title": "Tea-Leaves Quality Harness Integration",
   "type": "feature",
-  "status": "in_progress",
+  "status": "complete",
   "created": "2026-03-25",
   "updated": "2026-03-27",
-  "current_phase": 4,
-  "current_task": "4.4",
+  "current_phase": 5,
+  "current_task": "5.2",
   "phases": {
     "total": 5,
-    "completed": 4
+    "completed": 5
   },
   "tasks": {
     "total": 14,

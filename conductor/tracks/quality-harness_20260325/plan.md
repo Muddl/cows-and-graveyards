@@ -3,7 +3,7 @@
 **Track ID:** quality-harness_20260325
 **Spec:** [spec.md](./spec.md)
 **Created:** 2026-03-25
-**Status:** [~] In Progress
+**Status:** [x] Complete
 
 ## Overview
 
@@ -73,19 +73,19 @@ Credit tea-leaves creator and update project docs.
 
 ### Tasks
 
-- [ ] Task 5.1: Add cleak / tea-leaves credit to game credits (credits scene or data file)
-- [ ] Task 5.2: Update CLAUDE.md with new tool commands (lint, devtools CLI usage)
+- [x] Task 5.1: Add cleak / tea-leaves credit to game credits (credits scene or data file)
+- [x] Task 5.2: Update CLAUDE.md with new tool commands (lint, devtools CLI usage)
 
 ### Verification
 
-- [ ] Credits display tea-leaves attribution, CLAUDE.md documents new tooling
+- [x] Credits display tea-leaves attribution, CLAUDE.md documents new tooling
 
 ## Final Verification
 
-- [ ] All acceptance criteria met
-- [ ] Tests passing
-- [ ] `dotnet build` succeeds without warnings
-- [ ] Ready for review
+- [x] All acceptance criteria met
+- [x] Tests passing
+- [x] `dotnet build` succeeds without warnings
+- [x] Ready for review
 
 ---
 
