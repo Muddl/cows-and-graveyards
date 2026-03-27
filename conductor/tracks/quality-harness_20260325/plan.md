@@ -58,14 +58,14 @@ Port the GDScript and PowerShell linting tools.
 
 ### Tasks
 
-- [ ] Task 4.1: Port lint_project.gd into tools/, verify UID/NodePath checks against project scenes
-- [ ] Task 4.2: Port lint_shaders.gd into tools/, verify shader compilation checks
-- [ ] Task 4.3: Port lint_tests.ps1 into tools/, adapt test directory paths for project structure
-- [ ] Task 4.4: Port and adapt godot.ps1 launcher to resolve `j:\DevStuff\Godot\engines\4.6.1\godot.exe`
+- [x] Task 4.1: Port lint_project.gd into tools/, verify UID/NodePath checks against project scenes
+- [x] Task 4.2: Port lint_shaders.gd into tools/, verify shader compilation checks
+- [x] Task 4.3: Port lint_tests.ps1 into tools/, adapt test directory paths for project structure
+- [x] Task 4.4: Port and adapt godot.ps1 launcher to resolve `j:\DevStuff\Godot\engines\4.6.1\godot.exe`
 
 ### Verification
 
-- [ ] All linting tools run successfully against project, no false positives on clean codebase
+- [x] All linting tools run successfully against project, no false positives on clean codebase
 
 ## Phase 5: Credits & Documentation
 
