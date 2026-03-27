@@ -2,6 +2,8 @@
 
 | Status | Track ID | Title | Created | Updated |
 | ------ | -------- | ----- | ------- | ------- |
+| [ ] | visual-upgrade_20260325 | Medium-Fidelity Visual Upgrade | 2026-03-25 | 2026-03-25 |
+| [x] | quality-harness_20260325 | Tea-Leaves Quality Harness Integration | 2026-03-25 | 2026-03-27 |
 
 <!-- Tracks registered by /conductor:new-track -->
 

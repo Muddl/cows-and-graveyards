@@ -43,6 +43,26 @@ The `.runsettings` file configures gdUnit4 test runner with `GODOT_BIN` pointing
 - **Line endings:** LF everywhere (enforced via .gitattributes)
 - **Charset:** UTF-8 (enforced via .editorconfig)
 
+## Quality Tooling
+
+DevTools autoload and linting tools from [tea-leaves](https://github.com/cleak/tea-leaves) (MIT, by cleak).
+
+```bash
+# DevTools CLI — interact with running game instance
+python tools/devtools.py ping                # Check if game is running
+python tools/devtools.py screenshot          # Capture screenshot
+python tools/devtools.py scene-tree          # Get node hierarchy
+python tools/devtools.py performance         # Get FPS, memory stats
+python tools/devtools.py validate-all        # Validate all scenes
+python tools/devtools.py get-state --node "/root/GameScene"
+python tools/devtools.py input tap my_action # Simulate input
+
+# Linting — run via Godot headless or PowerShell
+pwsh tools/godot.ps1 --headless -s tools/lint_project.gd   # UID/NodePath lint
+pwsh tools/godot.ps1 --headless -s tools/lint_shaders.gd   # Shader compilation lint
+pwsh tools/lint_tests.ps1                                    # gdUnit4 test convention lint
+```
+
 ## Project Management
 
 This project uses **Conductor** for task tracking. Use `/conductor:status` to see current state and `/conductor:new-track` to create feature tracks. Conductor artifacts live in `conductor/`.
