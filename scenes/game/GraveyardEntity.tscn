@@ -1,17 +1,67 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://scripts/game/GraveyardEntity.cs" id="graveyard_entity_script"]
+[ext_resource type="Shader" path="res://shaders/stone.gdshader" id="stone_shader"]
 
-[sub_resource type="StandardMaterial3D" id="headstone_mat"]
-albedo_color = Color(0.4, 0.4, 0.45, 1)
+[sub_resource type="ShaderMaterial" id="headstone_mat"]
+shader = ExtResource("stone_shader")
+shader_parameter/base_color = Color(0.45, 0.43, 0.47, 1)
+shader_parameter/roughness = 0.85
+shader_parameter/noise_scale = 12.0
+shader_parameter/normal_strength = 0.3
+shader_parameter/color_variation = 0.08
+
+[sub_resource type="StandardMaterial3D" id="base_mat"]
+albedo_color = Color(0.35, 0.33, 0.37, 1)
+
+[sub_resource type="StandardMaterial3D" id="cross_mat"]
+albedo_color = Color(0.5, 0.48, 0.52, 1)
 
 [sub_resource type="BoxMesh" id="headstone_mesh"]
 material = SubResource("headstone_mat")
-size = Vector3(0.6, 1.4, 0.2)
+size = Vector3(0.6, 1.0, 0.15)
+
+[sub_resource type="CylinderMesh" id="arch_mesh"]
+material = SubResource("headstone_mat")
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.15
+radial_segments = 12
+
+[sub_resource type="BoxMesh" id="base_mesh"]
+material = SubResource("base_mat")
+size = Vector3(0.8, 0.15, 0.25)
+
+[sub_resource type="BoxMesh" id="cross_vertical_mesh"]
+material = SubResource("cross_mat")
+size = Vector3(0.06, 0.35, 0.06)
+
+[sub_resource type="BoxMesh" id="cross_horizontal_mesh"]
+material = SubResource("cross_mat")
+size = Vector3(0.2, 0.06, 0.06)
 
 [node name="GraveyardEntity" type="Node3D"]
 script = ExtResource("graveyard_entity_script")
 
 [node name="Headstone" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.575, 0)
 mesh = SubResource("headstone_mesh")
+
+[node name="ArchTop" type="MeshInstance3D" parent="Headstone"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0.5, 0)
+mesh = SubResource("arch_mesh")
+
+[node name="BaseSlab" type="MeshInstance3D" parent="Headstone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.575, 0)
+mesh = SubResource("base_mesh")
+
+[node name="Cross" type="Node3D" parent="Headstone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+
+[node name="Vertical" type="MeshInstance3D" parent="Headstone/Cross"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+mesh = SubResource("cross_vertical_mesh")
+
+[node name="Horizontal" type="MeshInstance3D" parent="Headstone/Cross"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
+mesh = SubResource("cross_horizontal_mesh")

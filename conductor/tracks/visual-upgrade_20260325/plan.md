@@ -29,9 +29,9 @@ Build a stylized headstone/graveyard model to replace the current BoxMesh.
 
 ### Tasks
 
-- [ ] Task 2.1: Write tests verifying GraveyardEntity scene structure
-- [ ] Task 2.2: Build low-poly headstone model using CSG (arched top, base slab, optional cross variant)
-- [ ] Task 2.3: Apply stone-textured material with subtle normal variation via shader
+- [x] Task 2.1: Write tests verifying GraveyardEntity scene structure
+- [x] Task 2.2: Build low-poly headstone model using CSG (arched top, base slab, optional cross variant)
+- [x] Task 2.3: Apply stone-textured material with subtle normal variation via shader
 
 ### Verification
 
