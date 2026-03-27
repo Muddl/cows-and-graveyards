@@ -7,10 +7,14 @@
 [ext_resource type="Shader" path="res://shaders/grass.gdshader" id="grass_shader"]
 
 [sub_resource type="ProceduralSkyMaterial" id="sky_mat"]
-sky_top_color = Color(0.4, 0.6, 0.9, 1)
-sky_horizon_color = Color(0.7, 0.8, 0.95, 1)
-ground_bottom_color = Color(0.2, 0.55, 0.15, 1)
-ground_horizon_color = Color(0.5, 0.65, 0.45, 1)
+sky_top_color = Color(0.35, 0.55, 0.88, 1)
+sky_horizon_color = Color(0.72, 0.82, 0.95, 1)
+sky_curve = 0.1
+sky_energy_multiplier = 1.1
+ground_bottom_color = Color(0.18, 0.5, 0.12, 1)
+ground_horizon_color = Color(0.55, 0.68, 0.48, 1)
+sun_angle_max = 30.0
+sun_curve = 0.1
 
 [sub_resource type="Sky" id="sky"]
 sky_material = SubResource("sky_mat")
@@ -80,6 +84,24 @@ albedo_color = Color(0.9, 0.9, 0.8, 1)
 material = SubResource("lane_mat")
 size = Vector3(0.15, 0.01, 2.0)
 
+[sub_resource type="StandardMaterial3D" id="hill_mat"]
+albedo_color = Color(0.25, 0.5, 0.2, 1)
+
+[sub_resource type="BoxMesh" id="hill_mesh"]
+material = SubResource("hill_mat")
+size = Vector3(60, 4, 20)
+
+[sub_resource type="StandardMaterial3D" id="fence_post_mat"]
+albedo_color = Color(0.45, 0.3, 0.15, 1)
+
+[sub_resource type="BoxMesh" id="fence_post_mesh"]
+material = SubResource("fence_post_mat")
+size = Vector3(0.1, 1.0, 0.1)
+
+[sub_resource type="BoxMesh" id="fence_rail_mesh"]
+material = SubResource("fence_post_mat")
+size = Vector3(0.05, 0.05, 4.0)
+
 [node name="GameScene" type="Node3D" unique_id=1298731447]
 script = ExtResource("game_scene_script")
 
@@ -88,7 +110,17 @@ environment = SubResource("env")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1314950166]
 transform = Transform3D(1, 0, 0, 0, 0.866, 0.5, 0, -0.5, 0.866, 0, 10, 0)
+light_color = Color(1.0, 0.96, 0.88, 1)
+light_energy = 1.2
 shadow_enabled = true
+shadow_bias = 0.03
+directional_shadow_max_distance = 100.0
+
+[node name="FillLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, -0.866, 0, 0.866, 0.5, 0, 8, 0)
+light_color = Color(0.7, 0.8, 0.95, 1)
+light_energy = 0.3
+shadow_enabled = false
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1997738888]
 transform = Transform3D(1, 0, 0, 0, 0.966, -0.259, 0, 0.259, 0.966, 0, 3, 8)
@@ -169,6 +201,44 @@ mesh = SubResource("lane_dash_mesh")
 [node name="Dash8" type="MeshInstance3D" parent="LaneMarkings"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, -40)
 mesh = SubResource("lane_dash_mesh")
+
+[node name="BackgroundScenery" type="Node3D" parent="."]
+
+[node name="HillLeft" type="MeshInstance3D" parent="BackgroundScenery"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45, -1, -60)
+mesh = SubResource("hill_mesh")
+
+[node name="HillRight" type="MeshInstance3D" parent="BackgroundScenery"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, -0.5, -55)
+mesh = SubResource("hill_mesh")
+
+[node name="FencePost1" type="MeshInstance3D" parent="BackgroundScenery"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.5, -10)
+mesh = SubResource("fence_post_mesh")
+
+[node name="FencePost2" type="MeshInstance3D" parent="BackgroundScenery"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.5, -14)
+mesh = SubResource("fence_post_mesh")
+
+[node name="FencePost3" type="MeshInstance3D" parent="BackgroundScenery"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.5, -18)
+mesh = SubResource("fence_post_mesh")
+
+[node name="FenceRail1" type="MeshInstance3D" parent="BackgroundScenery"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.7, -12)
+mesh = SubResource("fence_rail_mesh")
+
+[node name="FenceRail2" type="MeshInstance3D" parent="BackgroundScenery"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.7, -16)
+mesh = SubResource("fence_rail_mesh")
+
+[node name="FenceRail3" type="MeshInstance3D" parent="BackgroundScenery"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.35, -12)
+mesh = SubResource("fence_rail_mesh")
+
+[node name="FenceRail4" type="MeshInstance3D" parent="BackgroundScenery"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.35, -16)
+mesh = SubResource("fence_rail_mesh")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=483920157]
 

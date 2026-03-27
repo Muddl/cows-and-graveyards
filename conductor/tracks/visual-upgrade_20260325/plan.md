@@ -57,9 +57,9 @@ Improve skybox, lighting, and add background scenery for depth and cohesion.
 
 ### Tasks
 
-- [ ] Task 4.1: Enhance ProceduralSkyMaterial with sun disk, improved gradient, and cloud tint
-- [ ] Task 4.2: Tune DirectionalLight3D (shadow quality, color temperature, secondary fill light)
-- [ ] Task 4.3: Add distant background elements (hills/fences via simple meshes at horizon)
+- [x] Task 4.1: Enhance ProceduralSkyMaterial with sun disk, improved gradient, and cloud tint
+- [x] Task 4.2: Tune DirectionalLight3D (shadow quality, color temperature, secondary fill light)
+- [x] Task 4.3: Add distant background elements (hills/fences via simple meshes at horizon)
 
 ### Verification
 
