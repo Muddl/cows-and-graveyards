@@ -2,16 +2,94 @@
 
 [ext_resource type="Script" path="res://scripts/game/CowEntity.cs" id="cow_entity_script"]
 
-[sub_resource type="StandardMaterial3D" id="cow_mat"]
-albedo_color = Color(0.9, 0.9, 0.85, 1)
+[sub_resource type="StandardMaterial3D" id="cow_body_mat"]
+albedo_color = Color(0.92, 0.92, 0.87, 1)
 
-[sub_resource type="BoxMesh" id="cow_mesh"]
-material = SubResource("cow_mat")
-size = Vector3(1.2, 1, 2)
+[sub_resource type="StandardMaterial3D" id="cow_head_mat"]
+albedo_color = Color(0.92, 0.92, 0.87, 1)
+
+[sub_resource type="StandardMaterial3D" id="cow_leg_mat"]
+albedo_color = Color(0.85, 0.85, 0.8, 1)
+
+[sub_resource type="StandardMaterial3D" id="cow_tail_mat"]
+albedo_color = Color(0.7, 0.65, 0.6, 1)
+
+[sub_resource type="BoxMesh" id="body_mesh"]
+material = SubResource("cow_body_mat")
+size = Vector3(1.0, 0.8, 1.8)
+
+[sub_resource type="BoxMesh" id="head_mesh"]
+material = SubResource("cow_head_mat")
+size = Vector3(0.6, 0.6, 0.7)
+
+[sub_resource type="CylinderMesh" id="leg_mesh"]
+material = SubResource("cow_leg_mat")
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.6
+radial_segments = 8
+
+[sub_resource type="StandardMaterial3D" id="cow_spot_mat"]
+albedo_color = Color(0.1, 0.1, 0.1, 1)
+
+[sub_resource type="BoxMesh" id="spot_mesh_1"]
+material = SubResource("cow_spot_mat")
+size = Vector3(0.4, 0.25, 0.5)
+
+[sub_resource type="BoxMesh" id="spot_mesh_2"]
+material = SubResource("cow_spot_mat")
+size = Vector3(0.35, 0.2, 0.4)
+
+[sub_resource type="BoxMesh" id="spot_mesh_3"]
+material = SubResource("cow_spot_mat")
+size = Vector3(0.3, 0.2, 0.35)
+
+[sub_resource type="CylinderMesh" id="tail_mesh"]
+material = SubResource("cow_tail_mat")
+top_radius = 0.03
+bottom_radius = 0.05
+height = 0.6
+radial_segments = 6
 
 [node name="CowEntity" type="Node3D"]
 script = ExtResource("cow_entity_script")
 
 [node name="Body" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("cow_mesh")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+mesh = SubResource("body_mesh")
+
+[node name="Head" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, -1.0)
+mesh = SubResource("head_mesh")
+
+[node name="LegFrontLeft" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, -0.7, -0.6)
+mesh = SubResource("leg_mesh")
+
+[node name="LegFrontRight" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, -0.7, -0.6)
+mesh = SubResource("leg_mesh")
+
+[node name="LegBackLeft" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, -0.7, 0.6)
+mesh = SubResource("leg_mesh")
+
+[node name="LegBackRight" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, -0.7, 0.6)
+mesh = SubResource("leg_mesh")
+
+[node name="Spot1" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0.15, -0.2)
+mesh = SubResource("spot_mesh_1")
+
+[node name="Spot2" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.1, 0.3)
+mesh = SubResource("spot_mesh_2")
+
+[node name="Spot3" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.2, 0.5)
+mesh = SubResource("spot_mesh_3")
+
+[node name="Tail" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 0.866, 0.5, 0, -0.5, 0.866, 0, 0.1, 1.1)
+mesh = SubResource("tail_mesh")
