@@ -43,9 +43,9 @@ Replace the car BoxMesh and flat road/grass planes with more detailed versions.
 
 ### Tasks
 
-- [ ] Task 3.1: Write tests verifying Car and Road node structure in GameScene
-- [ ] Task 3.2: Build low-poly car model using CSG (body, roof, wheels, windshield)
-- [ ] Task 3.3: Enhance road with lane markings (additional mesh or shader) and grass with color variation
+- [x] Task 3.1: Write tests verifying Car and Road node structure in GameScene
+- [x] Task 3.2: Build low-poly car model using CSG (body, roof, wheels, windshield)
+- [x] Task 3.3: Enhance road with lane markings (additional mesh or shader) and grass with color variation
 
 ### Verification
 

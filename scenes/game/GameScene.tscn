@@ -2,8 +2,9 @@
 
 [ext_resource type="Script" uid="uid://nulbshweexew" path="res://scripts/game/GameScene.cs" id="game_scene_script"]
 [ext_resource type="PackedScene" path="res://scenes/game/GraveyardButton.tscn" id="graveyard_button_scene"]
-[ext_resource type="PackedScene" path="res://scenes/game/ScoreHud.tscn" id="score_hud_scene"]
 [ext_resource type="PackedScene" path="res://scenes/menus/PauseMenu.tscn" id="pause_menu_scene"]
+[ext_resource type="PackedScene" path="res://scenes/game/ScoreHud.tscn" id="score_hud_scene"]
+[ext_resource type="Shader" path="res://shaders/grass.gdshader" id="grass_shader"]
 
 [sub_resource type="ProceduralSkyMaterial" id="sky_mat"]
 sky_top_color = Color(0.4, 0.6, 0.9, 1)
@@ -28,8 +29,13 @@ albedo_color = Color(0.25, 0.25, 0.27, 1)
 material = SubResource("road_mat")
 size = Vector2(6, 200)
 
-[sub_resource type="StandardMaterial3D" id="grass_mat"]
-albedo_color = Color(0.2, 0.55, 0.15, 1)
+[sub_resource type="ShaderMaterial" id="grass_mat"]
+shader = ExtResource("grass_shader")
+shader_parameter/base_color = Color(0.2, 0.55, 0.15, 1)
+shader_parameter/tip_color = Color(0.35, 0.7, 0.25, 1)
+shader_parameter/noise_scale = 8.0
+shader_parameter/color_variation = 0.1
+shader_parameter/roughness = 0.9
 
 [sub_resource type="PlaneMesh" id="grass_mesh"]
 material = SubResource("grass_mat")
@@ -40,7 +46,39 @@ albedo_color = Color(0.8, 0.15, 0.1, 1)
 
 [sub_resource type="BoxMesh" id="car_mesh"]
 material = SubResource("car_mat")
-size = Vector3(2, 1, 4)
+size = Vector3(2, 0.7, 4)
+
+[sub_resource type="StandardMaterial3D" id="car_roof_mat"]
+albedo_color = Color(0.75, 0.12, 0.08, 1)
+
+[sub_resource type="BoxMesh" id="car_roof_mesh"]
+material = SubResource("car_roof_mat")
+size = Vector3(1.8, 0.6, 2.2)
+
+[sub_resource type="StandardMaterial3D" id="windshield_mat"]
+albedo_color = Color(0.6, 0.75, 0.9, 0.7)
+transparency = 1
+
+[sub_resource type="BoxMesh" id="windshield_mesh"]
+material = SubResource("windshield_mat")
+size = Vector3(1.7, 0.5, 0.05)
+
+[sub_resource type="StandardMaterial3D" id="wheel_mat"]
+albedo_color = Color(0.15, 0.15, 0.15, 1)
+
+[sub_resource type="CylinderMesh" id="wheel_mesh"]
+material = SubResource("wheel_mat")
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.2
+radial_segments = 10
+
+[sub_resource type="StandardMaterial3D" id="lane_mat"]
+albedo_color = Color(0.9, 0.9, 0.8, 1)
+
+[sub_resource type="BoxMesh" id="lane_dash_mesh"]
+material = SubResource("lane_mat")
+size = Vector3(0.15, 0.01, 2.0)
 
 [node name="GameScene" type="Node3D" unique_id=1298731447]
 script = ExtResource("game_scene_script")
@@ -74,11 +112,71 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 2)
 [node name="Body" type="MeshInstance3D" parent="Car" unique_id=1009829390]
 mesh = SubResource("car_mesh")
 
+[node name="Roof" type="MeshInstance3D" parent="Car"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, -0.3)
+mesh = SubResource("car_roof_mesh")
+
+[node name="Windshield" type="MeshInstance3D" parent="Car"]
+transform = Transform3D(1, 0, 0, 0, 0.966, -0.259, 0, 0.259, 0.966, 0, 0.55, -1.35)
+mesh = SubResource("windshield_mesh")
+
+[node name="WheelFrontLeft" type="MeshInstance3D" parent="Car"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -1.1, -0.2, -1.2)
+mesh = SubResource("wheel_mesh")
+
+[node name="WheelFrontRight" type="MeshInstance3D" parent="Car"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 1.1, -0.2, -1.2)
+mesh = SubResource("wheel_mesh")
+
+[node name="WheelBackLeft" type="MeshInstance3D" parent="Car"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -1.1, -0.2, 1.2)
+mesh = SubResource("wheel_mesh")
+
+[node name="WheelBackRight" type="MeshInstance3D" parent="Car"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 1.1, -0.2, 1.2)
+mesh = SubResource("wheel_mesh")
+
+[node name="LaneMarkings" type="Node3D" parent="."]
+
+[node name="Dash1" type="MeshInstance3D" parent="LaneMarkings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, -5)
+mesh = SubResource("lane_dash_mesh")
+
+[node name="Dash2" type="MeshInstance3D" parent="LaneMarkings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, -10)
+mesh = SubResource("lane_dash_mesh")
+
+[node name="Dash3" type="MeshInstance3D" parent="LaneMarkings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, -15)
+mesh = SubResource("lane_dash_mesh")
+
+[node name="Dash4" type="MeshInstance3D" parent="LaneMarkings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, -20)
+mesh = SubResource("lane_dash_mesh")
+
+[node name="Dash5" type="MeshInstance3D" parent="LaneMarkings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, -25)
+mesh = SubResource("lane_dash_mesh")
+
+[node name="Dash6" type="MeshInstance3D" parent="LaneMarkings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, -30)
+mesh = SubResource("lane_dash_mesh")
+
+[node name="Dash7" type="MeshInstance3D" parent="LaneMarkings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, -35)
+mesh = SubResource("lane_dash_mesh")
+
+[node name="Dash8" type="MeshInstance3D" parent="LaneMarkings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, -40)
+mesh = SubResource("lane_dash_mesh")
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=483920157]
 
 [node name="ScoreHud" parent="CanvasLayer" unique_id=424549114 instance=ExtResource("score_hud_scene")]
 layout_mode = 3
 anchors_preset = 10
+offset_bottom = 0.0
+grow_horizontal = 2
 
 [node name="GraveyardButtonLeft" parent="CanvasLayer" unique_id=792196645 instance=ExtResource("graveyard_button_scene")]
 layout_mode = 3
@@ -89,19 +187,19 @@ layout_mode = 3
 anchor_left = 0.5
 Side = 1
 
-[node name="PauseButton" type="Button" parent="CanvasLayer"]
-layout_mode = 3
+[node name="PauseButton" type="Button" parent="CanvasLayer" unique_id=1749908393]
+anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -65.0
 offset_top = 30.0
 offset_right = 65.0
 offset_bottom = 110.0
-mouse_filter = 0
-text = "II"
 theme_override_font_sizes/font_size = 40
+text = "II"
 
-[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("pause_menu_scene")]
+[node name="PauseMenu" parent="CanvasLayer" unique_id=329899468 instance=ExtResource("pause_menu_scene")]
 layout_mode = 3
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 15
+grow_horizontal = 2
+grow_vertical = 2
