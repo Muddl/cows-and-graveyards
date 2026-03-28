@@ -3,7 +3,6 @@
 | Status | Track ID | Title | Created | Updated |
 | ------ | -------- | ----- | ------- | ------- |
 | [x] | player-testing_20260328 | Initial Player Testing & Feedback | 2026-03-28 | 2026-03-28 |
-| [x] | audio-sfx_20260328 | Audio & Sound Effects | 2026-03-28 | 2026-03-28 |
 | [ ] | onboarding_20260328 | Onboarding & Tutorial | 2026-03-28 | 2026-03-28 |
 | [ ] | game-feel_20260328 | Game Feel Pass | 2026-03-28 | 2026-03-28 |
 | [ ] | ux-polish_20260328 | UX Polish | 2026-03-28 | 2026-03-28 |
@@ -42,3 +41,9 @@
 **Reason:** Completed - Work finished successfully
 **Archived:** 2026-03-28
 **Folder:** [./tracks/_archive/quality-harness_20260325/](./tracks/_archive/quality-harness_20260325/)
+
+### audio-sfx_20260328: Audio & Sound Effects
+
+**Reason:** Completed - Work finished successfully
+**Archived:** 2026-03-28
+**Folder:** [./tracks/_archive/audio-sfx_20260328/](./tracks/_archive/audio-sfx_20260328/)
