@@ -10,6 +10,12 @@ public partial class AudioManager : Node
 
     private readonly Dictionary<string, AudioStream?> _sfxRegistry = new();
 
+    /// <summary>The key of the most recently played SFX (for test observability).</summary>
+    public string? LastPlayedSfxKey { get; private set; }
+
+    /// <summary>Total number of SFX plays since creation (for test observability).</summary>
+    public int TotalSfxPlayed { get; private set; }
+
     public AudioManager()
     {
         EnsureBusLayout();
@@ -17,6 +23,7 @@ public partial class AudioManager : Node
 
     public override void _Ready()
     {
+        LoadBuiltInSfx();
     }
 
     /// <summary>
@@ -30,6 +37,9 @@ public partial class AudioManager : Node
             GD.PushWarning($"AudioManager: unknown SFX key '{key}'");
             return;
         }
+
+        LastPlayedSfxKey = key;
+        TotalSfxPlayed++;
 
         if (stream is null)
         {
@@ -76,6 +86,25 @@ public partial class AudioManager : Node
 
     /// <summary>Sets Ambient bus volume.</summary>
     public void SetAmbientVolume(float db) => SetBusVolume("Ambient", db);
+
+    private void LoadBuiltInSfx()
+    {
+        TryRegisterSfx("tap", "res://assets/audio/sfx/tap.ogg");
+        TryRegisterSfx("cow_moo", "res://assets/audio/sfx/cow_moo.ogg");
+        TryRegisterSfx("gravestone_thud", "res://assets/audio/sfx/gravestone_thud.ogg");
+    }
+
+    private void TryRegisterSfx(string key, string path)
+    {
+        if (ResourceLoader.Exists(path))
+        {
+            RegisterSfx(key, GD.Load<AudioStream>(path));
+        }
+        else
+        {
+            RegisterSfx(key, null);
+        }
+    }
 
     private static void EnsureBusLayout()
     {
