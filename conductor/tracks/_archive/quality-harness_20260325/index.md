@@ -1,6 +1,6 @@
-# Track: Main Menu, Pause Menu & Trip Persistence
+# Track: Tea-Leaves Quality Harness Integration
 
-**ID:** menus_20260318
+**ID:** quality-harness_20260325
 **Status:** Pending
 
 ## Documents
@@ -11,7 +11,7 @@
 ## Progress
 
 - Phases: 0/5 complete
-- Tasks: 0/16 complete
+- Tasks: 0/14 complete
 
 ## Quick Links
 

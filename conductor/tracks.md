@@ -2,8 +2,7 @@
 
 | Status | Track ID | Title | Created | Updated |
 | ------ | -------- | ----- | ------- | ------- |
-| [x] | visual-upgrade_20260325 | Medium-Fidelity Visual Upgrade | 2026-03-25 | 2026-03-27 |
-| [x] | quality-harness_20260325 | Tea-Leaves Quality Harness Integration | 2026-03-25 | 2026-03-27 |
+| [ ] | player-testing_20260328 | Initial Player Testing & Feedback | 2026-03-28 | 2026-03-28 |
 
 <!-- Tracks registered by /conductor:new-track -->
 
@@ -26,3 +25,15 @@
 **Reason:** Completed - Work finished successfully
 **Archived:** 2026-03-19
 **Folder:** [./tracks/_archive/menus_20260318/](./tracks/_archive/menus_20260318/)
+
+### visual-upgrade_20260325: Medium-Fidelity Visual Upgrade
+
+**Reason:** Completed - Work finished successfully
+**Archived:** 2026-03-28
+**Folder:** [./tracks/_archive/visual-upgrade_20260325/](./tracks/_archive/visual-upgrade_20260325/)
+
+### quality-harness_20260325: Tea-Leaves Quality Harness Integration
+
+**Reason:** Completed - Work finished successfully
+**Archived:** 2026-03-28
+**Folder:** [./tracks/_archive/quality-harness_20260325/](./tracks/_archive/quality-harness_20260325/)
