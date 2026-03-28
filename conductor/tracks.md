@@ -2,7 +2,7 @@
 
 | Status | Track ID | Title | Created | Updated |
 | ------ | -------- | ----- | ------- | ------- |
-| [ ] | player-testing_20260328 | Initial Player Testing & Feedback | 2026-03-28 | 2026-03-28 |
+| [x] | player-testing_20260328 | Initial Player Testing & Feedback | 2026-03-28 | 2026-03-28 |
 
 <!-- Tracks registered by /conductor:new-track -->
 

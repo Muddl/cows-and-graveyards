@@ -3,7 +3,7 @@
 **Track ID:** player-testing_20260328
 **Spec:** [spec.md](./spec.md)
 **Created:** 2026-03-28
-**Status:** [ ] Not Started
+**Status:** [x] Complete
 
 ## Overview
 
@@ -15,13 +15,13 @@ Define the reusable artifacts that structure every testing round.
 
 ### Tasks
 
-- [ ] Task 1.1: Define 5-7 player agent profiles with distinct personas (casual mobile gamer, hardcore gamer, young child, accessibility-focused user, first-time player, impatient commuter, genre enthusiast) — each with goals, skill level, and evaluation focus
-- [ ] Task 1.2: Design evaluation rubric covering: core gameplay loop, UX/usability, visual quality, game feel, visual correctness, performance perception — with rating scale and free-text fields
-- [ ] Task 1.3: Create report template for per-agent feedback and cross-agent summary with categorized findings (critical/high/medium/low)
+- [x] Task 1.1: Define 5-7 player agent profiles with distinct personas (casual mobile gamer, hardcore gamer, young child, accessibility-focused user, first-time player, impatient commuter, genre enthusiast) — each with goals, skill level, and evaluation focus
+- [x] Task 1.2: Design evaluation rubric covering: core gameplay loop, UX/usability, visual quality, game feel, visual correctness, performance perception — with rating scale and free-text fields
+- [x] Task 1.3: Create report template for per-agent feedback and cross-agent summary with categorized findings (critical/high/medium/low)
 
 ### Verification
 
-- [ ] All artifacts are complete, consistent, and stored in a known location
+- [x] All artifacts are complete, consistent, and stored in a known location
 
 ## Phase 2: Harness Implementation
 
@@ -29,15 +29,15 @@ Build the tooling that orchestrates a testing round.
 
 ### Tasks
 
-- [ ] Task 2.1: Write tests for the harness runner (validates it loads profiles, applies rubric, produces output per agent, generates summary)
-- [ ] Task 2.2: Implement harness runner script that orchestrates a full round — pins build (commit hash), runs each agent profile through evaluation, collects structured output
-- [ ] Task 2.3: Integrate with DevTools CLI for automated data collection (screenshots, scene-tree, performance stats) as evidence alongside agent feedback
-- [ ] Task 2.4: Set up timestamped output storage structure (e.g., `testing/rounds/{YYYY-MM-DD}/`) for cross-round comparison
+- [x] Task 2.1: Write tests for the harness runner (validates it loads profiles, applies rubric, produces output per agent, generates summary)
+- [x] Task 2.2: Implement harness runner script that orchestrates a full round — pins build (commit hash), runs each agent profile through evaluation, collects structured output
+- [x] Task 2.3: Integrate with DevTools CLI for automated data collection (screenshots, scene-tree, performance stats) as evidence alongside agent feedback
+- [x] Task 2.4: Set up timestamped output storage structure (e.g., `testing/rounds/{YYYY-MM-DD}/`) for cross-round comparison
 
 ### Verification
 
-- [ ] Harness runner executes end-to-end in a dry run, producing correctly structured output
-- [ ] Tests pass
+- [x] Harness runner executes end-to-end in a dry run, producing correctly structured output
+- [x] Tests pass
 
 ## Phase 3: First Testing Round
 
@@ -45,13 +45,13 @@ Execute the first full round against the current master build.
 
 ### Tasks
 
-- [ ] Task 3.1: Pin the test build (record commit hash, capture build metadata)
-- [ ] Task 3.2: Execute harness with all agent profiles against the pinned build
-- [ ] Task 3.3: Collect and store all agent feedback and DevTools evidence
+- [x] Task 3.1: Pin the test build (record commit hash, capture build metadata)
+- [x] Task 3.2: Execute harness with all agent profiles against the pinned build
+- [x] Task 3.3: Collect and store all agent feedback and DevTools evidence
 
 ### Verification
 
-- [ ] All agents have completed evaluation, output is stored and complete
+- [x] All agents have completed evaluation, output is stored and complete
 
 ## Phase 4: Analysis & Report
 
@@ -59,22 +59,22 @@ Compile findings into an actionable summary.
 
 ### Tasks
 
-- [ ] Task 4.1: Aggregate agent feedback, identify patterns and consensus across profiles
-- [ ] Task 4.2: Categorize findings by severity (critical/high/medium/low) and area (gameplay, UX, visuals, performance, feel)
-- [ ] Task 4.3: Produce final summary report with recommendations and candidate follow-up tracks
-- [ ] Task 4.4: Document how to re-run the harness for future rounds (usage instructions, slash command if applicable)
+- [x] Task 4.1: Aggregate agent feedback, identify patterns and consensus across profiles
+- [x] Task 4.2: Categorize findings by severity (critical/high/medium/low) and area (gameplay, UX, visuals, performance, feel)
+- [x] Task 4.3: Produce final summary report with recommendations and candidate follow-up tracks
+- [x] Task 4.4: Document how to re-run the harness for future rounds (usage instructions, slash command if applicable)
 
 ### Verification
 
-- [ ] Summary report is complete with categorized findings
-- [ ] Harness documentation enables a future round with a single command
+- [x] Summary report is complete with categorized findings
+- [x] Harness documentation enables a future round with a single command
 
 ## Final Verification
 
-- [ ] All acceptance criteria met
-- [ ] Tests passing
-- [ ] Harness is documented and repeatable
-- [ ] Report stored in timestamped round directory
+- [x] All acceptance criteria met
+- [x] Tests passing
+- [x] Harness is documented and repeatable
+- [x] Report stored in timestamped round directory
 
 ---
 

@@ -2,15 +2,18 @@
   "id": "player-testing_20260328",
   "title": "Initial Player Testing & Feedback",
   "type": "chore",
-  "status": "pending",
+  "status": "complete",
   "created": "2026-03-28",
   "updated": "2026-03-28",
+  "current_phase": 4,
+  "current_task": "4.4",
   "phases": {
     "total": 4,
-    "completed": 0
+    "completed": 4
   },
   "tasks": {
     "total": 14,
-    "completed": 0
-  }
+    "completed": 14
+  },
+  "commits": []
 }
