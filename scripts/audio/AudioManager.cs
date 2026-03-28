@@ -22,6 +22,15 @@ public partial class AudioManager : Node
     /// <summary>Whether ambient audio is currently playing.</summary>
     public bool IsAmbientPlaying => _ambientIsActive;
 
+    private AudioStreamPlayer? _musicPlayer;
+    private bool _musicIsActive;
+
+    /// <summary>Whether music is currently playing.</summary>
+    public bool IsMusicPlaying => _musicIsActive;
+
+    /// <summary>The key of the currently playing music track.</summary>
+    public string? CurrentMusicTrack { get; private set; }
+
     public AudioManager()
     {
         EnsureBusLayout();
@@ -124,6 +133,42 @@ public partial class AudioManager : Node
     }
 
     /// <summary>
+    /// Plays a music track by key on the Music bus. Stops any current track first.
+    /// </summary>
+    public void PlayMusic(string trackKey)
+    {
+        if (_musicPlayer is not null && _musicPlayer.Playing)
+            _musicPlayer.Stop();
+
+        _musicPlayer ??= new AudioStreamPlayer();
+        if (_musicPlayer.GetParent() is null)
+            AddChild(_musicPlayer);
+
+        _musicPlayer.Bus = "Music";
+        CurrentMusicTrack = trackKey;
+
+        var stream = TryLoadMusicStream(trackKey);
+        if (stream is not null)
+        {
+            _musicPlayer.Stream = stream;
+            _musicPlayer.Play();
+        }
+
+        _musicIsActive = true;
+    }
+
+    /// <summary>
+    /// Stops music playback.
+    /// </summary>
+    public void StopMusic()
+    {
+        _musicIsActive = false;
+        CurrentMusicTrack = null;
+        if (_musicPlayer is not null && _musicPlayer.Playing)
+            _musicPlayer.Stop();
+    }
+
+    /// <summary>
     /// Stops ambient audio playback.
     /// </summary>
     public void StopAmbient()
@@ -131,6 +176,12 @@ public partial class AudioManager : Node
         _ambientIsActive = false;
         if (_ambientPlayer is not null && _ambientPlayer.Playing)
             _ambientPlayer.Stop();
+    }
+
+    private static AudioStream? TryLoadMusicStream(string trackKey)
+    {
+        string path = $"res://assets/audio/music/{trackKey}.ogg";
+        return ResourceLoader.Exists(path) ? GD.Load<AudioStream>(path) : null;
     }
 
     private static AudioStream? TryLoadAmbientStream()

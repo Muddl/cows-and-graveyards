@@ -2,6 +2,7 @@ namespace CowsGraveyards.Menus;
 
 using System.Collections.Generic;
 using System.Linq;
+using CowsGraveyards.Audio;
 using Godot;
 
 public partial class MainMenuScene : Control
@@ -84,6 +85,9 @@ public partial class MainMenuScene : Control
         if (_mainPanel is not null)
             _mainPanel.Visible = true;
         ApplyQuitButtonVisibility();
+
+        var audioManager = GetNodeOrNull<AudioManager>("/root/AudioManager");
+        audioManager?.PlayMusic("menu_theme");
     }
 
     // ── Public API (testable without scene tree) ──────────────────────────────

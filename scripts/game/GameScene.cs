@@ -55,6 +55,7 @@ public partial class GameScene : Node3D
         PendingTrip.Clear();
 
         _audioManager?.StartAmbient();
+        _audioManager?.PlayMusic("gameplay_theme");
     }
 
     public override void _Input(InputEvent @event)
