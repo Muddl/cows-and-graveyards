@@ -117,7 +117,7 @@ Run `dotnet test --filter "FullyQualifiedName~CowsGraveyards.AmbientAudioTest|Co
 **Goal:** Audio pooling for rapid taps, device mute respect, pop/click prevention, and full end-to-end verification.
 
 ### Task 4.1 — Write audio pool and mute tests
-- Write tests in `tests/audio/AudioPolishTest.cs`
+- [x] Write tests in `tests/audio/AudioPolishTest.cs`
 - Test: rapid calls to `PlaySfx("tap")` in quick succession do not cut off each other (pool size >= 4)
 - Test: when device audio focus is lost, `AudioManager.HandleFocusLoss()` pauses all streams
 - Test: when audio focus is regained, streams resume
@@ -125,22 +125,22 @@ Run `dotnet test --filter "FullyQualifiedName~CowsGraveyards.AmbientAudioTest|Co
 - Commit: `test: audio pooling, focus handling, and init sanity`
 
 ### Task 4.2 — Implement audio pooling for SFX
-- Replace single AudioStreamPlayer per SFX with a pool of N players (N=4 minimum)
-- `PlaySfx` picks the next available player from the pool (round-robin)
-- All Task 4.1 pool tests must pass
+- [x] Replace single AudioStreamPlayer per SFX with a pool of N players (N=4 minimum)
+- [x] `PlaySfx` picks the next available player from the pool (round-robin)
+- [x] All Task 4.1 pool tests must pass
 - Commit: `feat: AudioStreamPlayer pool for rapid-fire SFX`
 
 ### Task 4.3 — Implement device mute / audio focus handling
-- Connect to Godot's `ApplicationFocusOut` / `ApplicationFocusIn` notifications
-- Implement `HandleFocusLoss()` and `HandleFocusGain()` in AudioManager
-- All Task 4.1 focus tests must pass
+- [x] Connect to Godot's `ApplicationFocusOut` / `ApplicationFocusIn` notifications
+- [x] Implement `HandleFocusLoss()` and `HandleFocusGain()` in AudioManager
+- [x] All Task 4.1 focus tests must pass
 - Commit: `feat: pause/resume audio on application focus change`
 
 ### Task 4.4 — Final integration and lint
-- Run full test suite: `dotnet test "Cows & Graveyards.csproj" --settings .runsettings`
-- Run shader lint: `pwsh tools/godot.ps1 --headless -s tools/lint_project.gd`
-- Run test convention lint: `pwsh tools/lint_tests.ps1`
-- Confirm all audio success criteria from spec.md are met
+- [x] Run full test suite: `dotnet test "Cows & Graveyards.csproj" --settings .runsettings`
+- [x] Run shader lint: `pwsh tools/godot.ps1 --headless -s tools/lint_project.gd`
+- [x] Run test convention lint: `pwsh tools/lint_tests.ps1`
+- [x] Confirm all audio success criteria from spec.md are met
 - Commit: `chore: audio track final verification`
 
 ### Verification checkpoint
