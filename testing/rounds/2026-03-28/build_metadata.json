@@ -1,0 +1,18 @@
+{
+  "commit": "2c7be1d",
+  "commit_full": "2c7be1d9ea08d453910358ed86afde03c7fd94ed",
+  "branch": "master",
+  "date": "2026-03-28",
+  "godot_version": "4.6.1",
+  "renderer": "Mobile",
+  "physics": "Jolt",
+  "agents": ["Casey", "Milo", "Avery", "Jordan", "Reese", "Dakota", "Morgan"],
+  "categories": [
+    "Core Gameplay Loop",
+    "UX / Usability",
+    "Visual Quality",
+    "Game Feel",
+    "Visual Correctness",
+    "Performance Perception"
+  ]
+}
