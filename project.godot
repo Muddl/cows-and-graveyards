@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 DevTools="res://scripts/devtools/DevTools.cs"
+AudioManager="res://scripts/audio/AudioManager.cs"
 
 [display]
 

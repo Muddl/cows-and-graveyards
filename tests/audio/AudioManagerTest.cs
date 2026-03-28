@@ -6,6 +6,7 @@ using Godot;
 using static GdUnit4.Assertions;
 
 [TestSuite]
+[RequireGodotRuntime]
 public class AudioManagerTest
 {
     private AudioManager _manager = null!;
@@ -25,6 +26,7 @@ public class AudioManagerTest
     // ── Bus structure ────────────────────────────────────────────────────────
 
     [TestCase]
+    [RequireGodotRuntime]
     public void SfxBusExistsWithCorrectIndex()
     {
         int index = AudioServer.GetBusIndex("SFX");
@@ -32,6 +34,7 @@ public class AudioManagerTest
     }
 
     [TestCase]
+    [RequireGodotRuntime]
     public void MusicBusExistsWithCorrectIndex()
     {
         int index = AudioServer.GetBusIndex("Music");
@@ -39,6 +42,7 @@ public class AudioManagerTest
     }
 
     [TestCase]
+    [RequireGodotRuntime]
     public void AmbientBusExistsWithCorrectIndex()
     {
         int index = AudioServer.GetBusIndex("Ambient");
@@ -48,13 +52,16 @@ public class AudioManagerTest
     // ── PlaySfx API ──────────────────────────────────────────────────────────
 
     [TestCase]
+    [RequireGodotRuntime]
     public void PlaySfxDoesNotThrowOnValidKey()
     {
-        // Should not throw when called with a registered key
+        // Register a key with null stream (no actual audio in test)
+        _manager.RegisterSfx("tap", null);
         _manager.PlaySfx("tap");
     }
 
     [TestCase]
+    [RequireGodotRuntime]
     public void PlaySfxDoesNotThrowOnUnknownKey()
     {
         // Should handle gracefully (log warning, no exception)
@@ -64,9 +71,9 @@ public class AudioManagerTest
     // ── Volume control ───────────────────────────────────────────────────────
 
     [TestCase]
+    [RequireGodotRuntime]
     public void SetBusVolumeClampsToValidRange()
     {
-        // Should not throw and should clamp extreme values
         _manager.SetBusVolume("SFX", 100f);
         float dbAfterHigh = AudioServer.GetBusVolumeDb(AudioServer.GetBusIndex("SFX"));
         AssertThat(dbAfterHigh).IsLessEqual(6f);
@@ -77,6 +84,7 @@ public class AudioManagerTest
     }
 
     [TestCase]
+    [RequireGodotRuntime]
     public void SetBusVolumeAffectsCorrectBus()
     {
         float originalMusic = AudioServer.GetBusVolumeDb(AudioServer.GetBusIndex("Music"));
