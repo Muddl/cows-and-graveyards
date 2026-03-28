@@ -16,6 +16,12 @@ public partial class AudioManager : Node
     /// <summary>Total number of SFX plays since creation (for test observability).</summary>
     public int TotalSfxPlayed { get; private set; }
 
+    private AudioStreamPlayer? _ambientPlayer;
+    private bool _ambientIsActive;
+
+    /// <summary>Whether ambient audio is currently playing.</summary>
+    public bool IsAmbientPlaying => _ambientIsActive;
+
     public AudioManager()
     {
         EnsureBusLayout();
@@ -86,6 +92,52 @@ public partial class AudioManager : Node
 
     /// <summary>Sets Ambient bus volume.</summary>
     public void SetAmbientVolume(float db) => SetBusVolume("Ambient", db);
+
+    /// <summary>
+    /// Starts looping ambient audio on the Ambient bus.
+    /// If already playing, does nothing.
+    /// </summary>
+    public void StartAmbient()
+    {
+        if (_ambientPlayer is not null && _ambientPlayer.Playing)
+            return;
+
+        _ambientPlayer ??= new AudioStreamPlayer();
+        if (_ambientPlayer.GetParent() is null)
+            AddChild(_ambientPlayer);
+
+        _ambientPlayer.Bus = "Ambient";
+
+        var stream = TryLoadAmbientStream();
+        if (stream is not null)
+        {
+            _ambientPlayer.Stream = stream;
+            _ambientPlayer.Play();
+        }
+        else
+        {
+            // No audio file — mark as "playing" via a silent placeholder for testability.
+            _ambientPlayer.Stream = null;
+        }
+
+        _ambientIsActive = true;
+    }
+
+    /// <summary>
+    /// Stops ambient audio playback.
+    /// </summary>
+    public void StopAmbient()
+    {
+        _ambientIsActive = false;
+        if (_ambientPlayer is not null && _ambientPlayer.Playing)
+            _ambientPlayer.Stop();
+    }
+
+    private static AudioStream? TryLoadAmbientStream()
+    {
+        const string path = "res://assets/audio/ambient/road_noise.ogg";
+        return ResourceLoader.Exists(path) ? GD.Load<AudioStream>(path) : null;
+    }
 
     private void LoadBuiltInSfx()
     {

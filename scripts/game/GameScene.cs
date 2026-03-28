@@ -53,6 +53,8 @@ public partial class GameScene : Node3D
 
         InitTripSlot(PendingTrip.SlotIndex, PendingTrip.Save);
         PendingTrip.Clear();
+
+        _audioManager?.StartAmbient();
     }
 
     public override void _Input(InputEvent @event)
