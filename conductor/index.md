@@ -14,6 +14,11 @@ Navigation hub for project context.
 ## Active Tracks
 
 - [Initial Player Testing & Feedback](./tracks/player-testing_20260328/index.md) — Pending
+- [Onboarding & Tutorial](./tracks/onboarding_20260328/index.md) — Pending
+- [Game Feel Pass](./tracks/game-feel_20260328/index.md) — Pending
+- [UX Polish](./tracks/ux-polish_20260328/index.md) — Pending
+- [Accessibility Foundations](./tracks/accessibility_20260328/index.md) — Pending
+- [AI Harness Context Review](./tracks/context-review_20260328/index.md) — Pending
 
 ## Completed Tracks
 
@@ -22,3 +27,4 @@ Navigation hub for project context.
 - [Main Menu, Pause Menu & Trip Persistence](./tracks/_archive/menus_20260318/index.md) — Archived
 - [Medium-Fidelity Visual Upgrade](./tracks/_archive/visual-upgrade_20260325/index.md) — Archived
 - [Tea-Leaves Quality Harness Integration](./tracks/_archive/quality-harness_20260325/index.md) — Archived
+- [Audio & Sound Effects](./tracks/_archive/audio-sfx_20260328/index.md) — Archived

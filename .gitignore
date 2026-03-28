@@ -1,6 +1,7 @@
 # Godot
 .godot/
 /android/
+*.uid
 
 # .NET / C#
 bin/
@@ -21,6 +22,9 @@ TestResults/
 
 # Claude Code
 .claude/
+
+# Python
+__pycache__/
 
 # OS
 Thumbs.db
