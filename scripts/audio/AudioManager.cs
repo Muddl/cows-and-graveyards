@@ -92,6 +92,7 @@ public partial class AudioManager : Node
         TryRegisterSfx("tap", "res://assets/audio/sfx/tap.ogg");
         TryRegisterSfx("cow_moo", "res://assets/audio/sfx/cow_moo.ogg");
         TryRegisterSfx("gravestone_thud", "res://assets/audio/sfx/gravestone_thud.ogg");
+        TryRegisterSfx("graveyard_penalty", "res://assets/audio/sfx/graveyard_penalty.ogg");
     }
 
     private void TryRegisterSfx(string key, string path)

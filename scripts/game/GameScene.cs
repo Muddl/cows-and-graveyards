@@ -221,5 +221,6 @@ public partial class GameScene : Node3D
             _gameState.Scores.ZeroLeft();
 
         _scoreHud?.UpdateScores(_gameState.Scores.LeftScore, _gameState.Scores.RightScore);
+        _audioManager?.PlaySfx("graveyard_penalty");
     }
 }
