@@ -1,6 +1,7 @@
 namespace CowsGraveyards.Game;
 
 using System;
+using CowsGraveyards.Audio;
 using CowsGraveyards.Menus;
 using Godot;
 
@@ -21,6 +22,7 @@ public partial class GameScene : Node3D
     private GraveyardButton _graveyardButtonRight = null!;
     private PauseMenu? _pauseMenu;
     private Button? _pauseButton;
+    private AudioManager? _audioManager;
 
     // Exposed for input-isolation tests and trip-state integration.
     public ScoreTracker Scores => _gameState.Scores;
@@ -29,6 +31,7 @@ public partial class GameScene : Node3D
 
     public override void _Ready()
     {
+        _audioManager = GetNodeOrNull<AudioManager>("/root/AudioManager");
         _scoreHud = GetNode<ScoreHud>("CanvasLayer/ScoreHud");
 
         _graveyardButtonLeft = GetNode<GraveyardButton>("CanvasLayer/GraveyardButtonLeft");
@@ -50,6 +53,9 @@ public partial class GameScene : Node3D
 
         InitTripSlot(PendingTrip.SlotIndex, PendingTrip.Save);
         PendingTrip.Clear();
+
+        _audioManager?.StartAmbient();
+        _audioManager?.PlayMusic("gameplay_theme");
     }
 
     public override void _Input(InputEvent @event)
@@ -184,6 +190,8 @@ public partial class GameScene : Node3D
         cow.StartDrivePast(start, end);
 
         _cowSpawner.RecordSpawn();
+        _audioManager?.PlaySfx("tap");
+        _audioManager?.PlaySfx("cow_moo");
     }
 
     private void SpawnGraveyard(TapSide side)
@@ -194,6 +202,8 @@ public partial class GameScene : Node3D
         var start = _cowSpawner.GetSpawnPosition(side);
         var end = _cowSpawner.GetEndPosition(side);
         graveyard.StartDrivePast(start, end);
+
+        _audioManager?.PlaySfx("gravestone_thud");
     }
 
     private void IncrementScore(TapSide side)
@@ -214,5 +224,6 @@ public partial class GameScene : Node3D
             _gameState.Scores.ZeroLeft();
 
         _scoreHud?.UpdateScores(_gameState.Scores.LeftScore, _gameState.Scores.RightScore);
+        _audioManager?.PlaySfx("graveyard_penalty");
     }
 }
