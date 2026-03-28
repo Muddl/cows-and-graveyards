@@ -1,0 +1,55 @@
+{
+  "trackId": "ux-polish_20260328",
+  "title": "UX Polish",
+  "priority": "high",
+  "status": "pending",
+  "createdAt": "2026-03-28",
+  "branch": "track/ux-polish_20260328",
+  "source": "player-testing_20260328",
+  "phases": [
+    {
+      "id": 1,
+      "title": "Graveyard Confirmation",
+      "status": "pending",
+      "tasks": [
+        { "id": "1.1", "title": "Write tests for graveyard confirmation behavior", "status": "pending" },
+        { "id": "1.2", "title": "Implement graveyard confirmation dialog", "status": "pending" }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Quick Resume",
+      "status": "pending",
+      "tasks": [
+        { "id": "2.1", "title": "Write tests for quick resume and simplified slot flow", "status": "pending" },
+        { "id": "2.2", "title": "Implement quick resume and simplified slot flow", "status": "pending" },
+        { "id": "2.3", "title": "Verify slot flow edge cases", "status": "pending" }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Transition & Loading Indicators",
+      "status": "pending",
+      "tasks": [
+        { "id": "3.1", "title": "Write tests for loading indicator presence", "status": "pending" },
+        { "id": "3.2", "title": "Implement scene transition loading indicator", "status": "pending" }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Pause Button Polish",
+      "status": "pending",
+      "tasks": [
+        { "id": "4.1", "title": "Write tests for pause button hit target and label", "status": "pending" },
+        { "id": "4.2", "title": "Implement pause button enlargement and label", "status": "pending" }
+      ]
+    }
+  ],
+  "taskCount": {
+    "total": 10,
+    "pending": 10,
+    "inProgress": 0,
+    "complete": 0
+  },
+  "tags": ["ux", "mobile", "accessibility", "player-testing"]
+}

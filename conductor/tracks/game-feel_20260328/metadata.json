@@ -1,0 +1,53 @@
+{
+  "id": "game-feel_20260328",
+  "title": "Game Feel Pass",
+  "status": "pending",
+  "priority": "high",
+  "created": "2026-03-28",
+  "branch": "track/game-feel_20260328",
+  "phases": [
+    {
+      "id": 1,
+      "title": "Animation Easing",
+      "status": "pending",
+      "tasks": [
+        { "id": "1.1", "title": "Write easing tests for CowEntity", "status": "pending" },
+        { "id": "1.2", "title": "Implement ease-in-out curve on CowEntity and GraveyardEntity", "status": "pending" }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Tap Feedback",
+      "status": "pending",
+      "tasks": [
+        { "id": "2.1", "title": "Write tap feedback tests", "status": "pending" },
+        { "id": "2.2", "title": "Implement haptic vibration", "status": "pending" },
+        { "id": "2.3", "title": "Implement tap ripple and button pressed states", "status": "pending" }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Score Animation",
+      "status": "pending",
+      "tasks": [
+        { "id": "3.1", "title": "Write score animation tests", "status": "pending" },
+        { "id": "3.2", "title": "Implement score animation on ScoreDisplay", "status": "pending" }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Impact Effects",
+      "status": "pending",
+      "tasks": [
+        { "id": "4.1", "title": "Write impact effect tests", "status": "pending" },
+        { "id": "4.2", "title": "Implement screen flash on graveyard wipe", "status": "pending" },
+        { "id": "4.3", "title": "Implement spawn pop on entity arrival", "status": "pending" }
+      ]
+    }
+  ],
+  "total_phases": 4,
+  "total_tasks": 10,
+  "dependencies": ["audio-sfx_20260328"],
+  "tags": ["game-feel", "juice", "haptics", "animation", "polish"],
+  "motivation": "Game Feel avg 2.0/5 in player testing; interactions described as dead and spreadsheet-like"
+}

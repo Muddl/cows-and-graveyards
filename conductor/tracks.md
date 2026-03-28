@@ -3,6 +3,11 @@
 | Status | Track ID | Title | Created | Updated |
 | ------ | -------- | ----- | ------- | ------- |
 | [x] | player-testing_20260328 | Initial Player Testing & Feedback | 2026-03-28 | 2026-03-28 |
+| [ ] | audio-sfx_20260328 | Audio & Sound Effects | 2026-03-28 | 2026-03-28 |
+| [ ] | onboarding_20260328 | Onboarding & Tutorial | 2026-03-28 | 2026-03-28 |
+| [ ] | game-feel_20260328 | Game Feel Pass | 2026-03-28 | 2026-03-28 |
+| [ ] | ux-polish_20260328 | UX Polish | 2026-03-28 | 2026-03-28 |
+| [ ] | accessibility_20260328 | Accessibility Foundations | 2026-03-28 | 2026-03-28 |
 
 <!-- Tracks registered by /conductor:new-track -->
 
