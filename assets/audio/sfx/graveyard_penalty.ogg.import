@@ -2,12 +2,13 @@
 
 importer="oggvorbisstr"
 type="AudioStreamOggVorbis"
-uid="uid://bipp4ouwqsy5q"
-valid=false
+uid="uid://ckkiltgcs7jkl"
+path="res://.godot/imported/graveyard_penalty.ogg-661f532dfa99962e7d59b491b2b98a94.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/audio/sfx/graveyard_penalty.ogg"
+dest_files=["res://.godot/imported/graveyard_penalty.ogg-661f532dfa99962e7d59b491b2b98a94.oggvorbisstr"]
 
 [params]
 

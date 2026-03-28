@@ -2,12 +2,13 @@
 
 importer="oggvorbisstr"
 type="AudioStreamOggVorbis"
-uid="uid://irmo42nfslwy"
-valid=false
+uid="uid://djoow1o0bxy74"
+path="res://.godot/imported/gravestone_thud.ogg-78954887e3c06f66234fadc86ef5a5df.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/audio/sfx/gravestone_thud.ogg"
+dest_files=["res://.godot/imported/gravestone_thud.ogg-78954887e3c06f66234fadc86ef5a5df.oggvorbisstr"]
 
 [params]
 

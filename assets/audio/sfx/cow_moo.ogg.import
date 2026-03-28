@@ -2,12 +2,13 @@
 
 importer="oggvorbisstr"
 type="AudioStreamOggVorbis"
-uid="uid://dtqtvesdwlank"
-valid=false
+uid="uid://g03o8rgnm3p7"
+path="res://.godot/imported/cow_moo.ogg-3d493fef5765d436bf890489b1723387.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/audio/sfx/cow_moo.ogg"
+dest_files=["res://.godot/imported/cow_moo.ogg-3d493fef5765d436bf890489b1723387.oggvorbisstr"]
 
 [params]
 
