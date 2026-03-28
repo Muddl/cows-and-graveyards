@@ -7,8 +7,11 @@ public partial class AudioManager : Node
 {
     private const float MaxVolumeDb = 6f;
     private const float MinVolumeDb = -80f;
+    private const int PoolSize = 4;
 
     private readonly Dictionary<string, AudioStream?> _sfxRegistry = new();
+    private readonly AudioStreamPlayer?[] _sfxPool = new AudioStreamPlayer?[PoolSize];
+    private int _nextPoolIndex;
 
     /// <summary>The key of the most recently played SFX (for test observability).</summary>
     public string? LastPlayedSfxKey { get; private set; }
@@ -16,8 +19,17 @@ public partial class AudioManager : Node
     /// <summary>Total number of SFX plays since creation (for test observability).</summary>
     public int TotalSfxPlayed { get; private set; }
 
+    /// <summary>Number of SFX pool slots available for simultaneous playback.</summary>
+    public int SfxPoolSize => PoolSize;
+
+    /// <summary>Whether audio is paused due to focus loss.</summary>
+    public bool IsPaused { get; private set; }
+
     private AudioStreamPlayer? _ambientPlayer;
     private bool _ambientIsActive;
+    private bool _ambientWasActive;
+    private bool _musicWasActive;
+    private string? _pausedMusicTrack;
 
     /// <summary>Whether ambient audio is currently playing.</summary>
     public bool IsAmbientPlaying => _ambientIsActive;
@@ -57,16 +69,14 @@ public partial class AudioManager : Node
         TotalSfxPlayed++;
 
         if (stream is null)
-        {
             return;
-        }
 
-        var player = new AudioStreamPlayer();
+        var player = GetOrCreatePoolPlayer(_nextPoolIndex);
+        _nextPoolIndex = (_nextPoolIndex + 1) % PoolSize;
+
         player.Stream = stream;
         player.Bus = "SFX";
-        AddChild(player);
         player.Play();
-        player.Finished += () => player.QueueFree();
     }
 
     /// <summary>
@@ -176,6 +186,58 @@ public partial class AudioManager : Node
         _ambientIsActive = false;
         if (_ambientPlayer is not null && _ambientPlayer.Playing)
             _ambientPlayer.Stop();
+    }
+
+    /// <summary>
+    /// Pauses all audio streams when the application loses focus.
+    /// </summary>
+    public void HandleFocusLoss()
+    {
+        _ambientWasActive = _ambientIsActive;
+        _musicWasActive = _musicIsActive;
+        _pausedMusicTrack = CurrentMusicTrack;
+
+        if (_ambientIsActive)
+            StopAmbient();
+        if (_musicIsActive)
+            StopMusic();
+
+        IsPaused = true;
+    }
+
+    /// <summary>
+    /// Resumes audio streams when the application regains focus.
+    /// </summary>
+    public void HandleFocusGain()
+    {
+        if (!IsPaused)
+            return;
+
+        IsPaused = false;
+
+        if (_ambientWasActive)
+            StartAmbient();
+        if (_musicWasActive && _pausedMusicTrack is not null)
+            PlayMusic(_pausedMusicTrack);
+    }
+
+    public override void _Notification(int what)
+    {
+        if (what == NotificationApplicationFocusOut)
+            HandleFocusLoss();
+        else if (what == NotificationApplicationFocusIn)
+            HandleFocusGain();
+    }
+
+    private AudioStreamPlayer GetOrCreatePoolPlayer(int index)
+    {
+        if (_sfxPool[index] is { } existing)
+            return existing;
+
+        var player = new AudioStreamPlayer();
+        AddChild(player);
+        _sfxPool[index] = player;
+        return player;
     }
 
     private static AudioStream? TryLoadMusicStream(string trackKey)
