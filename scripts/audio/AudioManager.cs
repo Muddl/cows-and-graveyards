@@ -227,6 +227,38 @@ public partial class AudioManager : Node
             HandleFocusLoss();
         else if (what == NotificationApplicationFocusIn)
             HandleFocusGain();
+        else if (what == NotificationWMCloseRequest || what == NotificationPredelete)
+            Cleanup();
+    }
+
+    private void Cleanup()
+    {
+        StopAmbient();
+        StopMusic();
+
+        if (_ambientPlayer is not null)
+        {
+            _ambientPlayer.Stream = null;
+            _ambientPlayer = null;
+        }
+
+        if (_musicPlayer is not null)
+        {
+            _musicPlayer.Stream = null;
+            _musicPlayer = null;
+        }
+
+        for (int i = 0; i < PoolSize; i++)
+        {
+            if (_sfxPool[i] is { } player)
+            {
+                player.Stop();
+                player.Stream = null;
+                _sfxPool[i] = null;
+            }
+        }
+
+        _sfxRegistry.Clear();
     }
 
     private AudioStreamPlayer GetOrCreatePoolPlayer(int index)
