@@ -2,15 +2,29 @@
   "id": "audio-sfx_20260328",
   "title": "Audio & Sound Effects",
   "type": "feature",
-  "status": "pending",
+  "status": "in_progress",
   "created": "2026-03-28",
   "updated": "2026-03-28",
+  "current_phase": 3,
+  "current_task": "3.4",
   "phases": {
     "total": 4,
-    "completed": 0
+    "completed": 3
   },
   "tasks": {
     "total": 14,
-    "completed": 0
-  }
+    "completed": 10
+  },
+  "commits": [
+    "c2c4e66: test: AudioManager bus structure and API contracts (audio-sfx_20260328)",
+    "748d7d1: feat: AudioManager autoload with bus layout (audio-sfx_20260328)",
+    "edb856f: test: core SFX event wiring for tap, moo, thud (audio-sfx_20260328)",
+    "489c394: feat: tap, cow moo, and gravestone thud SFX (audio-sfx_20260328)",
+    "2d00805: test: graveyard penalty SFX wiring (audio-sfx_20260328)",
+    "7388cf5: feat: graveyard penalty SFX (audio-sfx_20260328)",
+    "b193492: test: ambient road noise loop API (audio-sfx_20260328)",
+    "29478d7: feat: ambient road noise loop (audio-sfx_20260328)",
+    "354c5c5: test: background music API (audio-sfx_20260328)",
+    "a0ac42a: feat: background music with scene-based track switching (audio-sfx_20260328)"
+  ]
 }

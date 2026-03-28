@@ -1,7 +1,7 @@
 # Plan: Audio & Sound Effects
 
 **Track ID:** audio-sfx_20260328
-**Status:** Pending
+**Status:** In Progress
 
 ## Overview
 Four phases moving from infrastructure through core SFX, ambient/music, and final polish. Each phase follows strict TDD: tests are written and failing before any implementation code is added.
@@ -13,7 +13,7 @@ Four phases moving from infrastructure through core SFX, ambient/music, and fina
 **Goal:** Establish AudioManager autoload, configure audio bus layout (Master → SFX, Music, Ambient), and verify the structure is testable.
 
 ### Task 1.1 — Write AudioManager tests
-- Write gdUnit4 tests in `tests/audio/AudioManagerTest.cs`
+- [x] Write gdUnit4 tests in `tests/audio/AudioManagerTest.cs`
 - Test: AudioManager autoload exists in scene tree
 - Test: SFX bus exists with correct index
 - Test: Music bus exists with correct index
@@ -23,7 +23,7 @@ Four phases moving from infrastructure through core SFX, ambient/music, and fina
 - Commit: `test: AudioManager bus structure and API contracts`
 
 ### Task 1.2 — Implement AudioManager autoload
-- Create `scripts/audio/AudioManager.cs` (autoload singleton)
+- [x] Create `scripts/audio/AudioManager.cs` (autoload singleton)
 - Configure `default_bus_layout.tres` with Master, SFX, Music, Ambient buses
 - Register AudioManager in `project.godot` autoloads
 - Wire `PlaySfx`, `SetBusVolume`, `SetMusicVolume`, `SetAmbientVolume` methods
@@ -40,7 +40,7 @@ Run `dotnet test --filter "FullyQualifiedName~CowsGraveyards.AudioManagerTest"` 
 **Goal:** Add tap confirmation, cow moo, gravestone thud, and graveyard penalty sounds. Each sound is driven by a game event; tests verify the event-to-sound wiring.
 
 ### Task 2.1 — Write tap and entity spawn SFX tests
-- Write tests in `tests/audio/CoreSfxTest.cs`
+- [x] Write tests in `tests/audio/CoreSfxTest.cs`
 - Test: tapping cow (left or right) emits `CowTapped` signal
 - Test: `CowTapped` signal causes AudioManager to play "tap" SFX
 - Test: cow entity `Spawned` signal causes AudioManager to play "cow_moo" SFX
@@ -49,20 +49,20 @@ Run `dotnet test --filter "FullyQualifiedName~CowsGraveyards.AudioManagerTest"` 
 - Commit: `test: core SFX event wiring for tap, moo, thud`
 
 ### Task 2.2 — Implement tap and entity spawn SFX
-- Add placeholder CC0 audio files: `assets/audio/sfx/tap.ogg`, `cow_moo.ogg`, `gravestone_thud.ogg`
+- [x] Add placeholder CC0 audio files: `assets/audio/sfx/tap.ogg`, `cow_moo.ogg`, `gravestone_thud.ogg`
 - Register sounds in AudioManager SFX dictionary
 - Connect `CowTapped` and entity `Spawned` signals to AudioManager in GameScene
 - All Task 2.1 tests must pass
 - Commit: `feat: tap, cow moo, and gravestone thud SFX`
 
 ### Task 2.3 — Write graveyard penalty SFX tests
-- Write tests in `tests/audio/GraveyardPenaltySfxTest.cs`
+- [x] Write tests in `tests/audio/GraveyardPenaltySfxTest.cs`
 - Test: graveyard score-wipe event causes AudioManager to play "graveyard_penalty" SFX
 - Test: penalty sound is distinct from entity spawn sounds (different key)
 - Commit: `test: graveyard penalty SFX wiring`
 
 ### Task 2.4 — Implement graveyard penalty SFX
-- Add placeholder CC0 audio file: `assets/audio/sfx/graveyard_penalty.ogg`
+- [x] Add placeholder CC0 audio file: `assets/audio/sfx/graveyard_penalty.ogg`
 - Register in AudioManager; connect to graveyard wipe event in GameScene
 - All Task 2.3 tests must pass
 - Commit: `feat: graveyard penalty SFX`
@@ -77,7 +77,7 @@ Run `dotnet test --filter "FullyQualifiedName~CowsGraveyards.CoreSfxTest|CowsGra
 **Goal:** Add looping road-noise ambient track and background music with independent volume controls.
 
 ### Task 3.1 — Write ambient loop tests
-- Write tests in `tests/audio/AmbientAudioTest.cs`
+- [x] Write tests in `tests/audio/AmbientAudioTest.cs`
 - Test: `StartAmbient()` begins playback on the Ambient bus
 - Test: ambient audio loops (stream is set to loop)
 - Test: `StopAmbient()` stops playback without error
@@ -85,14 +85,14 @@ Run `dotnet test --filter "FullyQualifiedName~CowsGraveyards.CoreSfxTest|CowsGra
 - Commit: `test: ambient road noise loop API`
 
 ### Task 3.2 — Implement ambient road noise loop
-- Add placeholder CC0 audio file: `assets/audio/ambient/road_noise.ogg` (looping)
+- [x] Add placeholder CC0 audio file: `assets/audio/ambient/road_noise.ogg` (looping)
 - Implement `StartAmbient()` / `StopAmbient()` in AudioManager
 - Call `StartAmbient()` on GameScene ready; `StopAmbient()` on exit
 - All Task 3.1 tests must pass
 - Commit: `feat: ambient road noise loop`
 
 ### Task 3.3 — Write background music tests
-- Write tests in `tests/audio/MusicAudioTest.cs`
+- [x] Write tests in `tests/audio/MusicAudioTest.cs`
 - Test: `PlayMusic(string trackKey)` begins playback on the Music bus
 - Test: music loops by default
 - Test: `StopMusic()` stops without error
@@ -101,7 +101,7 @@ Run `dotnet test --filter "FullyQualifiedName~CowsGraveyards.CoreSfxTest|CowsGra
 - Commit: `test: background music API`
 
 ### Task 3.4 — Implement background music
-- Add placeholder CC0 audio files: `assets/audio/music/menu_theme.ogg`, `gameplay_theme.ogg`
+- [x] Add placeholder CC0 audio files: `assets/audio/music/menu_theme.ogg`, `gameplay_theme.ogg`
 - Implement `PlayMusic` / `StopMusic` / crossfade logic in AudioManager
 - Play `menu_theme` on MainMenuScene ready; `gameplay_theme` on GameScene ready
 - All Task 3.3 tests must pass
