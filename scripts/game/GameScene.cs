@@ -93,6 +93,7 @@ public partial class GameScene : Node3D
     public override void _Input(InputEvent @event)
     {
         if (!IsInputEnabled) return;
+        if (IsGraveyardTooltipShowing) return;
 
         if (@event is InputEventScreenTouch { Pressed: true } touch)
         {
