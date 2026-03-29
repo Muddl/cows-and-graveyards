@@ -3,10 +3,6 @@
     <TargetFramework>net9.0</TargetFramework>
     <TargetFramework Condition=" '$(GodotTargetPlatform)' == 'android' ">net9.0</TargetFramework>
     <LangVersion>13.0</LangVersion>
-    <!--Force nullable warnings, you can disable if you want-->
-    <Nullable>enable</Nullable>
-    <LangVersion>13.0</LangVersion>
-    <!--Force nullable warnings, you can disable if you want-->
     <Nullable>enable</Nullable>
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <RootNamespace>CowsGraveyards</RootNamespace>

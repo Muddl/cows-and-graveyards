@@ -7,6 +7,7 @@
 | [ ] | game-feel_20260328 | Game Feel Pass | 2026-03-28 | 2026-03-28 |
 | [ ] | ux-polish_20260328 | UX Polish | 2026-03-28 | 2026-03-28 |
 | [ ] | accessibility_20260328 | Accessibility Foundations | 2026-03-28 | 2026-03-28 |
+| [x] | context-review_20260328 | AI Harness Context Review | 2026-03-28 | 2026-03-28 |
 
 <!-- Tracks registered by /conductor:new-track -->
 

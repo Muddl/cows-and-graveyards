@@ -60,6 +60,27 @@ Commit granularity:
 - Code builds without warnings
 - Implementation matches the spec
 
+## Chore & Documentation Tracks
+
+Chore tracks (documentation, config, tooling updates) follow the same Conductor workflow but **skip TDD** since there is no production code to test. Verification is manual: build succeeds, docs are consistent, no broken cross-references.
+
+## Quality Gates
+
+Run these before marking a phase or track complete:
+
+```bash
+# Build
+dotnet build "Cows & Graveyards.csproj"
+
+# Tests (when applicable)
+dotnet test "Cows & Graveyards.csproj" --settings .runsettings
+
+# Linting (when applicable)
+pwsh tools/godot.ps1 --headless -s tools/lint_project.gd
+pwsh tools/godot.ps1 --headless -s tools/lint_shaders.gd
+pwsh tools/lint_tests.ps1
+```
+
 ## Task Lifecycle
 
 1. **Pending** — task created, not started

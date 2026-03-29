@@ -26,6 +26,17 @@
 - **Android** — Google Play Store
 - **iOS** — Apple App Store
 
+## Quality Tooling
+
+- **Tea-leaves** — AI-assisted quality harness ([cleak/tea-leaves](https://github.com/cleak/tea-leaves), MIT)
+  - `DevTools.cs` — Autoload providing runtime inspection via TCP (scene tree, performance, screenshots)
+  - `SceneValidator.cs` — Static scene validation (node types, required components)
+  - `devtools.py` — Python CLI for DevTools interaction
+  - `lint_project.gd` — UID/NodePath validation (headless Godot)
+  - `lint_shaders.gd` — Shader compilation linting (headless Godot)
+  - `lint_tests.ps1` — gdUnit4 test convention linting
+  - `godot.ps1` — PowerShell Godot launcher wrapper
+
 ## Key Dependencies
 
 | Package | Version | Purpose |
