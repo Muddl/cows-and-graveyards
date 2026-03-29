@@ -31,7 +31,7 @@ public class MainMenuSceneTest
 
         string label = menu.GetSlotLabel(save);
 
-        AssertThat(label).IsEqual("L: 5  R: 3");
+        AssertThat(label).IsEqual("Left: 5  Right: 3");
     }
 
     [TestCase]
@@ -42,7 +42,7 @@ public class MainMenuSceneTest
 
         string label = menu.GetSlotLabel(save);
 
-        AssertThat(label).IsEqual("L: 0  R: 0");
+        AssertThat(label).IsEqual("Left: 0  Right: 0");
     }
 
     [TestCase]
@@ -53,7 +53,7 @@ public class MainMenuSceneTest
 
         string label = menu.GetSlotLabel(save);
 
-        AssertThat(label).IsEqual("L: 99  R: 42");
+        AssertThat(label).IsEqual("Left: 99  Right: 42");
     }
 
     // ── Quit button visibility tests ─────────────────────────────────────────

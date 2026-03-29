@@ -15,19 +15,21 @@ Shipped (as of 2026-03-28):
 - **Visual Upgrade** — Medium-fidelity art pass, grass/stone shaders, entity visuals, effects
 - **Audio & SFX** — AudioManager, ambient audio, music, core SFX, graveyard penalty sounds
 - **Quality Harness** — Tea-leaves DevTools autoload, SceneValidator, project/shader/test linting
+- **Onboarding & Tutorial** — First-play tutorial overlay, graveyard tooltip, score label clarity, replay tutorial button
 
 ## Project Structure
 
 ```
-scripts/          # 20 C# classes
+scripts/          # 22 C# classes
   audio/          #   AudioManager
   devtools/       #   DevTools, SceneValidator
   game/           #   CowEntity, CowSpawner, GameScene, GameState, GraveyardButton,
                   #   GraveyardEntity, ScoreHud, ScoreTracker, Side, SideDetector
   menus/          #   MainMenuScene, PauseMenu, SaveManager, TripHistoryManager,
                   #   TripSave, PendingTrip, CompletedTripRecord
-tests/            # 30 gdUnit4 test classes (mirrors scripts/ layout)
-scenes/           # 7 .tscn files (game/ and menus/)
+  ui/             #   TutorialOverlay, GraveyardTooltip
+tests/            # 35 gdUnit4 test classes (mirrors scripts/ layout)
+scenes/           # 9 .tscn files (game/, menus/, ui/)
 shaders/          # 2 .gdshader files (grass, stone)
 tools/            # Tea-leaves CLI and linting scripts
 conductor/        # Conductor project management artifacts

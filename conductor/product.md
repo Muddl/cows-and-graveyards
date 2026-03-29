@@ -31,3 +31,4 @@ Shipped features (as of 2026-03-28):
 - **Visual Upgrade** — Medium-fidelity art pass with grass/stone shaders, cow and graveyard entity visuals, visual effects
 - **Audio & SFX** — AudioManager with ambient audio, music, core SFX, graveyard penalty sounds, and audio polish
 - **Quality Harness** — Tea-leaves integration: DevTools autoload, SceneValidator, project/shader linting, test convention linting
+- **Onboarding & Tutorial** — First-play tutorial overlay (4-step coach marks), graveyard first-use tooltip, improved score labels with color differentiation, replay tutorial button, tutorial state persistence per save slot

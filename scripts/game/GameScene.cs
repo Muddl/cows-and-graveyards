@@ -3,6 +3,7 @@ namespace CowsGraveyards.Game;
 using System;
 using CowsGraveyards.Audio;
 using CowsGraveyards.Menus;
+using CowsGraveyards.UI;
 using Godot;
 
 public partial class GameScene : Node3D
@@ -24,10 +25,18 @@ public partial class GameScene : Node3D
     private Button? _pauseButton;
     private AudioManager? _audioManager;
 
+    private TutorialOverlay? _tutorialOverlay;
+    private GraveyardTooltip? _graveyardTooltip;
+    private bool _ownsGraveyardTooltip;
+
     // Exposed for input-isolation tests and trip-state integration.
     public ScoreTracker Scores => _gameState.Scores;
 
     public bool IsInputEnabled { get; private set; } = true;
+
+    public bool IsTutorialActive { get; private set; }
+
+    public bool IsGraveyardTooltipShowing { get; private set; }
 
     public override void _Ready()
     {
@@ -51,16 +60,40 @@ public partial class GameScene : Node3D
         if (_pauseButton is not null)
             _pauseButton.Pressed += Pause;
 
+        _tutorialOverlay = GetNodeOrNull<TutorialOverlay>("CanvasLayer/TutorialOverlay");
+        if (_tutorialOverlay is not null)
+            _tutorialOverlay.Dismissed += EndTutorial;
+
+        _graveyardTooltip = GetNodeOrNull<GraveyardTooltip>("CanvasLayer/GraveyardTooltip");
+        if (_graveyardTooltip is not null)
+            _graveyardTooltip.Confirmed += OnGraveyardTooltipConfirmed;
+
         InitTripSlot(PendingTrip.SlotIndex, PendingTrip.Save);
         PendingTrip.Clear();
+
+        // Show tutorial/tooltip based on persisted flags
+        if (_tutorialOverlay is not null && !_tutorialSeen)
+            BeginTutorial();
+
+        if (_graveyardTooltip is not null && !_graveyardExplained)
+            _graveyardTooltip.Initialize(graveyardExplained: false);
+        else if (_graveyardTooltip is not null)
+            _graveyardTooltip.Initialize(graveyardExplained: true);
 
         _audioManager?.StartAmbient();
         _audioManager?.PlayMusic("gameplay_theme");
     }
 
+    public override void _Notification(int what)
+    {
+        if (what == NotificationPredelete && _ownsGraveyardTooltip)
+            _graveyardTooltip?.Free();
+    }
+
     public override void _Input(InputEvent @event)
     {
         if (!IsInputEnabled) return;
+        if (IsGraveyardTooltipShowing) return;
 
         if (@event is InputEventScreenTouch { Pressed: true } touch)
         {
@@ -92,7 +125,8 @@ public partial class GameScene : Node3D
 
     public void SaveAndExit()
     {
-        _saveManager?.SaveSlot(new TripSave(ActiveSlot, Scores.LeftScore, Scores.RightScore));
+        _saveManager?.SaveSlot(new TripSave(ActiveSlot, Scores.LeftScore, Scores.RightScore,
+            _tutorialSeen, _graveyardExplained));
         GetTree()?.ChangeSceneToFile("res://scenes/menus/MainMenuScene.tscn");
     }
 
@@ -113,6 +147,8 @@ public partial class GameScene : Node3D
     public int ActiveSlot { get; private set; }
     private SaveManager? _saveManager;
     private TripHistoryManager _tripHistoryManager = new();
+    private bool _tutorialSeen;
+    private bool _graveyardExplained;
 
     public void InitTripSlot(int slotIndex, TripSave? existingSave, SaveManager? saveManager = null, TripHistoryManager? historyManager = null)
     {
@@ -125,7 +161,71 @@ public partial class GameScene : Node3D
             _gameState.Scores.SetLeft(existingSave.LeftScore);
             _gameState.Scores.SetRight(existingSave.RightScore);
             _scoreHud?.UpdateScores(Scores.LeftScore, Scores.RightScore);
+            _tutorialSeen = existingSave.TutorialSeen;
+            _graveyardExplained = existingSave.GraveyardExplained;
         }
+    }
+
+    // ── Tutorial ──────────────────────────────────────────────────────────────
+
+    public void BeginTutorial()
+    {
+        IsTutorialActive = true;
+        IsInputEnabled = false;
+
+        if (_tutorialOverlay is not null)
+        {
+            _tutorialOverlay.Initialize(tutorialSeen: false);
+            _tutorialOverlay.Visible = true;
+        }
+    }
+
+    public void EndTutorial()
+    {
+        IsTutorialActive = false;
+        IsInputEnabled = true;
+        _tutorialSeen = true;
+
+        if (_tutorialOverlay is not null)
+            _tutorialOverlay.Visible = false;
+
+        PersistOnboardingFlags();
+    }
+
+    // ── Graveyard tooltip ──────────────────────────────────────────────────────
+
+    public void EnableGraveyardTooltip()
+    {
+        if (_graveyardTooltip is null)
+        {
+            _graveyardTooltip = new GraveyardTooltip();
+            _graveyardTooltip.Confirmed += OnGraveyardTooltipConfirmed;
+            _ownsGraveyardTooltip = true;
+        }
+
+        _graveyardTooltip.Initialize(graveyardExplained: false);
+    }
+
+    public void ConfirmGraveyardTooltip()
+    {
+        IsGraveyardTooltipShowing = false;
+        _graveyardTooltip?.Confirm();
+    }
+
+    private void OnGraveyardTooltipConfirmed()
+    {
+        IsGraveyardTooltipShowing = false;
+        _graveyardExplained = true;
+        PersistOnboardingFlags();
+    }
+
+    private bool TryBlockGraveyardWithTooltip()
+    {
+        if (_graveyardTooltip is null) return false;
+        if (!_graveyardTooltip.ShouldBlockAction()) return false;
+
+        IsGraveyardTooltipShowing = true;
+        return true;
     }
 
     // ── Test seams (score logic without scene-tree spawning) ──────────────────
@@ -149,11 +249,18 @@ public partial class GameScene : Node3D
     public void SimulateGraveyardPress(TapSide side)
     {
         if (!IsInputEnabled) return;
+        if (TryBlockGraveyardWithTooltip()) return;
 
         ZeroOpposingScore(side);
     }
 
     // ── Private helpers ───────────────────────────────────────────────────────
+
+    private void PersistOnboardingFlags()
+    {
+        _saveManager?.SaveSlot(new TripSave(ActiveSlot, Scores.LeftScore, Scores.RightScore,
+            _tutorialSeen, _graveyardExplained));
+    }
 
     private void HandleTap(Vector2 tapPosition)
     {
@@ -174,6 +281,7 @@ public partial class GameScene : Node3D
     private void OnGraveyardActivated(int side)
     {
         if (!IsInputEnabled) return;
+        if (TryBlockGraveyardWithTooltip()) return;
 
         var buttonSide = (TapSide)side;
         SpawnGraveyard(buttonSide);

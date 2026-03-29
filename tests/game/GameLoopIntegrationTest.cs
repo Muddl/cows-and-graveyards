@@ -43,8 +43,8 @@ public class GameLoopIntegrationTest
 
         AssertThat(_state.Scores.LeftScore).IsEqual(1);
         AssertThat(_state.Scores.RightScore).IsEqual(0);
-        AssertThat(_hud.LeftScoreText).IsEqual("L: 1");
-        AssertThat(_hud.RightScoreText).IsEqual("R: 0");
+        AssertThat(_hud.LeftScoreText).IsEqual("Left: 1");
+        AssertThat(_hud.RightScoreText).IsEqual("Right: 0");
     }
 
     [TestCase]
@@ -54,21 +54,21 @@ public class GameLoopIntegrationTest
 
         AssertThat(_state.Scores.LeftScore).IsEqual(0);
         AssertThat(_state.Scores.RightScore).IsEqual(1);
-        AssertThat(_hud.LeftScoreText).IsEqual("L: 0");
-        AssertThat(_hud.RightScoreText).IsEqual("R: 1");
+        AssertThat(_hud.LeftScoreText).IsEqual("Left: 0");
+        AssertThat(_hud.RightScoreText).IsEqual("Right: 1");
     }
 
     [TestCase]
     public void HudReflectsEachTapImmediately()
     {
         SimulateTap(100f);
-        AssertThat(_hud.LeftScoreText).IsEqual("L: 1");
+        AssertThat(_hud.LeftScoreText).IsEqual("Left: 1");
 
         SimulateTap(800f);
-        AssertThat(_hud.RightScoreText).IsEqual("R: 1");
+        AssertThat(_hud.RightScoreText).IsEqual("Right: 1");
 
         SimulateTap(100f);
-        AssertThat(_hud.LeftScoreText).IsEqual("L: 2");
+        AssertThat(_hud.LeftScoreText).IsEqual("Left: 2");
     }
 
     [TestCase]
@@ -94,8 +94,8 @@ public class GameLoopIntegrationTest
 
         AssertThat(_state.Scores.LeftScore).IsEqual(3);
         AssertThat(_state.Scores.RightScore).IsEqual(2);
-        AssertThat(_hud.LeftScoreText).IsEqual("L: 3");
-        AssertThat(_hud.RightScoreText).IsEqual("R: 2");
+        AssertThat(_hud.LeftScoreText).IsEqual("Left: 3");
+        AssertThat(_hud.RightScoreText).IsEqual("Right: 2");
     }
 
     [TestCase]
@@ -115,8 +115,8 @@ public class GameLoopIntegrationTest
         foreach (var tap in taps)
         {
             SimulateTap(tap);
-            AssertThat(_hud.LeftScoreText).IsEqual($"L: {_state.Scores.LeftScore}");
-            AssertThat(_hud.RightScoreText).IsEqual($"R: {_state.Scores.RightScore}");
+            AssertThat(_hud.LeftScoreText).IsEqual($"Left: {_state.Scores.LeftScore}");
+            AssertThat(_hud.RightScoreText).IsEqual($"Right: {_state.Scores.RightScore}");
         }
     }
 }

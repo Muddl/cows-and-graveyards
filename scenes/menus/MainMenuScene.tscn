@@ -35,6 +35,11 @@ custom_minimum_size = Vector2(0, 72)
 text = "Load Trip"
 theme_override_font_sizes/font_size = 40
 
+[node name="ReplayTutorialButton" type="Button" parent="MainPanel"]
+custom_minimum_size = Vector2(0, 72)
+text = "Replay Tutorial"
+theme_override_font_sizes/font_size = 40
+
 [node name="QuitButton" type="Button" parent="MainPanel"]
 custom_minimum_size = Vector2(0, 72)
 text = "Quit"

@@ -13,6 +13,9 @@ public partial class MainMenuScene : Control
     [Signal]
     public delegate void LoadTripRequestedEventHandler(TripSave save);
 
+    [Signal]
+    public delegate void ReplayTutorialRequestedEventHandler();
+
     private const int SlotCount = 3;
 
     private readonly SaveManager _saveManager = new();
@@ -24,6 +27,7 @@ public partial class MainMenuScene : Control
     private Control? _mainPanel;
     private Button? _startTripButton;
     private Button? _loadTripButton;
+    private Button? _replayTutorialButton;
     private Button? _quitButton;
 
     // Overlay error label (sits outside VBox so it doesn't shift layout)
@@ -42,6 +46,7 @@ public partial class MainMenuScene : Control
         _mainPanel       = GetNodeOrNull<Control>("MainPanel");
         _startTripButton = GetNodeOrNull<Button>("MainPanel/StartTripButton");
         _loadTripButton  = GetNodeOrNull<Button>("MainPanel/LoadTripButton");
+        _replayTutorialButton = GetNodeOrNull<Button>("MainPanel/ReplayTutorialButton");
         _quitButton      = GetNodeOrNull<Button>("MainPanel/QuitButton");
         _errorLabel      = GetNodeOrNull<Label>("ErrorLabel");
         _slotSelectPanel = GetNodeOrNull<Control>("SlotSelectPanel");
@@ -64,6 +69,9 @@ public partial class MainMenuScene : Control
 
         if (_backButton is not null)
             _backButton.Pressed += HideSlotSelectPanel;
+
+        if (_replayTutorialButton is not null)
+            _replayTutorialButton.Pressed += OnReplayTutorialPressed;
 
         if (_quitButton is not null)
             _quitButton.Pressed += OnQuitPressed;
@@ -97,7 +105,7 @@ public partial class MainMenuScene : Control
     {
         if (save is null)
             return "Empty";
-        return $"L: {save.LeftScore}  R: {save.RightScore}";
+        return $"Left: {save.LeftScore}  Right: {save.RightScore}";
     }
 
     /// <summary>Returns true if the Quit button should be shown on this platform.</summary>
@@ -141,6 +149,30 @@ public partial class MainMenuScene : Control
     public void OnLoadTripSlotPressed(TripSave save)
     {
         EmitSignal(SignalName.LoadTripRequested, save);
+    }
+
+    /// <summary>Called by the Replay Tutorial button. Resets tutorial flags
+    /// for the first occupied save slot and starts that trip with tutorial active.</summary>
+    public void OnReplayTutorialPressed()
+    {
+        var slots = _saveManager.LoadAllSlots();
+
+        // Find first slot with a save and reset its tutorial flags
+        for (int i = 0; i < slots.Count; i++)
+        {
+            if (slots[i] is { } save)
+            {
+                var reset = save.WithTutorialReset();
+                _saveManager.SaveSlot(reset);
+                EmitSignal(SignalName.ReplayTutorialRequested);
+                EmitSignal(SignalName.LoadTripRequested, reset);
+                return;
+            }
+        }
+
+        // No saves exist — start a fresh trip on slot 0 (tutorial shows by default)
+        EmitSignal(SignalName.ReplayTutorialRequested);
+        EmitSignal(SignalName.NewTripRequested, 0);
     }
 
     // ── Private helpers ───────────────────────────────────────────────────────

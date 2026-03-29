@@ -1,0 +1,77 @@
+{
+  "trackId": "onboarding_20260328",
+  "title": "Onboarding & Tutorial",
+  "status": "complete",
+  "priority": "critical",
+  "createdDate": "2026-03-28",
+  "completedDate": "2026-03-28",
+  "branch": "track/onboarding_20260328",
+  "motivation": "6 of 7 player-testing agents flagged zero onboarding as a critical problem. First-time players cannot understand the game without prior knowledge of the road trip cow-counting tradition.",
+  "current_phase": 4,
+  "current_task": "4.4",
+  "phases": [
+    {
+      "id": 1,
+      "title": "Score Label Improvement",
+      "status": "complete",
+      "tasks": [
+        { "id": "1.1", "title": "Test: Score label content and color", "status": "complete" },
+        { "id": "1.2", "title": "Implement: Update score label nodes and binding", "status": "complete" },
+        { "id": "1.3", "title": "Commit", "status": "complete" }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "First-Play Tutorial Overlay",
+      "status": "complete",
+      "tasks": [
+        { "id": "2.1", "title": "Test: Tutorial overlay visibility and step progression", "status": "complete" },
+        { "id": "2.2", "title": "Implement: TutorialOverlay scene and controller", "status": "complete" },
+        { "id": "2.3", "title": "Integrate: Add overlay to GameScene", "status": "complete" },
+        { "id": "2.4", "title": "Commit", "status": "complete" }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Graveyard First-Use Explanation",
+      "status": "complete",
+      "tasks": [
+        { "id": "3.1", "title": "Test: Graveyard first-use tooltip display", "status": "complete" },
+        { "id": "3.2", "title": "Implement: GraveyardTooltip scene and controller", "status": "complete" },
+        { "id": "3.3", "title": "Commit", "status": "complete" }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Tutorial Persistence & Replay",
+      "status": "complete",
+      "tasks": [
+        { "id": "4.1", "title": "Test: Tutorial state persistence in save data", "status": "complete" },
+        { "id": "4.2", "title": "Implement: Tutorial save state in SaveData model", "status": "complete" },
+        { "id": "4.3", "title": "Implement: Replay tutorial entry point in menu/settings", "status": "complete" },
+        { "id": "4.4", "title": "Commit", "status": "complete" }
+      ]
+    }
+  ],
+  "taskCount": {
+    "total": 13,
+    "pending": 0,
+    "inProgress": 0,
+    "completed": 13
+  },
+  "commits": [
+    "3c8f9e3: feat: improve score label clarity and color differentiation (onboarding_20260328)",
+    "d35ea64: feat: add first-play tutorial overlay with coach marks (onboarding_20260328)",
+    "6b8c21d: feat: add graveyard first-use tooltip with confirmation gate (onboarding_20260328)",
+    "875e3c0: feat: persist tutorial state and add replay option (onboarding_20260328)"
+  ],
+  "linkedTracks": ["player-testing_20260328"],
+  "outOfScope": [
+    "Full in-game help system",
+    "Video tutorials",
+    "Localization / i18n of tutorial text",
+    "Multiplayer-specific onboarding",
+    "Accessibility audit of tutorial UI"
+  ],
+  "tags": ["onboarding", "tutorial", "ux", "critical", "player-testing-finding"]
+}

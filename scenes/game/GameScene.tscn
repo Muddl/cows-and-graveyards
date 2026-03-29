@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" path="res://scenes/menus/PauseMenu.tscn" id="pause_menu_scene"]
 [ext_resource type="PackedScene" path="res://scenes/game/ScoreHud.tscn" id="score_hud_scene"]
 [ext_resource type="Shader" path="res://shaders/grass.gdshader" id="grass_shader"]
+[ext_resource type="PackedScene" path="res://scenes/ui/TutorialOverlay.tscn" id="tutorial_overlay_scene"]
+[ext_resource type="PackedScene" path="res://scenes/ui/GraveyardTooltip.tscn" id="graveyard_tooltip_scene"]
 
 [sub_resource type="ProceduralSkyMaterial" id="sky_mat"]
 sky_top_color = Color(0.35, 0.55, 0.88, 1)
@@ -326,6 +328,19 @@ theme_override_font_sizes/font_size = 40
 text = "II"
 
 [node name="PauseMenu" parent="CanvasLayer" unique_id=329899468 instance=ExtResource("pause_menu_scene")]
+layout_mode = 3
+anchors_preset = 15
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TutorialOverlay" parent="CanvasLayer" instance=ExtResource("tutorial_overlay_scene")]
+layout_mode = 3
+anchors_preset = 15
+grow_horizontal = 2
+grow_vertical = 2
+visible = false
+
+[node name="GraveyardTooltip" parent="CanvasLayer" instance=ExtResource("graveyard_tooltip_scene")]
 layout_mode = 3
 anchors_preset = 15
 grow_horizontal = 2
