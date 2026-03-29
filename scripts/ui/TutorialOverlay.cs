@@ -13,8 +13,8 @@ public partial class TutorialOverlay : Control
     {
         "Tap the left side to count cows on your side!",
         "Tap the right side to count cows on your side!",
-        "These are your scores \u2014 left player and right player.",
-        "The graveyard button zeros your opponent\u2019s cows \u2014 use it wisely!",
+        "These are your scores - left player and right player.",
+        "The graveyard button zeros your opponent's cows - use it wisely!",
     };
 
     private Label? _stepLabel;

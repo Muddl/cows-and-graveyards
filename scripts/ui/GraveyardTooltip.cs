@@ -8,7 +8,7 @@ public partial class GraveyardTooltip : Control
     public delegate void ConfirmedEventHandler();
 
     private const string ExplanationText =
-        "Pressing Graveyard resets your opponent\u2019s cow count to zero! Use it when you pass a graveyard.";
+        "Pressing Graveyard resets your opponent's cow count to zero! Use it when you pass a graveyard.";
 
     private Label? _messageLabel;
     private Button? _gotItButton;
