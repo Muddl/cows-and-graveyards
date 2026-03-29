@@ -46,14 +46,14 @@ Enhance CLAUDE.md with current project state and useful context for future AI se
 
 ### Tasks
 
-- [ ] Task 3.1: Add "Current Feature State" section summarizing what's shipped (game scene, graveyard mechanic, menus/persistence, visual upgrade, audio/SFX, quality harness)
-- [ ] Task 3.2: Add "Project Structure" section with key directory layout and class counts
-- [ ] Task 3.3: Review and update "Quality Tooling" section — ensure all tools/commands are current
-- [ ] Task 3.4: Add "Available Agents" section documenting useful specialized agents for this project (godot-csharp-dev, tdd-orchestrator, debugger, etc.)
+- [x] Task 3.1: Add "Current Feature State" section summarizing what's shipped (game scene, graveyard mechanic, menus/persistence, visual upgrade, audio/SFX, quality harness)
+- [x] Task 3.2: Add "Project Structure" section with key directory layout and class counts
+- [x] Task 3.3: Review and update "Quality Tooling" section — ensure all tools/commands are current (no changes needed)
+- [x] Task 3.4: Add "Available Agents" section documenting useful specialized agents for this project (godot-csharp-dev, tdd-orchestrator, debugger, etc.)
 
 ### Verification
 
-- [ ] CLAUDE.md is self-consistent and matches actual project state
+- [x] CLAUDE.md is self-consistent and matches actual project state
 
 ## Phase 4: Audit Memory Files
 
