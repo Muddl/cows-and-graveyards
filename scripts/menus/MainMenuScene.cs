@@ -152,10 +152,27 @@ public partial class MainMenuScene : Control
     }
 
     /// <summary>Called by the Replay Tutorial button. Resets tutorial flags
-    /// for all save slots and emits ReplayTutorialRequested.</summary>
+    /// for the first occupied save slot and starts that trip with tutorial active.</summary>
     public void OnReplayTutorialPressed()
     {
+        var slots = _saveManager.LoadAllSlots();
+
+        // Find first slot with a save and reset its tutorial flags
+        for (int i = 0; i < slots.Count; i++)
+        {
+            if (slots[i] is { } save)
+            {
+                var reset = save.WithTutorialReset();
+                _saveManager.SaveSlot(reset);
+                EmitSignal(SignalName.ReplayTutorialRequested);
+                EmitSignal(SignalName.LoadTripRequested, reset);
+                return;
+            }
+        }
+
+        // No saves exist — start a fresh trip on slot 0 (tutorial shows by default)
         EmitSignal(SignalName.ReplayTutorialRequested);
+        EmitSignal(SignalName.NewTripRequested, 0);
     }
 
     // ── Private helpers ───────────────────────────────────────────────────────
