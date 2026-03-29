@@ -30,15 +30,15 @@ Bring conductor index and metadata in sync with actual track state.
 
 ### Tasks
 
-- [ ] Task 2.1: Update `conductor/index.md` — add missing active tracks (onboarding, game-feel, ux-polish, accessibility) and missing archived track (audio-sfx)
-- [ ] Task 2.2: Review and update `conductor/product.md` — ensure it reflects current feature set (cows, graveyards, menus, audio, visual upgrade all shipped)
-- [ ] Task 2.3: Review `conductor/tech-stack.md` — verify dependency versions match csproj; add tea-leaves tooling reference
-- [ ] Task 2.4: Review `conductor/workflow.md` — add any workflow learnings from completed tracks (e.g., phase commit bundling, PR workflow refinements)
+- [x] Task 2.1: Update `conductor/index.md` — add missing active tracks (onboarding, game-feel, ux-polish, accessibility) and missing archived track (audio-sfx)
+- [x] Task 2.2: Review and update `conductor/product.md` — ensure it reflects current feature set (cows, graveyards, menus, audio, visual upgrade all shipped)
+- [x] Task 2.3: Review `conductor/tech-stack.md` — verify dependency versions match csproj; add tea-leaves tooling reference
+- [x] Task 2.4: Review `conductor/workflow.md` — add any workflow learnings from completed tracks (e.g., phase commit bundling, PR workflow refinements)
 
 ### Verification
 
-- [ ] All conductor artifact cross-references are consistent
-- [ ] Track counts match between index.md and tracks.md
+- [x] All conductor artifact cross-references are consistent
+- [x] Track counts match between index.md and tracks.md
 
 ## Phase 3: Update CLAUDE.md
 
