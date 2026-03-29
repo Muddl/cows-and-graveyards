@@ -3,7 +3,7 @@
 **Track ID:** context-review_20260328
 **Spec:** [spec.md](./spec.md)
 **Created:** 2026-03-28
-**Status:** [~] In Progress
+**Status:** [x] Complete
 
 ## Overview
 
@@ -76,21 +76,21 @@ Evaluate available agents/skills and configure any that add value for ongoing de
 
 ### Tasks
 
-- [ ] Task 5.1: Review available agent types and document which are most useful for this Godot C#/TDD project
-- [ ] Task 5.2: Evaluate whether custom hooks or skills would benefit the workflow (e.g., auto-lint on commit, test reminder)
-- [ ] Task 5.3: Document recommended agent usage patterns in CLAUDE.md
+- [x] Task 5.1: Review available agent types and document which are most useful for this Godot C#/TDD project (done in Phase 3, Task 3.4)
+- [x] Task 5.2: Evaluate whether custom hooks or skills would benefit the workflow — no custom hooks needed at this stage; documented useful existing skills
+- [x] Task 5.3: Document recommended agent usage patterns in CLAUDE.md — added "Useful Skills" section
 
 ### Verification
 
-- [ ] Documented agents/skills are actually available and functional
-- [ ] CLAUDE.md agent guidance is actionable
+- [x] Documented agents/skills are actually available and functional
+- [x] CLAUDE.md agent guidance is actionable
 
 ## Final Verification
 
-- [ ] All acceptance criteria met
-- [ ] `dotnet build` clean
-- [ ] All documentation cross-references valid
-- [ ] Ready for review
+- [x] All acceptance criteria met
+- [x] `dotnet build` clean
+- [x] All documentation cross-references valid
+- [x] Ready for review
 
 ---
 

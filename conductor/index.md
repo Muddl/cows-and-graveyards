@@ -17,7 +17,7 @@ Navigation hub for project context.
 - [Game Feel Pass](./tracks/game-feel_20260328/index.md) — Pending
 - [UX Polish](./tracks/ux-polish_20260328/index.md) — Pending
 - [Accessibility Foundations](./tracks/accessibility_20260328/index.md) — Pending
-- [AI Harness Context Review](./tracks/context-review_20260328/index.md) — In Progress
+- [AI Harness Context Review](./tracks/context-review_20260328/index.md) — Complete
 
 ## Completed Tracks
 

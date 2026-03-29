@@ -106,3 +106,12 @@ These specialized agents are available and useful for this project:
 - **csharp-pro** — Advanced C# patterns, .NET optimization. Use for complex C# implementation.
 
 For exploration and research, use the `Explore` subagent type directly rather than a named agent.
+
+## Useful Skills
+
+- `/conductor:status` — Project progress overview
+- `/conductor:new-track` — Create a new feature/bug/chore/refactor track
+- `/conductor:implement {trackId}` — Execute a track's implementation plan
+- `/commit` — Standardized commit workflow
+- `/code-review` — Pre-PR code review
+- `/simplify` — Post-implementation complexity check
