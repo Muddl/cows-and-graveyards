@@ -26,6 +26,7 @@ public partial class GameScene : Node3D
     private AudioManager? _audioManager;
 
     private TutorialOverlay? _tutorialOverlay;
+    private GraveyardTooltip? _graveyardTooltip;
 
     // Exposed for input-isolation tests and trip-state integration.
     public ScoreTracker Scores => _gameState.Scores;
@@ -33,6 +34,8 @@ public partial class GameScene : Node3D
     public bool IsInputEnabled { get; private set; } = true;
 
     public bool IsTutorialActive { get; private set; }
+
+    public bool IsGraveyardTooltipShowing { get; private set; }
 
     public override void _Ready()
     {
@@ -59,6 +62,10 @@ public partial class GameScene : Node3D
         _tutorialOverlay = GetNodeOrNull<TutorialOverlay>("CanvasLayer/TutorialOverlay");
         if (_tutorialOverlay is not null)
             _tutorialOverlay.Dismissed += EndTutorial;
+
+        _graveyardTooltip = GetNodeOrNull<GraveyardTooltip>("CanvasLayer/GraveyardTooltip");
+        if (_graveyardTooltip is not null)
+            _graveyardTooltip.Confirmed += OnGraveyardTooltipConfirmed;
 
         InitTripSlot(PendingTrip.SlotIndex, PendingTrip.Save);
         PendingTrip.Clear();
@@ -160,6 +167,34 @@ public partial class GameScene : Node3D
             _tutorialOverlay.Visible = false;
     }
 
+    // ── Graveyard tooltip ──────────────────────────────────────────────────────
+
+    public void EnableGraveyardTooltip()
+    {
+        _graveyardTooltip ??= new GraveyardTooltip();
+        _graveyardTooltip.Initialize(graveyardExplained: false);
+    }
+
+    public void ConfirmGraveyardTooltip()
+    {
+        IsGraveyardTooltipShowing = false;
+        _graveyardTooltip?.Confirm();
+    }
+
+    private void OnGraveyardTooltipConfirmed()
+    {
+        IsGraveyardTooltipShowing = false;
+    }
+
+    private bool TryBlockGraveyardWithTooltip()
+    {
+        if (_graveyardTooltip is null) return false;
+        if (!_graveyardTooltip.ShouldBlockAction()) return false;
+
+        IsGraveyardTooltipShowing = true;
+        return true;
+    }
+
     // ── Test seams (score logic without scene-tree spawning) ──────────────────
 
     /// <summary>
@@ -181,6 +216,7 @@ public partial class GameScene : Node3D
     public void SimulateGraveyardPress(TapSide side)
     {
         if (!IsInputEnabled) return;
+        if (TryBlockGraveyardWithTooltip()) return;
 
         ZeroOpposingScore(side);
     }
@@ -206,6 +242,7 @@ public partial class GameScene : Node3D
     private void OnGraveyardActivated(int side)
     {
         if (!IsInputEnabled) return;
+        if (TryBlockGraveyardWithTooltip()) return;
 
         var buttonSide = (TapSide)side;
         SpawnGraveyard(buttonSide);
