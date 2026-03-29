@@ -48,3 +48,9 @@
 **Reason:** Completed - Work finished successfully
 **Archived:** 2026-03-28
 **Folder:** [./tracks/_archive/audio-sfx_20260328/](./tracks/_archive/audio-sfx_20260328/)
+
+### onboarding_20260328: Onboarding & Tutorial
+
+**Reason:** Completed - Work finished successfully
+**Archived:** 2026-03-28
+**Folder:** [./tracks/_archive/onboarding_20260328/](./tracks/_archive/onboarding_20260328/)
