@@ -70,7 +70,7 @@ public class GraveyardIntegrationTest
 
         SimulateGraveyardPress(TapSide.Left);
 
-        AssertThat(_hud.RightScoreText).IsEqual("R: 0");
+        AssertThat(_hud.RightScoreText).IsEqual("Right: 0");
     }
 
     // Task 4.2 — right graveyard zeroes left score, HUD reflects immediately
@@ -95,7 +95,7 @@ public class GraveyardIntegrationTest
 
         SimulateGraveyardPress(TapSide.Right);
 
-        AssertThat(_hud.LeftScoreText).IsEqual("L: 0");
+        AssertThat(_hud.LeftScoreText).IsEqual("Left: 0");
     }
 
     // Task 4.3 — graveyard activation does not affect the same side's score
@@ -109,7 +109,7 @@ public class GraveyardIntegrationTest
         SimulateGraveyardPress(TapSide.Left);
 
         AssertThat(_state.Scores.LeftScore).IsEqual(2);
-        AssertThat(_hud.LeftScoreText).IsEqual("L: 2");
+        AssertThat(_hud.LeftScoreText).IsEqual("Left: 2");
     }
 
     [TestCase]
@@ -121,7 +121,7 @@ public class GraveyardIntegrationTest
         SimulateGraveyardPress(TapSide.Right);
 
         AssertThat(_state.Scores.RightScore).IsEqual(2);
-        AssertThat(_hud.RightScoreText).IsEqual("R: 2");
+        AssertThat(_hud.RightScoreText).IsEqual("Right: 2");
     }
 
     // Task 4.4 — interleaved cow taps and graveyard activations
@@ -138,8 +138,8 @@ public class GraveyardIntegrationTest
 
         AssertThat(_state.Scores.LeftScore).IsEqual(2);
         AssertThat(_state.Scores.RightScore).IsEqual(0);
-        AssertThat(_hud.LeftScoreText).IsEqual("L: 2");
-        AssertThat(_hud.RightScoreText).IsEqual("R: 0");
+        AssertThat(_hud.LeftScoreText).IsEqual("Left: 2");
+        AssertThat(_hud.RightScoreText).IsEqual("Right: 0");
     }
 
     [TestCase]
@@ -152,7 +152,7 @@ public class GraveyardIntegrationTest
         SimulateCowTap(800f);
 
         AssertThat(_state.Scores.RightScore).IsEqual(2);
-        AssertThat(_hud.RightScoreText).IsEqual("R: 2");
+        AssertThat(_hud.RightScoreText).IsEqual("Right: 2");
     }
 
     [TestCase]
@@ -192,8 +192,8 @@ public class GraveyardIntegrationTest
             else
                 SimulateCowTap(tapX);
 
-            AssertThat(_hud.LeftScoreText).IsEqual($"L: {_state.Scores.LeftScore}");
-            AssertThat(_hud.RightScoreText).IsEqual($"R: {_state.Scores.RightScore}");
+            AssertThat(_hud.LeftScoreText).IsEqual($"Left: {_state.Scores.LeftScore}");
+            AssertThat(_hud.RightScoreText).IsEqual($"Right: {_state.Scores.RightScore}");
         }
     }
 }

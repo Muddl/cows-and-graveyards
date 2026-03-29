@@ -97,7 +97,7 @@ public partial class MainMenuScene : Control
     {
         if (save is null)
             return "Empty";
-        return $"L: {save.LeftScore}  R: {save.RightScore}";
+        return $"Left: {save.LeftScore}  Right: {save.RightScore}";
     }
 
     /// <summary>Returns true if the Quit button should be shown on this platform.</summary>

@@ -20,14 +20,14 @@ public class ScoreHudTest
     [RequireGodotRuntime]
     public void InitialLeftScoreDisplaysZero()
     {
-        AssertThat(_hud.LeftScoreText).IsEqual("L: 0");
+        AssertThat(_hud.LeftScoreText).IsEqual("Left: 0");
     }
 
     [TestCase]
     [RequireGodotRuntime]
     public void InitialRightScoreDisplaysZero()
     {
-        AssertThat(_hud.RightScoreText).IsEqual("R: 0");
+        AssertThat(_hud.RightScoreText).IsEqual("Right: 0");
     }
 
     [TestCase]
@@ -36,7 +36,7 @@ public class ScoreHudTest
     {
         _hud.UpdateScores(3, 0);
 
-        AssertThat(_hud.LeftScoreText).IsEqual("L: 3");
+        AssertThat(_hud.LeftScoreText).IsEqual("Left: 3");
     }
 
     [TestCase]
@@ -45,7 +45,7 @@ public class ScoreHudTest
     {
         _hud.UpdateScores(0, 5);
 
-        AssertThat(_hud.RightScoreText).IsEqual("R: 5");
+        AssertThat(_hud.RightScoreText).IsEqual("Right: 5");
     }
 
     [TestCase]
@@ -54,8 +54,8 @@ public class ScoreHudTest
     {
         _hud.UpdateScores(7, 4);
 
-        AssertThat(_hud.LeftScoreText).IsEqual("L: 7");
-        AssertThat(_hud.RightScoreText).IsEqual("R: 4");
+        AssertThat(_hud.LeftScoreText).IsEqual("Left: 7");
+        AssertThat(_hud.RightScoreText).IsEqual("Right: 4");
     }
 
     [TestCase]
@@ -66,7 +66,7 @@ public class ScoreHudTest
         _hud.UpdateScores(2, 0);
         _hud.UpdateScores(3, 1);
 
-        AssertThat(_hud.LeftScoreText).IsEqual("L: 3");
-        AssertThat(_hud.RightScoreText).IsEqual("R: 1");
+        AssertThat(_hud.LeftScoreText).IsEqual("Left: 3");
+        AssertThat(_hud.RightScoreText).IsEqual("Right: 1");
     }
 }
