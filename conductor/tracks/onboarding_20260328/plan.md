@@ -1,4 +1,4 @@
-# Track Plan: Onboarding & Tutorial
+# Track Plan: Onboarding & Tutorial [x] Complete
 
 **Track ID:** onboarding_20260328
 **Total Phases:** 4
@@ -11,7 +11,7 @@
 
 **Goal:** Replace ambiguous "L: X" / "R: X" labels with clear, color-differentiated labels that communicate side identity at a glance.
 
-### Task 1.1 — Test: Score label content and color
+### ~~Task 1.1 — Test: Score label content and color~~ [x]
 
 Write gdUnit4 tests that assert:
 - The left score label text contains a human-readable identifier (not just "L").
@@ -23,7 +23,7 @@ Write gdUnit4 tests that assert:
 1. Write `ScoreLabelTest.cs` under `tests/ui/`.
 2. Run tests — confirm all fail (red).
 
-### Task 1.2 — Implement: Update score label nodes and binding
+### ~~Task 1.2 — Implement: Update score label nodes and binding~~ [x]
 
 - Update the score label nodes in the game scene to use the new text format (e.g., "Left: {n}" / "Right: {n}").
 - Assign distinct color modulates to left and right labels.
@@ -34,7 +34,7 @@ Write gdUnit4 tests that assert:
 2. Run `ScoreLabelTest.cs` — confirm all pass (green).
 3. Visually verify in editor / DevTools screenshot.
 
-### Task 1.3 — Commit
+### ~~Task 1.3 — Commit~~ [x]
 
 Commit with message: `feat: improve score label clarity and color differentiation`
 
@@ -46,7 +46,7 @@ Commit with message: `feat: improve score label clarity and color differentiatio
 
 **Goal:** Display a sequential coach-mark overlay on first launch (per save slot) that teaches the four core interactions.
 
-### Task 2.1 — Test: Tutorial overlay visibility and step progression
+### ~~Task 2.1 — Test: Tutorial overlay visibility and step progression~~ [x]
 
 Write gdUnit4 tests that assert:
 - `TutorialOverlay` node is visible when `TutorialSeen` is `false` in save data.
@@ -59,7 +59,7 @@ Write gdUnit4 tests that assert:
 1. Write `TutorialOverlayTest.cs` under `tests/ui/`.
 2. Run tests — confirm all fail (red).
 
-### Task 2.2 — Implement: TutorialOverlay scene and controller
+### ~~Task 2.2 — Implement: TutorialOverlay scene and controller~~ [x]
 
 - Create `scenes/ui/TutorialOverlay.tscn` with coach-mark panels for each step:
   1. "Tap the left side to count cows on your side!" (highlight left tap zone)
@@ -73,7 +73,7 @@ Write gdUnit4 tests that assert:
 1. Implement scene and controller.
 2. Run `TutorialOverlayTest.cs` — confirm all pass (green).
 
-### Task 2.3 — Integrate: Add overlay to GameScene
+### ~~Task 2.3 — Integrate: Add overlay to GameScene~~ [x]
 
 - Instance `TutorialOverlay` in `GameScene`.
 - On scene ready, check save data — show overlay if not seen.
@@ -84,7 +84,7 @@ Write gdUnit4 tests that assert:
 2. Implement input block.
 3. Run all tests — confirm green.
 
-### Task 2.4 — Commit
+### ~~Task 2.4 — Commit~~ [x]
 
 Commit with message: `feat: add first-play tutorial overlay with coach marks`
 
@@ -96,7 +96,7 @@ Commit with message: `feat: add first-play tutorial overlay with coach marks`
 
 **Goal:** Explain the graveyard mechanic the first time it is triggered, so it feels intentional rather than a bug.
 
-### Task 3.1 — Test: Graveyard first-use tooltip display
+### ~~Task 3.1 — Test: Graveyard first-use tooltip display~~ [x]
 
 Write gdUnit4 tests that assert:
 - `GraveyardTooltip` node is shown the first time the graveyard button is pressed when `GraveyardExplained` is `false`.
@@ -108,7 +108,7 @@ Write gdUnit4 tests that assert:
 1. Write `GraveyardTooltipTest.cs` under `tests/ui/`.
 2. Run tests — confirm all fail (red).
 
-### Task 3.2 — Implement: GraveyardTooltip scene and controller
+### ~~Task 3.2 — Implement: GraveyardTooltip scene and controller~~ [x]
 
 - Create `scenes/ui/GraveyardTooltip.tscn` — a brief pop-up/panel that reads:
   "Graveyard! Your opponent loses all their cows. Are you sure?" with a Confirm button.
@@ -121,7 +121,7 @@ Write gdUnit4 tests that assert:
 1. Implement scene and controller.
 2. Run `GraveyardTooltipTest.cs` — confirm all pass (green).
 
-### Task 3.3 — Commit
+### ~~Task 3.3 — Commit~~ [x]
 
 Commit with message: `feat: add graveyard first-use explanation tooltip`
 
@@ -133,7 +133,7 @@ Commit with message: `feat: add graveyard first-use explanation tooltip`
 
 **Goal:** Persist the tutorial-seen state across launches and allow the player to replay the tutorial from the menu.
 
-### Task 4.1 — Test: Tutorial state persistence in save data
+### ~~Task 4.1 — Test: Tutorial state persistence in save data~~ [x]
 
 Write gdUnit4 tests that assert:
 - `TutorialSeen` flag is written to save data when tutorial is dismissed.
@@ -145,7 +145,7 @@ Write gdUnit4 tests that assert:
 1. Write `TutorialSaveStateTest.cs` under `tests/data/`.
 2. Run tests — confirm all fail (red).
 
-### Task 4.2 — Implement: Tutorial save state in SaveData model
+### ~~Task 4.2 — Implement: Tutorial save state in SaveData model~~ [x]
 
 - Add `TutorialSeen` (bool) and `GraveyardExplained` (bool) fields to the save data model/schema.
 - Implement read/write in the save system.
@@ -155,7 +155,7 @@ Write gdUnit4 tests that assert:
 1. Implement save data changes.
 2. Run `TutorialSaveStateTest.cs` — confirm all pass (green).
 
-### Task 4.3 — Implement: Replay tutorial entry point in menu/settings
+### ~~Task 4.3 — Implement: Replay tutorial entry point in menu/settings~~ [x]
 
 - Add a "Replay Tutorial" button to the main menu or settings screen.
 - On press: call `ResetTutorial()`, then navigate to (or reload) the game scene so the overlay fires.
@@ -165,7 +165,7 @@ Write gdUnit4 tests that assert:
 2. Implement button and handler.
 3. Run all tests — confirm green.
 
-### Task 4.4 — Commit
+### ~~Task 4.4 — Commit~~ [x]
 
 Commit with message: `feat: persist tutorial state and add replay option`
 
