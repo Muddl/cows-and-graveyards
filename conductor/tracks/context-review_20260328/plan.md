@@ -61,14 +61,14 @@ Refresh memory index and ensure all entries are current and useful.
 
 ### Tasks
 
-- [ ] Task 4.1: Verify existing memory files are still accurate (feedback_godot_input.md, project_ios_testing.md, reference_tea_leaves.md)
-- [ ] Task 4.2: Add any missing memories from completed tracks (workflow patterns, architectural decisions worth preserving)
-- [ ] Task 4.3: Update MEMORY.md index — ensure all entries have accurate descriptions
+- [x] Task 4.1: Verify existing memory files are still accurate (feedback_godot_input.md, project_ios_testing.md, reference_tea_leaves.md)
+- [x] Task 4.2: Add any missing memories from completed tracks (workflow patterns, architectural decisions worth preserving) — none needed, key learnings already captured
+- [x] Task 4.3: Update MEMORY.md index — ensure all entries have accurate descriptions
 
 ### Verification
 
-- [ ] All memory file links in MEMORY.md resolve to existing files
-- [ ] No stale or contradictory information in memory files
+- [x] All memory file links in MEMORY.md resolve to existing files
+- [x] No stale or contradictory information in memory files
 
 ## Phase 5: Agent & Skill Review
 
