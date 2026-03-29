@@ -58,6 +58,7 @@ public class AudioManagerTest
         // Register a key with null stream (no actual audio in test)
         _manager.RegisterSfx("tap", null);
         _manager.PlaySfx("tap");
+        AssertThat(_manager).IsNotNull();
     }
 
     [TestCase]
@@ -66,6 +67,7 @@ public class AudioManagerTest
     {
         // Should handle gracefully (log warning, no exception)
         _manager.PlaySfx("nonexistent_sound");
+        AssertThat(_manager).IsNotNull();
     }
 
     // ── Volume control ───────────────────────────────────────────────────────

@@ -3,6 +3,7 @@ namespace CowsGraveyards.Game;
 using System;
 using CowsGraveyards.Audio;
 using CowsGraveyards.Menus;
+using CowsGraveyards.UI;
 using Godot;
 
 public partial class GameScene : Node3D
@@ -24,10 +25,14 @@ public partial class GameScene : Node3D
     private Button? _pauseButton;
     private AudioManager? _audioManager;
 
+    private TutorialOverlay? _tutorialOverlay;
+
     // Exposed for input-isolation tests and trip-state integration.
     public ScoreTracker Scores => _gameState.Scores;
 
     public bool IsInputEnabled { get; private set; } = true;
+
+    public bool IsTutorialActive { get; private set; }
 
     public override void _Ready()
     {
@@ -50,6 +55,10 @@ public partial class GameScene : Node3D
         _pauseButton = GetNodeOrNull<Button>("CanvasLayer/PauseButton");
         if (_pauseButton is not null)
             _pauseButton.Pressed += Pause;
+
+        _tutorialOverlay = GetNodeOrNull<TutorialOverlay>("CanvasLayer/TutorialOverlay");
+        if (_tutorialOverlay is not null)
+            _tutorialOverlay.Dismissed += EndTutorial;
 
         InitTripSlot(PendingTrip.SlotIndex, PendingTrip.Save);
         PendingTrip.Clear();
@@ -126,6 +135,29 @@ public partial class GameScene : Node3D
             _gameState.Scores.SetRight(existingSave.RightScore);
             _scoreHud?.UpdateScores(Scores.LeftScore, Scores.RightScore);
         }
+    }
+
+    // ── Tutorial ──────────────────────────────────────────────────────────────
+
+    public void BeginTutorial()
+    {
+        IsTutorialActive = true;
+        IsInputEnabled = false;
+
+        if (_tutorialOverlay is not null)
+        {
+            _tutorialOverlay.Initialize(tutorialSeen: false);
+            _tutorialOverlay.Visible = true;
+        }
+    }
+
+    public void EndTutorial()
+    {
+        IsTutorialActive = false;
+        IsInputEnabled = true;
+
+        if (_tutorialOverlay is not null)
+            _tutorialOverlay.Visible = false;
     }
 
     // ── Test seams (score logic without scene-tree spawning) ──────────────────
